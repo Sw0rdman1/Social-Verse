@@ -16,7 +16,7 @@ const WelcomeScreenButtons: React.FC<Props> = ({ navigation }) => {
     <>
       <Animated.View
         entering={BounceInLeft.delay(2300).duration(1250)}
-        sharedTransitionTag="button"
+        sharedTransitionTag="button-sign-in"
         style={[styles.button, { bottom: 80 }]}
       >
         <Button title="Sign In" onPress={() => navigateToPage("LogIn")} />
@@ -24,6 +24,7 @@ const WelcomeScreenButtons: React.FC<Props> = ({ navigation }) => {
 
       <Animated.View
         entering={BounceInRight.delay(2300).duration(1250)}
+        sharedTransitionTag="button-join-now"
         style={[styles.button, { bottom: 0 }]}
       >
         <Button

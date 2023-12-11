@@ -7,20 +7,34 @@ import LogInForm from "../components/auth/LogInForm";
 import Colors from "../../assets/constants/Colors";
 import { StackScreenProps } from "@react-navigation/stack";
 import { AppleAuthButton } from "../components/auth/AppleAuthButton";
+import RegistrationForm from "../components/auth/RegistrationForm";
+import { useState } from "react";
 
-const LogInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+const RegistrationScreen: React.FC<StackScreenProps<any>> = ({
+  navigation,
+}) => {
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   return (
     <Animated.View style={styles.container} sharedTransitionTag="container">
       <GradientBackground>
         <StatusBar style="dark" />
         <Animated.View style={styles.formContainer} sharedTransitionTag="form">
-          <LogInForm navigation={navigation} />
+          <RegistrationForm
+            navigation={navigation}
+            setButtonDisabled={setButtonDisabled}
+          />
         </Animated.View>
         <Animated.View
-          sharedTransitionTag="button-sign-in"
+          sharedTransitionTag="button-join-now"
           style={styles.buttonContainer}
         >
-          <Button title="Sign In" onPress={() => navigation.goBack()} />
+          <Button
+            title="Join Now"
+            onPress={() => navigation.goBack()}
+            filled={buttonDisabled}
+            color="transparent"
+          />
         </Animated.View>
         <Animated.View
           style={styles.appleButton}
@@ -31,14 +45,14 @@ const LogInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
             <Text style={styles.text}> or </Text>
             <View style={styles.line} />
           </View>
-          <AppleAuthButton signIn />
+          <AppleAuthButton signIn={false} />
         </Animated.View>
       </GradientBackground>
     </Animated.View>
   );
 };
 
-export default LogInScreen;
+export default RegistrationScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +61,7 @@ const styles = StyleSheet.create({
   formContainer: {
     position: "absolute",
     top: 0,
-    height: 540,
+    height: 600,
     width: "100%",
     paddingBottom: 30,
     backgroundColor: Colors.whiteBg,
@@ -59,12 +73,12 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: "absolute",
-    bottom: 200,
+    bottom: 150,
     left: "5%",
   },
   appleButton: {
     position: "absolute",
-    bottom: 90,
+    bottom: 40,
     left: "5%",
     display: "flex",
     alignItems: "center",

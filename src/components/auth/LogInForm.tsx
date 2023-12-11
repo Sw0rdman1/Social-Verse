@@ -6,6 +6,7 @@ import EmailInput from "./EmailInput";
 import PasswordInput from "./PasswordInput";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import BackButton from "./BackButton";
+import AuthText from "./AuthText";
 
 interface Props {
   navigation: StackScreenProps<any>["navigation"];
@@ -40,13 +41,7 @@ const LogInForm: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <BackButton handleBackButton={handleBackButton} />
-      <Animated.View
-        entering={FadeInUp.delay(600).springify()}
-        style={styles.textContainer}
-      >
-        <Text style={styles.title}>SocialVerse</Text>
-        <Text style={styles.subtitle}>Welcome back!</Text>
-      </Animated.View>
+      <AuthText subtitle="Welcome back!" />
       <Animated.View entering={FadeInUp.delay(700).springify()}>
         <EmailInput email={email} setEmail={customSetEmail} />
       </Animated.View>
@@ -66,21 +61,5 @@ const styles = StyleSheet.create({
     marginTop: 60,
     alignItems: "center",
     justifyContent: "center",
-  },
-  textContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 40,
-  },
-  title: {
-    fontSize: 46,
-    fontWeight: "bold",
-    color: Colors.primary,
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 26,
-    fontWeight: "600",
-    color: Colors.black,
   },
 });
