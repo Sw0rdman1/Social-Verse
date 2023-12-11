@@ -11,7 +11,7 @@ const LogInForm = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handleBackButton} style={styles.backButton}>
-        <Ionicons name="chevron-back" size={24} color="black" />
+        <Ionicons name="chevron-back" size={24} color="white" />
       </TouchableOpacity>
       <Text style={styles.title}>Welcome back!</Text>
     </View>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 10,
-    left: 10,
+    top: 0,
+    left: 20,
   },
 });
