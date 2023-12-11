@@ -8,6 +8,7 @@ const Colors = {
   titleColor: "#ffea00",
   error: "#fd3737",
   gray: "#999DA0",
+  success: "#7ac142",
 };
 
 export default Colors;

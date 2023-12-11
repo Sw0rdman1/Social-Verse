@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   textContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 40,
+    marginBottom: 25,
   },
   title: {
     fontSize: 46,

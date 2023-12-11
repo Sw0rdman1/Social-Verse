@@ -3,7 +3,7 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import Button from "../components/ui/Button";
 import GradientBackground from "../components/ui/GradientBackground";
 import { StatusBar } from "expo-status-bar";
-import LogInForm from "../components/auth/LogInForm";
+import LogInForm from "../components/auth/login/LogInForm";
 import Colors from "../../assets/constants/Colors";
 import { StackScreenProps } from "@react-navigation/stack";
 import { AppleAuthButton } from "../components/auth/AppleAuthButton";

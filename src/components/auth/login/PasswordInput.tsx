@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import Colors from "../../../assets/constants/Colors";
+import Colors from "../../../../assets/constants/Colors";
 
 const { error, black, gray, whiteBg, primary } = Colors;
 

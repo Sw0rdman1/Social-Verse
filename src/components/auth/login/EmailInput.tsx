@@ -7,8 +7,8 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import { validateEmail } from "../../utils/validation";
-import Colors from "../../../assets/constants/Colors";
+import { validateEmail } from "../../../utils/validation";
+import Colors from "../../../../assets/constants/Colors";
 
 const { error, black, gray, whiteBg, primary } = Colors;
 
@@ -92,6 +92,7 @@ export default EmailInput;
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
+    marginTop: 20,
     width: "90%",
   },
 

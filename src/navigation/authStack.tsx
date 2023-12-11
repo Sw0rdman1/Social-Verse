@@ -13,17 +13,17 @@ export default function AuthStack() {
         <Stack.Screen
           name="Welcome"
           component={WelcomeScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="LogIn"
           component={LogInScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="Registration"
           component={RegistrationScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, gestureEnabled: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

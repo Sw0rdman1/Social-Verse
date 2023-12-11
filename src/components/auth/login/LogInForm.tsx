@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import Colors from "../../../assets/constants/Colors";
+import Colors from "../../../../assets/constants/Colors";
 import { StackScreenProps } from "@react-navigation/stack";
 import EmailInput from "./EmailInput";
 import PasswordInput from "./PasswordInput";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
-import BackButton from "./BackButton";
-import AuthText from "./AuthText";
+import BackButton from "../BackButton";
+import AuthText from "../AuthText";
 
 interface Props {
   navigation: StackScreenProps<any>["navigation"];
