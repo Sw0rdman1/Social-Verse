@@ -1,41 +1,37 @@
 import { StyleSheet, Image } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
+const prefix = "../../../../assets/images/";
+const images = [
+  require(`${prefix}hero2.jpg`),
+  require(`${prefix}hero1.jpg`),
+  require(`${prefix}hero3.jpg`),
+  require(`${prefix}hero4.jpg`),
+];
+
 const WelcomeScreenImages = () => {
   return (
     <>
       <Animated.View
         entering={FadeInDown.delay(1200).duration(1500).springify()}
       >
-        <Image
-          source={require("../../../assets/images/hero2.jpg")}
-          style={styles.image1}
-        />
+        <Image source={images[0]} style={styles.image1} />
       </Animated.View>
       <Animated.View
         entering={FadeInDown.delay(900).duration(1000).springify()}
       >
-        <Image
-          source={require("../../../assets/images/hero1.jpg")}
-          style={styles.image2}
-        />
+        <Image source={images[1]} style={styles.image2} />
       </Animated.View>
 
       <Animated.View
         entering={FadeInDown.delay(600).duration(1000).springify()}
       >
-        <Image
-          source={require("../../../assets/images/hero3.jpg")}
-          style={styles.image3}
-        />
+        <Image source={images[2]} style={styles.image3} />
       </Animated.View>
       <Animated.View
         entering={FadeInDown.delay(300).duration(1500).springify()}
       >
-        <Image
-          source={require("../../../assets/images/hero4.jpg")}
-          style={styles.image4}
-        />
+        <Image source={images[3]} style={styles.image4} />
       </Animated.View>
     </>
   );
