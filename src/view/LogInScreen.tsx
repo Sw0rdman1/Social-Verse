@@ -19,7 +19,7 @@ const LogInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <GradientBackground>
         <StatusBar style="dark" />
         <Animated.View style={styles.formContainer} sharedTransitionTag="form">
-          <LogInForm />
+          <LogInForm navigation={navigation} />
         </Animated.View>
         <Animated.View
           sharedTransitionTag="button"
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     width: "100%",
-    paddingHorizontal: 0,
     backgroundColor: Colors.whiteBg,
     height: 550,
     display: "flex",
