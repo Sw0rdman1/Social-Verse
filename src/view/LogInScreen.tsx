@@ -1,10 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import Animated, {
-  BounceIn,
-  BounceInDown,
-  BounceInUp,
-  FadeInDown,
-} from "react-native-reanimated";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import Button from "../components/ui/Button";
 import GradientBackground from "../components/ui/GradientBackground";
 import { StatusBar } from "expo-status-bar";

@@ -1,11 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
-import Animated, { BounceInRight, BounceInLeft } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import GradientBackground from "../components/ui/GradientBackground";
 import WelcomeScreenImages from "../components/auth/welcome/WelcomeScreenImages";
 import WelcomeScreenTitle from "../components/auth/welcome/WelcomeScreenTitle";
-import Button from "../components/ui/Button";
 import WelcomeScreenButtons from "../components/auth/welcome/WelcomeScreenButtons";
+import FormsTemplate from "../components/auth/welcome/FormsTemplate";
 
 const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   return (
@@ -15,18 +15,7 @@ const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           <WelcomeScreenImages />
           <WelcomeScreenTitle />
           <WelcomeScreenButtons navigation={navigation} />
-          <Animated.View
-            sharedTransitionTag="form"
-            style={{
-              position: "absolute",
-              top: -1050,
-              height: 1000,
-              width: "100%",
-              paddingHorizontal: 22,
-              backgroundColor: "white",
-              borderRadius: 50,
-            }}
-          />
+          <FormsTemplate />
         </View>
       </GradientBackground>
     </Animated.View>
