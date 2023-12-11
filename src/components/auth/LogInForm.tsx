@@ -1,14 +1,37 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Colors from "../../../assets/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { StackScreenProps } from "@react-navigation/stack";
+import EmailInput from "./EmailInput";
+import PasswordInput from "./PasswordInput";
 
 interface Props {
   navigation: StackScreenProps<any>["navigation"];
 }
 
 const LogInForm: React.FC<Props> = ({ navigation }) => {
+  const [email, setEmail] = useState({ value: "", error: "" });
+  const [password, setPassword] = useState({ value: "", error: "" });
+
+  const customSetEmail = (
+    newEmail: Partial<{ value: string; error: string }>
+  ) => {
+    setEmail((prevEmail) => ({
+      ...prevEmail,
+      ...newEmail,
+    }));
+  };
+
+  const customSetPassword = (
+    newPassword: Partial<{ value: string; error: string }>
+  ) => {
+    setPassword((prevPassword) => ({
+      ...prevPassword,
+      ...newPassword,
+    }));
+  };
+
   const handleBackButton = () => {
     navigation.goBack();
   };
@@ -18,7 +41,10 @@ const LogInForm: React.FC<Props> = ({ navigation }) => {
       <TouchableOpacity onPress={handleBackButton} style={styles.backButton}>
         <Ionicons name="chevron-back" size={22} color="white" />
       </TouchableOpacity>
-      <Text style={styles.title}>Welcome back!</Text>
+      <Text style={styles.title}>SocialVerse</Text>
+      <Text style={styles.subtitle}>Welcome back!</Text>
+      <EmailInput email={email} setEmail={customSetEmail} />
+      <PasswordInput password={password} setPassword={customSetPassword} />
     </View>
   );
 };
@@ -31,12 +57,19 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 60,
     alignItems: "center",
-    paddingTop: 50,
+    justifyContent: "center",
   },
   title: {
-    fontSize: 38,
+    fontSize: 44,
     fontWeight: "bold",
+    color: Colors.primary,
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 26,
+    fontWeight: "600",
     color: Colors.black,
+    marginBottom: 40,
   },
   backButton: {
     position: "absolute",

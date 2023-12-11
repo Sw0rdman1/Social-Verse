@@ -6,6 +6,8 @@ const Colors = {
   gradient2: "#2ec4b6",
   primary: "#2AB7C7",
   titleColor: "#ffea00",
+  error: "#fd3737",
+  gray: "#999DA0",
 };
 
 export default Colors;
