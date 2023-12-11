@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
   textContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 40,
+    marginBottom: 50,
   },
   title: {
-    fontSize: 44,
+    fontSize: 46,
     fontWeight: "bold",
     color: Colors.primary,
     marginBottom: 10,

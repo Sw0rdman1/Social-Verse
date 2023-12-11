@@ -45,30 +45,21 @@ const EmailInput: React.FC<EmailInputProps> = ({ email, setEmail }) => {
     <View style={styles.container}>
       <Text
         style={{
-          fontSize: 17,
+          fontSize: 18,
           fontWeight: "600",
           marginBottom: 8,
-          marginLeft: 10,
-          color: email.error ? error : black,
+          marginLeft: 8,
+          color: email.error ? error : primary,
         }}
       >
         Email address
       </Text>
 
       <View
-        style={{
-          width: "100%",
-          height: 48,
-          backgroundColor: whiteBg,
-          borderColor: email.error ? error : gray,
-          borderWidth: 1,
-          borderRadius: 20,
-          alignItems: "center",
-          flexDirection: "row",
-          justifyContent: "center",
-          paddingLeft: 15,
-          paddingRight: 12,
-        }}
+        style={[
+          styles.inputFieldContainer,
+          { borderColor: email.error ? error : gray },
+        ]}
       >
         <TextInput
           placeholder="example@mail.com"
@@ -108,6 +99,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  inputFieldContainer: {
+    width: "100%",
+    height: 48,
+    borderWidth: 1,
+    borderRadius: 15,
+    borderColor: Colors.primary,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingLeft: 15,
+    paddingRight: 12,
+  },
   inputField: {
     flex: 10,
     fontSize: 15,

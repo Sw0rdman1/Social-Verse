@@ -37,8 +37,8 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
             fontSize: 17,
             fontWeight: "600",
             marginBottom: 8,
-            marginLeft: 10,
-            color: password.error ? error : black,
+            marginLeft: 8,
+            color: password.error ? error : primary,
           }}
         >
           Password
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   inputField: {
     height: 48,
     borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: 15,
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "center",
