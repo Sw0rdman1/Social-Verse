@@ -1,13 +1,13 @@
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
 import Colors from "../../../assets/constants/Colors";
-const { white, primary, gradient1 } = Colors;
+const { white, primary, gradient2 } = Colors;
 
 const Button = (props: any) => {
   const filledBgColor = props.color || primary;
   const outlinedColor = white;
   const bgColor = props.filled ? filledBgColor : outlinedColor;
-  const textColor = props.filled ? white : gradient1;
+  const textColor = props.filled ? white : gradient2;
   const buttonStyle = props.disabled ? styles.disabledButton : styles.button;
 
   return (

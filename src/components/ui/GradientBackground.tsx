@@ -19,7 +19,7 @@ const GradientBackground = ({
         justifyContent: centerItems ? "center" : "flex-start",
         alignItems: centerItems ? "center" : "flex-start",
       }}
-      colors={[gradient2, gradient1]}
+      colors={[gradient1, gradient2]}
     >
       {children}
     </LinearGradient>

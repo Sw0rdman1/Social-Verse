@@ -5,39 +5,16 @@ import GradientBackground from "../components/ui/GradientBackground";
 import WelcomeScreenImages from "../components/auth/WelcomeScreenImages";
 import WelcomeScreenTitle from "../components/auth/WelcomeScreenTitle";
 import Button from "../components/ui/Button";
+import WelcomeScreenButtons from "../components/auth/WelcomeScreenButtons";
 
 const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
-  const navigateToPage = (page: string) => {
-    navigation.navigate(page);
-  };
-
   return (
     <Animated.View style={{ flex: 1 }} sharedTransitionTag="container">
       <GradientBackground>
         <View style={{ flex: 1, marginVertical: 50 }}>
           <WelcomeScreenImages />
-
           <WelcomeScreenTitle />
-
-          <Animated.View
-            entering={BounceInLeft.delay(2300).duration(1250)}
-            sharedTransitionTag="button"
-            style={[styles.button, { bottom: 80 }]}
-          >
-            <Button title="Sign In" onPress={() => navigateToPage("LogIn")} />
-          </Animated.View>
-
-          <Animated.View
-            entering={BounceInRight.delay(2300).duration(1250)}
-            style={[styles.button, { bottom: 0 }]}
-          >
-            <Button
-              title="Join Now"
-              filled
-              color="transparent"
-              onPress={() => navigateToPage("Registration")}
-            />
-          </Animated.View>
+          <WelcomeScreenButtons navigation={navigation} />
           <Animated.View
             sharedTransitionTag="form"
             style={{
@@ -56,13 +33,6 @@ const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  button: {
-    width: "90%",
-    position: "absolute",
-    bottom: 0,
-    left: "5%",
-  },
-});
+const styles = StyleSheet.create({});
 
 export default WelcomeScreen;
