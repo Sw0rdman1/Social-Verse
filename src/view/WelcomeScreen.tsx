@@ -24,7 +24,7 @@ const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
               width: "100%",
               paddingHorizontal: 22,
               backgroundColor: "white",
-              borderRadius: 40,
+              borderRadius: 50,
             }}
           />
         </View>
