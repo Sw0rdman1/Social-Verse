@@ -4,7 +4,7 @@ import Animated, {
   BounceInLeft,
   FadeInUp,
 } from "react-native-reanimated";
-import Colors from "../../../assets/constants/Colors";
+import Colors from "../../../../assets/constants/Colors";
 const { titleColor, white } = Colors;
 
 const WelcomeScreenTitle = () => {

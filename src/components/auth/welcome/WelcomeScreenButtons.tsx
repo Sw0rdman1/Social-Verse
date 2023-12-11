@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import Animated, { BounceInLeft, BounceInRight } from "react-native-reanimated";
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 
 interface Props {
   navigation: StackScreenProps<any>["navigation"];
