@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import Colors from "../../../assets/constants/Colors";
-import { Ionicons } from "@expo/vector-icons";
 import { StackScreenProps } from "@react-navigation/stack";
 import EmailInput from "./EmailInput";
 import PasswordInput from "./PasswordInput";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import BackButton from "./BackButton";
 
 interface Props {
   navigation: StackScreenProps<any>["navigation"];
@@ -39,14 +39,7 @@ const LogInForm: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Animated.View
-        entering={FadeInUp.delay(500).springify()}
-        style={styles.backButton}
-      >
-        <TouchableOpacity onPress={handleBackButton}>
-          <Ionicons name="chevron-back" size={22} color="white" />
-        </TouchableOpacity>
-      </Animated.View>
+      <BackButton handleBackButton={handleBackButton} />
       <Animated.View
         entering={FadeInUp.delay(600).springify()}
         style={styles.textContainer}
@@ -77,7 +70,7 @@ const styles = StyleSheet.create({
   textContainer: {
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 50,
+    marginBottom: 40,
   },
   title: {
     fontSize: 46,
@@ -89,16 +82,5 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: "600",
     color: Colors.black,
-  },
-  backButton: {
-    position: "absolute",
-    top: 0,
-    left: 20,
-    height: 30,
-    width: 30,
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: Colors.primary,
   },
 });
