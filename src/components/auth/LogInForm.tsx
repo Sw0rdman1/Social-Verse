@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { StackScreenProps } from "@react-navigation/stack";
 import EmailInput from "./EmailInput";
 import PasswordInput from "./PasswordInput";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 
 interface Props {
   navigation: StackScreenProps<any>["navigation"];
@@ -38,13 +39,27 @@ const LogInForm: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleBackButton} style={styles.backButton}>
-        <Ionicons name="chevron-back" size={22} color="white" />
-      </TouchableOpacity>
-      <Text style={styles.title}>SocialVerse</Text>
-      <Text style={styles.subtitle}>Welcome back!</Text>
-      <EmailInput email={email} setEmail={customSetEmail} />
-      <PasswordInput password={password} setPassword={customSetPassword} />
+      <Animated.View
+        entering={FadeInUp.delay(500).springify()}
+        style={styles.backButton}
+      >
+        <TouchableOpacity onPress={handleBackButton}>
+          <Ionicons name="chevron-back" size={22} color="white" />
+        </TouchableOpacity>
+      </Animated.View>
+      <Animated.View
+        entering={FadeInUp.delay(600).springify()}
+        style={styles.textContainer}
+      >
+        <Text style={styles.title}>SocialVerse</Text>
+        <Text style={styles.subtitle}>Welcome back!</Text>
+      </Animated.View>
+      <Animated.View entering={FadeInUp.delay(700).springify()}>
+        <EmailInput email={email} setEmail={customSetEmail} />
+      </Animated.View>
+      <Animated.View entering={FadeInUp.delay(800).springify()}>
+        <PasswordInput password={password} setPassword={customSetPassword} />
+      </Animated.View>
     </View>
   );
 };
@@ -59,6 +74,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  textContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 40,
+  },
   title: {
     fontSize: 44,
     fontWeight: "bold",
@@ -69,7 +89,6 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: "600",
     color: Colors.black,
-    marginBottom: 40,
   },
   backButton: {
     position: "absolute",
