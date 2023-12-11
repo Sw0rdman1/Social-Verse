@@ -5,11 +5,18 @@ import Animated, {
   FadeInUp,
 } from "react-native-reanimated";
 import Colors from "../../../assets/constants/Colors";
-const { primary, secondary, titleColor, white } = Colors;
+const { titleColor, white } = Colors;
 
 const WelcomeScreenTitle = () => {
   return (
-    <>
+    <View
+      style={{
+        paddingHorizontal: 22,
+        position: "absolute",
+        top: 380,
+        width: "100%",
+      }}
+    >
       <Animated.Text
         entering={BounceInLeft.delay(1500).duration(1250)}
         style={{
@@ -60,7 +67,7 @@ const WelcomeScreenTitle = () => {
           </Text>
         </Animated.Text>
       </View>
-    </>
+    </View>
   );
 };
 

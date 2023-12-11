@@ -1,9 +1,10 @@
 const Colors = {
-  white: "#FFFFFF",
-  black: "#222222",
-  primary: "#2196f3",
-  secondary: "#2ec4b6",
-  middleColor: "#2AB7C7",
+  white: "#ffffff",
+  whiteBg: "#f2f2f2",
+  black: "#333333",
+  gradient1: "#2196f3",
+  gradient2: "#2ec4b6",
+  primary: "#2AB7C7",
   titleColor: "#ffea00",
 };
 

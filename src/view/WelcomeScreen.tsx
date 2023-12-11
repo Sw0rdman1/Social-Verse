@@ -12,47 +12,56 @@ const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   };
 
   return (
-    <GradientBackground>
-      <View style={{ flex: 1, marginVertical: 50 }}>
-        <WelcomeScreenImages />
+    <Animated.View style={{ flex: 1 }} sharedTransitionTag="container">
+      <GradientBackground>
+        <View style={{ flex: 1, marginVertical: 50 }}>
+          <WelcomeScreenImages />
 
-        <View
-          style={{
-            paddingHorizontal: 22,
-            position: "absolute",
-            top: 380,
-            width: "100%",
-          }}
-        >
           <WelcomeScreenTitle />
 
-          <Animated.View entering={BounceInLeft.delay(2300).duration(1250)}>
-            <Button
-              title="Sign In"
-              style={styles.button}
-              onPress={() => navigateToPage("LogIn")}
-            />
+          <Animated.View
+            entering={BounceInLeft.delay(2300).duration(1250)}
+            sharedTransitionTag="button"
+            style={[styles.button, { bottom: 80 }]}
+          >
+            <Button title="Sign In" onPress={() => navigateToPage("LogIn")} />
           </Animated.View>
 
-          <Animated.View entering={BounceInRight.delay(2300).duration(1250)}>
+          <Animated.View
+            entering={BounceInRight.delay(2300).duration(1250)}
+            style={[styles.button, { bottom: 0 }]}
+          >
             <Button
               title="Join Now"
-              style={styles.button}
-              filled={true}
+              filled
               color="transparent"
               onPress={() => navigateToPage("Registration")}
             />
           </Animated.View>
+          <Animated.View
+            sharedTransitionTag="form"
+            style={{
+              position: "absolute",
+              top: -1050,
+              height: 1000,
+              width: "100%",
+              paddingHorizontal: 22,
+              backgroundColor: "white",
+              borderRadius: 40,
+            }}
+          />
         </View>
-      </View>
-    </GradientBackground>
+      </GradientBackground>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 15,
-    width: "100%",
+    width: "90%",
+    position: "absolute",
+    bottom: 0,
+    left: "5%",
   },
 });
 

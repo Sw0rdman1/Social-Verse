@@ -1,19 +1,25 @@
 import { LinearGradient } from "expo-linear-gradient";
 
 import Colors from "../../../assets/constants/Colors";
-const { primary, secondary } = Colors;
+const { gradient1, gradient2 } = Colors;
 
 interface GradientBackgroundProps {
   children: React.ReactNode;
+  centerItems?: boolean;
 }
 
-const GradientBackground = ({ children }: GradientBackgroundProps) => {
+const GradientBackground = ({
+  children,
+  centerItems,
+}: GradientBackgroundProps) => {
   return (
     <LinearGradient
       style={{
         flex: 1,
+        justifyContent: centerItems ? "center" : "flex-start",
+        alignItems: centerItems ? "center" : "flex-start",
       }}
-      colors={[secondary, primary]}
+      colors={[gradient2, gradient1]}
     >
       {children}
     </LinearGradient>
