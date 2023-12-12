@@ -22,17 +22,8 @@ const LogInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
         >
           <Button title="Sign In" onPress={() => navigation.goBack()} />
         </Animated.View>
-        <Animated.View
-          style={styles.appleButton}
-          entering={FadeInDown.delay(200).springify()}
-        >
-          <View style={styles.lineContainer}>
-            <View style={styles.line} />
-            <Text style={styles.text}> or </Text>
-            <View style={styles.line} />
-          </View>
-          <AppleAuthButton signIn />
-        </Animated.View>
+
+        <AppleAuthButton signIn />
       </GradientBackground>
     </Animated.View>
   );
@@ -61,30 +52,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 200,
     left: "5%",
-  },
-  appleButton: {
-    position: "absolute",
-    bottom: 90,
-    left: "5%",
-    display: "flex",
-    alignItems: "center",
-    gap: 10,
-  },
-  text: {
-    fontSize: 22,
-    fontWeight: "500",
-    color: Colors.white,
-  },
-  lineContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
-  },
-  line: {
-    marginTop: 5,
-    height: 1,
-    width: 120,
-    backgroundColor: Colors.white,
   },
 });
