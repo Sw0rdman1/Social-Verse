@@ -1,8 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MainScreen from "../screens/user/MainScreen";
-import PostScreen from "../screens/user/PostScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import HomeScreen from "../view/HomeScreen";
+import LoadingScreen from "../view/LoadingScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,14 +12,14 @@ export default function UserStack() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Main"
-            component={MainScreen}
-            options={{ headerShown: false }}
+            name="Loading"
+            component={LoadingScreen}
+            options={{ headerShown: false, gestureEnabled: false }}
           />
           <Stack.Screen
-            name="Post"
-            component={PostScreen}
-            options={{ headerShown: false }}
+            name="Home"
+            component={HomeScreen}
+            options={{ headerShown: false, gestureEnabled: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>

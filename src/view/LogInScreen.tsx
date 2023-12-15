@@ -20,10 +20,13 @@ const LogInScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           sharedTransitionTag="button-sign-in"
           style={styles.buttonContainer}
         >
-          <Button title="Sign In" onPress={() => navigation.goBack()} />
+          <Button
+            title="Sign In"
+            onPress={() => navigation.navigate("Loading")}
+          />
         </Animated.View>
 
-        <AppleAuthButton signIn />
+        <AppleAuthButton signIn navigation={navigation} />
       </GradientBackground>
     </Animated.View>
   );

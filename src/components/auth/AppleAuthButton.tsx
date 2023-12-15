@@ -4,7 +4,13 @@ import { useAuth } from "../../hooks/useAuth";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import Colors from "../../../assets/constants/Colors";
 
-export function AppleAuthButton({ signIn }: { signIn: boolean }) {
+export function AppleAuthButton({
+  signIn,
+  navigation,
+}: {
+  signIn: boolean;
+  navigation: any;
+}) {
   const { signInWithApple } = useAuth();
 
   if (Platform.OS === "ios")
