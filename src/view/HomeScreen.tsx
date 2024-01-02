@@ -1,10 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect } from "react";
 import Animated from "react-native-reanimated";
 import GradientBackground from "../components/ui/GradientBackground";
 import Colors from "../../assets/constants/Colors";
+import { useAuth } from "../hooks/useAuth";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }: any) => {
+  const { loadingData, initialized, user, signOut } = useAuth();
+  const signOutHandler = () => {
+    signOut();
+  };
+
   return (
     <Animated.View style={{ flex: 1 }} sharedTransitionTag="container">
       <GradientBackground inverted centerItems>
@@ -25,7 +31,12 @@ const HomeScreen = () => {
           <Animated.View
             style={styles.formContainer}
             sharedTransitionTag="home-screen"
-          ></Animated.View>
+          >
+            <Text>Home Screen</Text>
+            <TouchableOpacity onPress={signOutHandler}>
+              <Text>Log out</Text>
+            </TouchableOpacity>
+          </Animated.View>
         </View>
       </GradientBackground>
     </Animated.View>
