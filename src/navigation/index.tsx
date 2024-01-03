@@ -7,6 +7,7 @@ import LogInScreen from "../view/LogInScreen";
 import RegistrationScreen from "../view/RegistrationScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
+import PostScreen from "../view/PostScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,11 +24,18 @@ export default function RootNavigation() {
             options={{ headerShown: false, gestureEnabled: false }}
           />
           {user ? (
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{ headerShown: false, gestureEnabled: false }}
-            />
+            <>
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{ headerShown: false, gestureEnabled: false }}
+              />
+              <Stack.Screen
+                name="Post"
+                component={PostScreen}
+                options={{ headerShown: false }}
+              />
+            </>
           ) : (
             <>
               <Stack.Screen
