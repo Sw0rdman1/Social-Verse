@@ -7,24 +7,21 @@ import FormsTemplate from "../components/auth/welcome/FormsTemplate";
 import { useAuth } from "../hooks/useAuth";
 import HomeScreenTemplate from "../components/HomeScreenTemplate";
 
-const LoadingScreen = ({ navigation }: { navigation: any }) => {
-  const { user, signOut, initialized } = useAuth();
+const LoadingScreen = ({ route, navigation }: any) => {
+  const { loadingData, initialized, user } = useAuth();
   const [fontSize, setFontSize] = useState(60);
-  const [loadingData, setLoadingData] = useState(false);
-
-  const simulateLoadingData = async () => {
-    setLoadingData(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setLoadingData(false);
-  };
 
   useEffect(() => {
-    if (user) {
-      simulateLoadingData();
-      setFontSize(40);
-      navigation.replace("Home");
+    if (!initialized) return;
+
+    if (!user) {
+      setFontSize(60);
+      navigation.navigate("Welcome");
+    } else if (!loadingData) {
+      setFontSize(45);
+      navigation.navigate("Home");
     }
-  }, []);
+  }, [initialized, user, loadingData]);
 
   return (
     <Animated.View style={styles.fullContainer} sharedTransitionTag="container">
@@ -67,7 +64,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontSize: 60,
     fontWeight: "700",
     color: Colors.white,
   },

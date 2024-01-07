@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 import GradientBackground from "../components/ui/GradientBackground";
 import Colors from "../../assets/constants/Colors";
+import { useAuth } from "../hooks/useAuth";
+import PostsList from "../components/auth/home/PostList";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }: any) => {
   return (
     <Animated.View style={{ flex: 1 }} sharedTransitionTag="container">
       <GradientBackground inverted centerItems>
@@ -25,7 +26,9 @@ const HomeScreen = () => {
           <Animated.View
             style={styles.formContainer}
             sharedTransitionTag="home-screen"
-          ></Animated.View>
+          >
+            <PostsList navigation={navigation} />
+          </Animated.View>
         </View>
       </GradientBackground>
     </Animated.View>
@@ -38,9 +41,8 @@ const styles = StyleSheet.create({
   formContainer: {
     position: "absolute",
     bottom: 0,
-    height: 700,
+    height: "80%",
     width: "100%",
-    paddingBottom: 30,
     backgroundColor: Colors.whiteBg,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
@@ -51,8 +53,8 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.white,
     fontWeight: "700",
+    fontSize: 45,
     position: "absolute",
-    top: 60,
-    fontSize: 40,
+    top: "10%",
   },
 });
