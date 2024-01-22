@@ -11,6 +11,7 @@ const LoadingScreen = ({ route, navigation }: any) => {
   const { loadingData, initialized, user } = useAuth();
   const [fontSize, setFontSize] = useState(60);
 
+
   useEffect(() => {
     if (!initialized) return;
 

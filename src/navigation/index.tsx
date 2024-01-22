@@ -33,7 +33,7 @@ export default function RootNavigation() {
               <Stack.Screen
                 name="Post"
                 component={PostScreen}
-                options={{ headerShown: false }}
+                options={{ headerShown: false, gestureEnabled: false }}
               />
             </>
           ) : (

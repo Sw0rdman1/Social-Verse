@@ -8,16 +8,20 @@ const { black } = Colors;
 
 interface Props {
   handleBackButton: () => void;
+  size?: number;
 }
 
-const BackButton: React.FC<Props> = ({ handleBackButton }) => {
+const BackButton: React.FC<Props> = ({ handleBackButton, size = 20 }) => {
   return (
     <Animated.View
       entering={FadeInUp.delay(500).springify()}
-      style={styles.backButton}
+      style={[styles.backButton, {
+        height: size + 6,
+        width: size + 6,
+      }]}
     >
       <TouchableOpacity onPress={handleBackButton}>
-        <Ionicons name="chevron-back" size={20} color="white" />
+        <Ionicons name="chevron-back" size={size} color="white" />
       </TouchableOpacity>
     </Animated.View>
   );
@@ -30,8 +34,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     left: 20,
-    height: 26,
-    width: 26,
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",

@@ -15,10 +15,10 @@ import {
   State,
 } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
-import Colors from "../../../../assets/constants/Colors";
-import { Post, getFakePosts } from "../../../models/Post";
-import Avatar from "../../ui/Avatar";
-import { useAuth } from "../../../hooks/useAuth";
+import Colors from "../../../assets/constants/Colors";
+import { Post, getFakePosts } from "../../models/Post";
+import Avatar from "../ui/Avatar";
+import { useAuth } from "../../hooks/useAuth";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -182,7 +182,7 @@ const PostsList = ({ navigation }: any) => {
                       });
                     }}
                   >
-                    <Animated.View sharedTransitionTag={post.id}>
+                    <Animated.View>
                       <Animated.Image
                         sharedTransitionTag={post.id + ".image"}
                         source={{ uri: post.contentPhoto }}
@@ -193,10 +193,7 @@ const PostsList = ({ navigation }: any) => {
                         }}
                       />
                     </Animated.View>
-                    <Animated.View
-                      style={styles.overlay}
-                      sharedTransitionTag={post.id + ".overlay"}
-                    />
+
                   </TouchableOpacity>
                 </RNAnimated.View>
               );
@@ -241,7 +238,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: Colors.black,
+    backgroundColor: "transparent",
     opacity: 0,
     position: "absolute",
   },

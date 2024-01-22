@@ -5,7 +5,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 import EmailInput from "./EmailInput";
 import PasswordInput from "./PasswordInput";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
-import BackButton from "../BackButton";
+import BackButton from "../../ui/BackButton";
 import AuthText from "../AuthText";
 
 interface Props {

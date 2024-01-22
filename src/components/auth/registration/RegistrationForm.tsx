@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
-import BackButton from "../BackButton";
+import BackButton from "../../ui/BackButton";
 import AuthText from "../AuthText";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import NewEmailInput from "./NewEmailInput";

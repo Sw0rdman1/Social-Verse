@@ -3,7 +3,7 @@ import Animated from "react-native-reanimated";
 import GradientBackground from "../components/ui/GradientBackground";
 import Colors from "../../assets/constants/Colors";
 import { useAuth } from "../hooks/useAuth";
-import PostsList from "../components/auth/home/PostList";
+import PostsList from "../components/home/PostList";
 
 const HomeScreen = ({ navigation }: any) => {
   return (
