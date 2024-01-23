@@ -9,26 +9,37 @@ import AuthorInfo from "../components/home/AuthorInfo";
 import InteractionSection from "../components/home/InteractionSection";
 import PostDescription from "../components/home/PostDescription";
 import CommentSection from "../components/home/CommentSection";
+import { useRef } from "react";
 
 const PostScreen = ({ route, navigation }: any) => {
   const { post } = route.params;
+  const scrolViewRef = useRef(null);
+
+  const goBackHandler = () => {
+    navigation.goBack();
+  }
 
   return (
     <Animated.View
       sharedTransitionTag={post.id}
       style={styles.container}
     >
-      <PostImage post={post} goBackHandler={() => {
-        navigation.goBack();
-      }} >
+      <PostImage
+        post={post}
+        goBackHandler={goBackHandler}
+        scrolViewRef={scrolViewRef}
+      >
         <View style={styles.infoContainer}>
           <PostDescription post={post} />
           <InteractionSection post={post} />
-          <CommentSection post={post} />
+          <CommentSection
+            post={post}
+            scrolViewRef={scrolViewRef}
+          />
           <View style={{ height: 50 }} />
         </View>
       </PostImage>
-    </Animated.View>
+    </Animated.View >
   );
 };
 

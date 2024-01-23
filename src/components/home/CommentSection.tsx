@@ -5,6 +5,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import Colors from '../../../assets/constants/Colors';
 import CommentEntity, { getFakeComments } from '../../models/Comment';
 import Comment from './Comment';
+import { MaterialIcons } from '@expo/vector-icons';
+import CommentInput from './CommentInput';
+
+const ICON_SIZE = 28;
 
 const NoComments: React.FC = () => {
     return (
@@ -16,9 +20,10 @@ const NoComments: React.FC = () => {
 
 interface CommentSectionProps {
     post: Post;
+    scrolViewRef: any;
 }
 
-const CommentSection: React.FC<CommentSectionProps> = ({ post }) => {
+const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) => {
     const [commentsDisplayed, setCommentsDisplayed] = useState(false);
     const [comments, setComments] = useState<CommentEntity[]>([]);
 
@@ -38,12 +43,16 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post }) => {
                     backgroundColor: Colors.grayTransparent,
                 }]}
             >
-                <Text style={styles.interactionText}>Show all comments</Text>
-                <Text style={styles.interactionNumber}>{comments.length}</Text>
-                <FontAwesome name="comments" size={28} color="black" />
+                <Text style={styles.interactionText}>{commentsDisplayed ? "Hide comments" : "Show comments"}</Text>
+                {!commentsDisplayed && <Text style={styles.interactionNumber}>{comments.length}</Text>}
+                {commentsDisplayed ?
+                    <MaterialIcons name="cancel" size={ICON_SIZE} color="black" /> :
+                    <FontAwesome name="comments" size={ICON_SIZE} color="black" />
+                }
             </TouchableOpacity>
             {commentsDisplayed &&
-                <View style={{ marginHorizontal: 10 }}>
+                <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+                    <CommentInput postID={post.id} scrolViewRef={scrolViewRef} />
                     {comments.length ?
                         comments.map((comment, index) => {
                             return (

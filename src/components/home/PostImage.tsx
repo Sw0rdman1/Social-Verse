@@ -145,12 +145,14 @@ interface ScrollViewScreenProps {
     children: React.ReactNode;
     post: Post;
     goBackHandler: () => void;
+    scrolViewRef: any;
 }
 
 const PostImage: React.FC<ScrollViewScreenProps> = ({
     children,
     post,
     goBackHandler,
+    scrolViewRef
 }) => {
     const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
 
@@ -174,6 +176,7 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
                 <AuthorInfo author={post.author} />
             </Animated.View>
             <ScrollView
+                ref={scrolViewRef}
                 bounces={false}
                 style={{
                     backgroundColor: Colors.whiteBg,
