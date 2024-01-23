@@ -36,7 +36,6 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
             <TouchableOpacity
                 onPress={() => {
                     setCommentsDisplayed(!commentsDisplayed);
-
                 }}
                 style={[styles.interactionContainer,
                 {
@@ -51,8 +50,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
                 }
             </TouchableOpacity>
             {commentsDisplayed &&
-                <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+                <View style={{ marginHorizontal: 10 }}>
                     <CommentInput postID={post.id} scrolViewRef={scrolViewRef} />
+
                     {comments.length ?
                         comments.map((comment, index) => {
                             return (
@@ -61,6 +61,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
                         })
                         : <NoComments />
                     }
+
                 </View>
             }
         </View>

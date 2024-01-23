@@ -36,7 +36,6 @@ const PostScreen = ({ route, navigation }: any) => {
             post={post}
             scrolViewRef={scrolViewRef}
           />
-          <View style={{ height: 50 }} />
         </View>
       </PostImage>
     </Animated.View >
