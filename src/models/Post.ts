@@ -1,5 +1,5 @@
-import { User } from "./Use";
-import { fa, faker } from "@faker-js/faker";
+import { User } from "./User";
+import { faker } from "@faker-js/faker";
 
 export interface Post {
   id: string;

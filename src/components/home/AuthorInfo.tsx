@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Avatar from '../ui/Avatar'
-import { User } from '../../models/Use'
+import { User } from '../../models/User'
 import Colors from '../../../assets/constants/Colors'
 
 interface AuthorInfoProps {

@@ -8,6 +8,7 @@ import PostImage from "../components/home/PostImage";
 import AuthorInfo from "../components/home/AuthorInfo";
 import InteractionSection from "../components/home/InteractionSection";
 import PostDescription from "../components/home/PostDescription";
+import CommentSection from "../components/home/CommentSection";
 
 const PostScreen = ({ route, navigation }: any) => {
   const { post } = route.params;
@@ -23,7 +24,8 @@ const PostScreen = ({ route, navigation }: any) => {
         <View style={styles.infoContainer}>
           <PostDescription post={post} />
           <InteractionSection post={post} />
-          <View style={{ height: 1100 }} />
+          <CommentSection post={post} />
+          <View style={{ height: 50 }} />
         </View>
       </PostImage>
     </Animated.View>

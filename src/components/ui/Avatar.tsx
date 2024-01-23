@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { User } from "../../models/Use";
+import { User } from "../../models/User";
 
 interface AvatarProps {
   user: User;
