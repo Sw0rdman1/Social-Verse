@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         flexDirection: "row",
         borderBottomWidth: 1,
-        borderBottomColor: Colors.grayTransparent,
+        borderBottomColor: Colors.whiteBg,
         gap: 5,
     },
     avatar: {
@@ -43,16 +43,17 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 5,
         gap: 5,
-        backgroundColor: "whitesmoke",
+        backgroundColor: Colors.whiteBg,
         padding: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 15,
         borderRadius: 20,
+        paddingBottom: 25,
     },
     username: {
         fontWeight: "bold",
-        fontSize: 15,
+        fontSize: 16,
     },
     comment: {
-        fontSize: 15,
+        fontSize: 14,
     },
 })

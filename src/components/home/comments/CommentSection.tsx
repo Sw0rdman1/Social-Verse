@@ -37,7 +37,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef, com
         <View style={styles.mainContainer}>
 
             {commentsDisplayed &&
-                <View style={{ marginHorizontal: 10 }}>
+                <View style={{ marginHorizontal: 5 }}>
                     <CommentInput postID={post.id} scrolViewRef={scrolViewRef} />
                     {comments.length ?
                         comments.map((comment, index) =>

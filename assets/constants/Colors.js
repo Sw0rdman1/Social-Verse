@@ -12,7 +12,7 @@ const Colors = {
   titleColorTransparent: "rgba(255, 234, 0, 0.15)",
   error: "#fd3737",
   gray: "#999DA0",
-  grayTransparent: "rgba(153, 157, 160, 0.20)",
+  grayTransparent: "rgba(153, 157, 160, 0.1)",
   success: "#7ac142",
   likeColor: "#ff0000",
   likeColorTransparent: "rgba(255, 0, 0, 0.15)",
