@@ -1,13 +1,14 @@
 import { useAuth } from "../hooks/useAuth";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoadingScreen from "../view/LoadingScreen";
-import HomeScreen from "../view/HomeScreen";
-import WelcomeScreen from "../view/WelcomeScreen";
-import LogInScreen from "../view/LogInScreen";
-import RegistrationScreen from "../view/RegistrationScreen";
+import HomeScreen from "../view/main/HomeScreen";
+import WelcomeScreen from "../view/auth/WelcomeScreen";
+import LogInScreen from "../view/auth/LogInScreen";
+import RegistrationScreen from "../view/auth/RegistrationScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import PostScreen from "../view/PostScreen";
+import PostScreen from "../view/main/PostScreen";
+import MainScreen from "../view/main/MainScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,8 +27,8 @@ export default function RootNavigation() {
           {user ? (
             <>
               <Stack.Screen
-                name="Home"
-                component={HomeScreen}
+                name="Main"
+                component={MainScreen}
                 options={{ headerShown: false, gestureEnabled: false }}
               />
               <Stack.Screen

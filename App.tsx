@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { SupabaseProvider } from "./src/context/SupabaseProvider";
 import "react-native-gesture-handler";
-import WelcomeScreen from "./src/view/WelcomeScreen";
+import WelcomeScreen from "./src/view/auth/WelcomeScreen";
 import { StackScreenProps } from "@react-navigation/stack";
 import RootNavigation from "./src/navigation";
 

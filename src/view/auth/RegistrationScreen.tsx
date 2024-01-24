@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import Button from "../components/ui/Button";
-import GradientBackground from "../components/ui/GradientBackground";
+import Button from "../../components/ui/Button";
+import GradientBackground from "../../components/ui/GradientBackground";
 import { StatusBar } from "expo-status-bar";
-import LogInForm from "../components/auth/login/LogInForm";
-import Colors from "../../assets/constants/Colors";
+import LogInForm from "../../components/auth/login/LogInForm";
+import Colors from "../../../assets/constants/Colors";
 import { StackScreenProps } from "@react-navigation/stack";
-import { AppleAuthButton } from "../components/auth/AppleAuthButton";
-import RegistrationForm from "../components/auth/registration/RegistrationForm";
+import RegistrationForm from "../../components/auth/registration/RegistrationForm";
 import { useEffect, useState } from "react";
+import { AppleAuthButton } from "../../components/auth/AppleAuthButton";
 
 const RegistrationScreen: React.FC<StackScreenProps<any>> = ({
   navigation,
@@ -43,7 +43,7 @@ const RegistrationScreen: React.FC<StackScreenProps<any>> = ({
           />
         </Animated.View>
 
-        <AppleAuthButton signIn={false} />
+        <AppleAuthButton signIn={false} navigation={navigation} />
       </GradientBackground>
     </Animated.View>
   );

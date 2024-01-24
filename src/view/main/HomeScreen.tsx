@@ -1,9 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
-import GradientBackground from "../components/ui/GradientBackground";
-import Colors from "../../assets/constants/Colors";
-import { useAuth } from "../hooks/useAuth";
-import PostsList from "../components/home/post/PostList";
+import GradientBackground from "../../components/ui/GradientBackground";
+import Colors from "../../../assets/constants/Colors";
+import { useAuth } from "../../hooks/useAuth";
+import PostsList from "../../components/home/post/PostList";
 
 const HomeScreen = ({ navigation }: any) => {
   return (
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   formContainer: {
     position: "absolute",
     bottom: 0,
-    height: "80%",
+    height: "82.5%",
     width: "100%",
     backgroundColor: Colors.whiteBg,
     borderTopLeftRadius: 50,
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 45,
     position: "absolute",
-    top: "10%",
+    top: "7.5%",
   },
 });
