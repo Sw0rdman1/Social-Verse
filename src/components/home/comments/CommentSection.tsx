@@ -39,7 +39,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
                 }}
                 style={[styles.interactionContainer,
                 {
-                    backgroundColor: Colors.grayTransparent,
+                    backgroundColor: commentsDisplayed ? Colors.gradient2 : Colors.grayTransparent,
                 }]}
             >
                 <Text style={styles.interactionText}>{commentsDisplayed ? "Hide comments" : "Show comments"}</Text>
@@ -52,16 +52,12 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
             {commentsDisplayed &&
                 <View style={{ marginHorizontal: 10 }}>
                     <CommentInput postID={post.id} scrolViewRef={scrolViewRef} />
-
                     {comments.length ?
-                        comments.map((comment, index) => {
-                            return (
-                                <Comment comment={comment} key={index} />
-                            )
-                        })
+                        comments.map((comment, index) =>
+                            <Comment comment={comment} key={index} />
+                        )
                         : <NoComments />
                     }
-
                 </View>
             }
         </View>
@@ -83,6 +79,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginVertical: 5,
         marginHorizontal: 10,
+        height: 50,
     },
     interactionText: {
         fontSize: 16,

@@ -1,7 +1,9 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 
+
+const { height } = Dimensions.get("window");
 
 
 const Button = ({ onPress }: any) => {
@@ -39,7 +41,12 @@ const CommentInput: React.FC<CommentInputProps> = ({ postID, scrolViewRef }) => 
                 value={comment}
                 onChangeText={handleCommentChange}
                 onFocus={() => {
-                    scrolViewRef.current.scrollToEnd({ animated: true })
+                    scrolViewRef.current.scrollTo({
+                        x: 0,
+                        y: height * 0.5 + 70,
+                        animated: true,
+                    })
+
                 }}
             />
             <Button onPress={handleCommentSubmit} />

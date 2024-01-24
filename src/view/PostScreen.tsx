@@ -1,4 +1,5 @@
 import {
+  KeyboardAvoidingView,
   StyleSheet,
   View,
 } from "react-native";
@@ -20,6 +21,7 @@ const PostScreen = ({ route, navigation }: any) => {
   }
 
   return (
+
     <Animated.View
       sharedTransitionTag={post.id}
       style={styles.container}
@@ -38,7 +40,7 @@ const PostScreen = ({ route, navigation }: any) => {
           />
         </View>
       </PostImage>
-    </Animated.View >
+    </Animated.View>
   );
 };
 
@@ -57,8 +59,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    width: "100%",
-    zIndex: 100,
+    paddingBottom: 10,
     backgroundColor: Colors.whiteBg,
   },
 });

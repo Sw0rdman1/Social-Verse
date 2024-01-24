@@ -12,8 +12,8 @@ import BackButton from "../../ui/BackButton";
 
 const { height } = Dimensions.get("window");
 
-const Header_Max_Height = height - 320;
-const Header_Min_Height = 260;
+const Header_Max_Height = height - 230;
+const Header_Min_Height = 220;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 const BORDER_RADIUS = 40;
 

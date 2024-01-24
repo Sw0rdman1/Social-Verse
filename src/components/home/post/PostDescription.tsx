@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 15,
         gap: 10,
+        height: 140,
     },
     text: {
         fontSize: 17,
