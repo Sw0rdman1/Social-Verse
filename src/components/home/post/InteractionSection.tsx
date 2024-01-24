@@ -2,8 +2,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import Colors from '../../../assets/constants/Colors';
-import { Post } from '../../models/Post';
+import Colors from '../../../../assets/constants/Colors';
+import { Post } from '../../../models/Post';
 
 
 const ICON_SIZE = 22;

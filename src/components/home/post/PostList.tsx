@@ -15,10 +15,10 @@ import {
   State,
 } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
-import Colors from "../../../assets/constants/Colors";
-import { Post, getFakePosts } from "../../models/Post";
-import Avatar from "../ui/Avatar";
-import { useAuth } from "../../hooks/useAuth";
+import Colors from "../../../../assets/constants/Colors";
+import { Post, getFakePosts } from "../../../models/Post";
+import Avatar from "../../ui/Avatar";
+import { useAuth } from "../../../hooks/useAuth";
 
 const { width, height } = Dimensions.get("screen");
 

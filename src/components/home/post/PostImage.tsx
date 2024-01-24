@@ -2,13 +2,13 @@
 import { Animated as RNAnimated, ScrollView, StyleSheet, View, Text, Dimensions } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Post } from "../../models/Post";
-import Colors from "../../../assets/constants/Colors";
+import { Post } from "../../../models/Post";
+import Colors from "../../../../assets/constants/Colors";
 import { useEffect, useRef, useState } from "react";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
 import AuthorInfo from "./AuthorInfo";
-import BackButton from "../ui/BackButton";
+import BackButton from "../../ui/BackButton";
 
 const { height } = Dimensions.get("window");
 

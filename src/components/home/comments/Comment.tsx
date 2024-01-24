@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import CommentEntity from '../../models/Comment';
-import Colors from '../../../assets/constants/Colors';
-import Avatar from '../ui/Avatar';
+import CommentEntity from '../../../models/Comment';
+import Colors from '../../../../assets/constants/Colors';
+import Avatar from '../../ui/Avatar';
 
 interface CommentProps {
     comment: CommentEntity;

@@ -4,11 +4,11 @@ import {
 } from "react-native";
 import Animated from "react-native-reanimated";
 import Colors from "../../assets/constants/Colors";
-import PostImage from "../components/home/PostImage";
-import AuthorInfo from "../components/home/AuthorInfo";
-import InteractionSection from "../components/home/InteractionSection";
-import PostDescription from "../components/home/PostDescription";
-import CommentSection from "../components/home/CommentSection";
+import PostImage from "../components/home/post/PostImage";
+import AuthorInfo from "../components/home/post/AuthorInfo";
+import InteractionSection from "../components/home/post/InteractionSection";
+import PostDescription from "../components/home/post/PostDescription";
+import CommentSection from "../components/home/comments/CommentSection";
 import { useRef } from "react";
 
 const PostScreen = ({ route, navigation }: any) => {

@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Post } from '../../models/Post';
+import { Post } from '../../../models/Post';
 import { useEffect, useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
-import Colors from '../../../assets/constants/Colors';
-import CommentEntity, { getFakeComments } from '../../models/Comment';
+import Colors from '../../../../assets/constants/Colors';
+import CommentEntity, { getFakeComments } from '../../../models/Comment';
 import Comment from './Comment';
 import { MaterialIcons } from '@expo/vector-icons';
 import CommentInput from './CommentInput';

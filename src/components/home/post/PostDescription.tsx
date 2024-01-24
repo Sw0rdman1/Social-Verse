@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Post } from '../../models/Post';
+import { Post } from '../../../models/Post';
 import moment from 'moment';
-import Colors from '../../../assets/constants/Colors';
+import Colors from '../../../../assets/constants/Colors';
 
 interface PostDescriptionProps {
     post: Post;
