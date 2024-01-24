@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    paddingBottom: 10,
+    paddingBottom: 30,
     backgroundColor: Colors.whiteBg,
   },
 });

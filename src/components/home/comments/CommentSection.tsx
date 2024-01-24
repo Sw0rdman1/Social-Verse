@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Post } from '../../../models/Post';
 import { useEffect, useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
@@ -7,8 +7,10 @@ import CommentEntity, { getFakeComments } from '../../../models/Comment';
 import Comment from './Comment';
 import { MaterialIcons } from '@expo/vector-icons';
 import CommentInput from './CommentInput';
+import { AntDesign } from '@expo/vector-icons';
 
 const ICON_SIZE = 28;
+const { height } = Dimensions.get("window");
 
 const NoComments: React.FC = () => {
     return (
@@ -36,16 +38,23 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
             <TouchableOpacity
                 onPress={() => {
                     setCommentsDisplayed(!commentsDisplayed);
+                    if (commentsDisplayed) {
+                        scrolViewRef.current.scrollTo({
+                            x: 0,
+                            y: height + 400,
+                            animated: true,
+                        })
+                    }
                 }}
                 style={[styles.interactionContainer,
                 {
-                    backgroundColor: commentsDisplayed ? Colors.gradient2 : Colors.grayTransparent,
+                    backgroundColor: Colors.grayTransparent,
                 }]}
             >
                 <Text style={styles.interactionText}>{commentsDisplayed ? "Hide comments" : "Show comments"}</Text>
                 {!commentsDisplayed && <Text style={styles.interactionNumber}>{comments.length}</Text>}
                 {commentsDisplayed ?
-                    <MaterialIcons name="cancel" size={ICON_SIZE} color="black" /> :
+                    <AntDesign name="close" size={ICON_SIZE - 4} color="black" /> :
                     <FontAwesome name="comments" size={ICON_SIZE} color="black" />
                 }
             </TouchableOpacity>
@@ -70,6 +79,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         width: "100%",
+        marginTop: 10,
     },
     interactionContainer: {
         flexDirection: "row",

@@ -32,6 +32,8 @@ const CommentInput: React.FC<CommentInputProps> = ({ postID, scrolViewRef }) => 
         setComment('')
     }
 
+
+
     return (
 
         <View style={styles.container}>

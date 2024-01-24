@@ -77,7 +77,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
     });
 
     const animatedOpacity = value.interpolate({
-        inputRange: [0, 150],
+        inputRange: [0, 120],
         outputRange: [1, 0],
         extrapolate: "clamp",
     });
