@@ -10,11 +10,12 @@ import AuthorInfo from "../components/home/post/AuthorInfo";
 import InteractionSection from "../components/home/post/InteractionSection";
 import PostDescription from "../components/home/post/PostDescription";
 import CommentSection from "../components/home/comments/CommentSection";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const PostScreen = ({ route, navigation }: any) => {
   const { post } = route.params;
   const scrolViewRef = useRef(null);
+  const [commentsDisplayed, setCommentsDisplayed] = useState(false);
 
   const goBackHandler = () => {
     navigation.goBack();
@@ -33,10 +34,14 @@ const PostScreen = ({ route, navigation }: any) => {
       >
         <View style={styles.infoContainer}>
           <PostDescription post={post} />
-          <InteractionSection post={post} />
+          <InteractionSection
+            post={post}
+            setCommentsDisplayed={setCommentsDisplayed}
+            commentsDisplayed={commentsDisplayed} />
           <CommentSection
             post={post}
             scrolViewRef={scrolViewRef}
+            commentsDisplayed={commentsDisplayed}
           />
         </View>
       </PostImage>
@@ -59,7 +64,8 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    paddingBottom: 30,
     backgroundColor: Colors.whiteBg,
+    paddingBottom: 30,
+
   },
 });

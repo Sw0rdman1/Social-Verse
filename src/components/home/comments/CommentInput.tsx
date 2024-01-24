@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
+import Colors from '../../../../assets/constants/Colors';
 
 
 const { height } = Dimensions.get("window");
@@ -45,7 +46,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ postID, scrolViewRef }) => 
                 onFocus={() => {
                     scrolViewRef.current.scrollTo({
                         x: 0,
-                        y: height * 0.5 + 70,
+                        y: height * 0.5 + 40,
                         animated: true,
                     })
 
@@ -65,14 +66,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
+        marginTop: 10,
+
     },
     input: {
-        backgroundColor: 'whitesmoke',
+        backgroundColor: Colors.whiteBg,
         padding: 15,
         borderRadius: 15,
         flex: 1,
         marginRight: 10,
         fontSize: 16,
-        marginTop: 10,
     },
 })

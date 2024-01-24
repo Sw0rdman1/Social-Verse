@@ -11,9 +11,11 @@ const ICON_SIZE = 22;
 
 interface InteractionSectionProps {
     post: Post;
+    setCommentsDisplayed: (value: boolean) => void;
+    commentsDisplayed: boolean;
 }
 
-const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
+const InteractionSection: React.FC<InteractionSectionProps> = ({ post, setCommentsDisplayed, commentsDisplayed }) => {
 
     const [isLiked, setIsLiked] = useState(post.liked);
     const [isBookmarked, setIsBookmarked] = useState(post.bookmarked);
@@ -38,6 +40,25 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => {
+                    setCommentsDisplayed(!commentsDisplayed);
+                }}
+                style={[styles.interactionContainer,
+                {
+                    marginBottom: commentsDisplayed ? 0 : 10,
+                    height: commentsDisplayed ? 55 : 45,
+                    borderBottomLeftRadius: commentsDisplayed ? 0 : 10,
+                    borderBottomRightRadius: commentsDisplayed ? 0 : 10,
+                    backgroundColor: commentsDisplayed ? Colors.grayTransparent : "whitesmoke",
+                }]}
+            >
+                {!commentsDisplayed && <Text style={styles.interactionText}>{post.numberOfComments}</Text>}
+                {commentsDisplayed ?
+                    <AntDesign name="close" size={ICON_SIZE} color={Colors.black} /> :
+                    <FontAwesome name="comments" size={ICON_SIZE} color={Colors.black} />
+                }
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
                     setIsBookmarked(!isBookmarked);
                     post.numberOfBookmarks += isBookmarked ? -1 : 1;
 
@@ -51,7 +72,7 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
 
                 {isBookmarked ?
                     <FontAwesome name="bookmark" size={ICON_SIZE} color={Colors.gradient2} /> :
-                    <FontAwesome name="bookmark-o" size={ICON_SIZE} color="black" />
+                    <FontAwesome name="bookmark-o" size={ICON_SIZE} color={Colors.black} />
                 }
             </TouchableOpacity>
         </View >
@@ -63,14 +84,13 @@ export default InteractionSection
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '100%',
         gap: 5,
-        borderWidth: 1,
         borderColor: Colors.whiteBg,
         paddingHorizontal: 10,
-        height: 50,
+        height: 60,
+        marginTop: 10,
+        paddingTop: 5,
     },
     interactionContainer: {
         flexDirection: 'row',
@@ -79,6 +99,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         borderRadius: 10,
+        height: 45,
     },
     interactionText: {
         marginRight: 10,

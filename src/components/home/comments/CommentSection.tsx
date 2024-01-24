@@ -23,10 +23,10 @@ const NoComments: React.FC = () => {
 interface CommentSectionProps {
     post: Post;
     scrolViewRef: any;
+    commentsDisplayed: boolean;
 }
 
-const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) => {
-    const [commentsDisplayed, setCommentsDisplayed] = useState(false);
+const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef, commentsDisplayed }) => {
     const [comments, setComments] = useState<CommentEntity[]>([]);
 
     useEffect(() => {
@@ -35,29 +35,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
 
     return (
         <View style={styles.mainContainer}>
-            <TouchableOpacity
-                onPress={() => {
-                    setCommentsDisplayed(!commentsDisplayed);
-                    if (commentsDisplayed) {
-                        scrolViewRef.current.scrollTo({
-                            x: 0,
-                            y: height + 400,
-                            animated: true,
-                        })
-                    }
-                }}
-                style={[styles.interactionContainer,
-                {
-                    backgroundColor: Colors.grayTransparent,
-                }]}
-            >
-                <Text style={styles.interactionText}>{commentsDisplayed ? "Hide comments" : "Show comments"}</Text>
-                {!commentsDisplayed && <Text style={styles.interactionNumber}>{comments.length}</Text>}
-                {commentsDisplayed ?
-                    <AntDesign name="close" size={ICON_SIZE - 4} color="black" /> :
-                    <FontAwesome name="comments" size={ICON_SIZE} color="black" />
-                }
-            </TouchableOpacity>
+
             {commentsDisplayed &&
                 <View style={{ marginHorizontal: 10 }}>
                     <CommentInput postID={post.id} scrolViewRef={scrolViewRef} />
@@ -78,29 +56,8 @@ export default CommentSection
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        width: "100%",
-        marginTop: 10,
-    },
-    interactionContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 10,
-        borderRadius: 10,
-        marginVertical: 5,
-        marginHorizontal: 10,
-        height: 50,
-    },
-    interactionText: {
-        fontSize: 16,
-        fontWeight: "600",
+        backgroundColor: Colors.grayTransparent,
+        borderRadius: 20,
         marginHorizontal: 5,
-
-    },
-    interactionNumber: {
-        fontSize: 16,
-        fontWeight: "bold",
-        marginLeft: 10,
-        marginRight: 5,
     },
 })

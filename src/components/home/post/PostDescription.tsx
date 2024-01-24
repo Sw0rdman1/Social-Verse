@@ -28,8 +28,9 @@ const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
         paddingHorizontal: 15,
+        justifyContent: 'center',
         gap: 10,
-        height: 140,
+        height: 130,
     },
     text: {
         fontSize: 17,
