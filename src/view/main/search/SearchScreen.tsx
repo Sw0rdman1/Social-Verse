@@ -16,12 +16,25 @@ interface SearchScreenProps {
 
 const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
     const insets = useSafeAreaInsets();
-
+    const [initialUsers, setInitialUsers] = useState<User[]>([])
     const [users, setUsers] = useState<User[]>([])
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [includeEmail, setIncludeEmail] = useState(false);
+
 
     useEffect(() => {
-        setUsers(getFakeUsers())
+        const fetchedUsers = getFakeUsers()
+        setInitialUsers(fetchedUsers)
+        setUsers(fetchedUsers)
     }, [])
+
+    const searchUsers = (searchTerm: string) => {
+        if (includeEmail) {
+            setUsers(initialUsers.filter((user) => user.displayName.toLowerCase().includes(searchTerm.toLowerCase()) || user.email.toLowerCase().includes(searchTerm.toLowerCase())))
+        } else {
+            setUsers(initialUsers.filter((user) => user.displayName.toLowerCase().includes(searchTerm.toLowerCase())))
+        }
+    }
 
 
     return (
@@ -39,12 +52,17 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
                     <View style={[styles.form, {
                         paddingTop: insets.top
                     }]}>
-                        <SearchInput />
+                        <SearchInput searchUsers={searchUsers} isFollowing={isFollowing} includeEmail={includeEmail} />
                     </View>
                     <Animated.View
                         style={styles.formContainer}
                     >
-                        <SearchFilters />
+                        <SearchFilters
+                            isFollowing={isFollowing}
+                            setIsFollowing={setIsFollowing}
+                            includeEmail={includeEmail}
+                            setIncludeEmail={setIncludeEmail}
+                        />
                         <SearchResults users={users} navigation={navigation} />
 
                     </Animated.View>
@@ -73,6 +91,6 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        gap: 20,
+        gap: 10,
     },
 })

@@ -1,15 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import Colors from '../../../assets/constants/Colors'
 import { Ionicons } from '@expo/vector-icons';
 
-const SearchInput = () => {
+interface SearchInputProps {
+    searchUsers: (searchTerm: string) => void;
+    isFollowing: boolean;
+    includeEmail: boolean;
+
+}
+
+const SearchInput: React.FC<SearchInputProps> = ({ searchUsers, isFollowing, includeEmail }) => {
 
     const [searchText, setSearchText] = useState('')
 
+    useEffect(() => {
+        searchUsers(searchText)
+    }, [searchText, isFollowing, includeEmail])
+
     const handleSearch = () => {
-        // Perform search logic here
-        console.log('Searching for:', searchText)
+        searchUsers(searchText)
     }
 
     return (

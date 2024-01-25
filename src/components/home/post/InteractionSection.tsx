@@ -44,8 +44,8 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post, setCommen
                 }}
                 style={[styles.interactionContainer,
                 {
-                    marginBottom: commentsDisplayed ? 0 : 10,
                     height: commentsDisplayed ? 55 : 45,
+                    paddingTop: commentsDisplayed ? 0 : 10,
                     borderBottomLeftRadius: commentsDisplayed ? 0 : 10,
                     borderBottomRightRadius: commentsDisplayed ? 0 : 10,
                     backgroundColor: commentsDisplayed ? Colors.grayTransparent : "whitesmoke",
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     },
     interactionText: {
         marginRight: 10,
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: '600',
     },
 

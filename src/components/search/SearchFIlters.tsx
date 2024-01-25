@@ -3,9 +3,14 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import Colors from '../../../assets/constants/Colors';
 
-const SearchFilters = () => {
-    const [isFollowing, setIsFollowing] = useState(false);
-    const [includeEmail, setIncludeEmail] = useState(false);
+interface SearchFiltersProps {
+    isFollowing: boolean;
+    setIsFollowing: (value: boolean) => void;
+    includeEmail: boolean;
+    setIncludeEmail: (value: boolean) => void;
+}
+
+const SearchFilters: React.FC<SearchFiltersProps> = ({ isFollowing, setIsFollowing, includeEmail, setIncludeEmail }) => {
 
     const handleFollowingFilter = () => {
         setIsFollowing(!isFollowing);
@@ -52,6 +57,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         paddingHorizontal: 22,
         gap: 15,
+        paddingBottom: 5,
     },
     button: {
         backgroundColor: Colors.grayTransparentLess,

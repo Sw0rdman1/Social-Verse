@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 import { User } from '../../models/User';
 import Colors from '../../../assets/constants/Colors';
 import { StackNavigationProp } from '@react-navigation/stack';
-import Animated from 'react-native-reanimated';
+import Animated, { FadeIn, FadeOut, Layout } from 'react-native-reanimated';
 
 
 interface SearchResultsProps {
@@ -23,20 +23,29 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            {users.map((user) => (
-                <TouchableOpacity onPress={() => openUserProfilePage(user)} key={user.id} style={styles.userContainer}>
-                    <Animated.Image
-                        sharedTransitionTag={user.id + ".image"}
-                        source={{ uri: user.profilePicture }} style={styles.avatar}
-                    />
-                    <View style={styles.userInfo}>
-                        <Text style={styles.firstName}>{user.displayName}</Text>
-                        <Text style={styles.email}>{user.email.toLowerCase()}</Text>
-                    </View>
+            {users.map((user, index) => (
+                <TouchableOpacity onPress={() => openUserProfilePage(user)} key={user.id} >
+                    <Animated.View
+                        entering={FadeIn.delay(100 * index)}
+                        exiting={FadeOut}
+                        layout={Layout.delay(100)}
+                        style={styles.userContainer}
+                    >
+                        <Animated.Image
+                            sharedTransitionTag={user.id + ".image"}
+                            source={{ uri: user.profilePicture }} style={styles.avatar}
+                        />
+                        <View style={styles.userInfo}>
+                            <Text style={styles.firstName}>{user.displayName}</Text>
+                            <Text style={styles.email}>{user.email.toLowerCase()}</Text>
+                        </View>
+                    </Animated.View>
                 </TouchableOpacity>
-            ))}
+
+            ))
+            }
             <View style={{ height: 120 }} />
-        </ScrollView>
+        </ScrollView >
     );
 };
 
@@ -44,7 +53,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        paddingTop: 10,
         paddingHorizontal: 10,
     },
     userContainer: {
