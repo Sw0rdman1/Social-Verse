@@ -1,7 +1,7 @@
 import { useAuth } from "../hooks/useAuth";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoadingScreen from "../view/LoadingScreen";
-import HomeScreen from "../view/main/HomeScreen";
+import HomeScreen from "../view/main/home/HomeScreen";
 import WelcomeScreen from "../view/auth/WelcomeScreen";
 import LogInScreen from "../view/auth/LogInScreen";
 import RegistrationScreen from "../view/auth/RegistrationScreen";

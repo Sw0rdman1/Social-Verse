@@ -6,11 +6,12 @@ import { Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TabContainer from "./TabContainer";
 import Colors from "../../../assets/constants/Colors";
-import HomeScreen from "../../view/main/HomeScreen";
-import SearchScreen from "../../view/main/SearchScreen";
+import HomeScreen from "../../view/main/home/HomeScreen";
+import SearchScreen from "../../view/main/search/SearchScreen";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
-import HomeNavigation from "../../view/main/homeStack";
 import { useBottomTab } from "../../context/BottomBarContext";
+import HomeNavigation from "../../view/main/home/homeStack";
+import SearchNavigation from "../../view/main/search/searchStack";
 
 
 interface BottomNavigationProps {
@@ -66,9 +67,10 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
                 }}
             />
             <Tab.Screen
-                name="Search"
-                component={SearchScreen}
-                options={{
+                name="SearchTab"
+                children={() => (
+                    <SearchNavigation />
+                )} options={{
                     tabBarIcon: ({ focused }) => {
                         return (
                             <TabContainer focused={focused}>

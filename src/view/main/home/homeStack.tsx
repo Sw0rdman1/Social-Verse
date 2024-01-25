@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import PostScreen from './PostScreen';
 import HomeScreen from './HomeScreen';
 import React from 'react';
+import PostScreen from '../PostScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,5 +26,3 @@ const HomeNavigation: React.FC = () => {
 }
 
 export default HomeNavigation
-
-const styles = StyleSheet.create({})

@@ -1,8 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
-import GradientBackground from "../../components/ui/GradientBackground";
-import Colors from "../../../assets/constants/Colors";
-import PostsList from "../../components/home/post/PostList";
+import GradientBackground from "../../../components/ui/GradientBackground";
+import Colors from "../../../../assets/constants/Colors";
+import PostsList from "../../../components/home/post/PostList";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 
 interface HomeScreenProps {
