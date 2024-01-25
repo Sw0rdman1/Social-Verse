@@ -1,12 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import BottomTabNavigation from '../../components/navigation/BottomTabNavigation'
+import { StackScreenProps } from '@react-navigation/stack'
+import { BottomTabProvider } from '../../context/BottomBarContext'
 
-const MainScreen = () => {
+const MainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+
     return (
-        <View style={styles.container}>
-            <BottomTabNavigation />
-        </View>
+        <BottomTabProvider>
+            <View style={styles.container}>
+                <BottomTabNavigation navigation={navigation} />
+            </View>
+        </BottomTabProvider>
     )
 }
 

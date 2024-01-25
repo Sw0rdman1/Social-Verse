@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -9,34 +8,48 @@ import TabContainer from "./TabContainer";
 import Colors from "../../../assets/constants/Colors";
 import HomeScreen from "../../view/main/HomeScreen";
 import SearchScreen from "../../view/main/SearchScreen";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import HomeNavigation from "../../view/main/homeStack";
+import { useBottomTab } from "../../context/BottomBarContext";
 
-interface BottomTabNavigationProps {
+
+interface BottomNavigationProps {
+    navigation: StackNavigationProp<any, any>
 }
 
-const BottomTabNavigation: React.FC<BottomTabNavigationProps> = () => {
+const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) => {
     const Tab = createBottomTabNavigator();
+    const [tabBarVisible, setTabBarVisible] = useState(true);
+    const { isBottomTabVisible } = useBottomTab();
 
     return (
         <Tab.Navigator
             screenOptions={{
                 tabBarShowLabel: false,
                 headerShown: false,
-                tabBarStyle: {
-                    position: "absolute",
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                    elevation: 0,
-                    height: 75,
-                    backgroundColor: Colors.white,
-                    borderTopColor: Colors.gray,
-                },
+                tabBarStyle:
+                    isBottomTabVisible ? {
+                        position: "absolute",
+                        bottom: 35,
+                        backgroundColor: Colors.black,
+                        height: 60,
+                        paddingBottom: 0,
+                        marginHorizontal: 15,
+                        borderRadius: 15,
+                        shadowColor: Colors.black,
+                        shadowOffset: { width: 0, height: 5 },
+                        shadowOpacity: 0.6,
+                        shadowRadius: 3,
+                    } : {
+                        display: "none"
+                    }
+
             }}
         >
             <Tab.Screen
-                name="Home"
+                name="HomeTab"
                 children={() => (
-                    <HomeScreen />
+                    <HomeNavigation />
                 )}
                 options={{
                     tabBarIcon: ({ focused }) => {

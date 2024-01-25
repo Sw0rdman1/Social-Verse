@@ -10,16 +10,24 @@ import AuthorInfo from "../../components/home/post/AuthorInfo";
 import InteractionSection from "../../components/home/post/InteractionSection";
 import PostDescription from "../../components/home/post/PostDescription";
 import CommentSection from "../../components/home/comments/CommentSection";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useBottomTab } from "../../context/BottomBarContext";
 
 const PostScreen = ({ route, navigation }: any) => {
   const { post } = route.params;
   const scrolViewRef = useRef(null);
   const [commentsDisplayed, setCommentsDisplayed] = useState(false);
 
+  const { setBottomTabVisible } = useBottomTab();
+
   const goBackHandler = () => {
+    setBottomTabVisible(true)
     navigation.goBack();
   }
+
+  useEffect(() => {
+    setBottomTabVisible(false)
+  }, [])
 
   return (
 

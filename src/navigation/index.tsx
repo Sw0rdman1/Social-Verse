@@ -31,11 +31,6 @@ export default function RootNavigation() {
                 component={MainScreen}
                 options={{ headerShown: false, gestureEnabled: false }}
               />
-              <Stack.Screen
-                name="Post"
-                component={PostScreen}
-                options={{ headerShown: false, gestureEnabled: false }}
-              />
             </>
           ) : (
             <>

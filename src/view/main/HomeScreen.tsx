@@ -2,10 +2,14 @@ import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 import GradientBackground from "../../components/ui/GradientBackground";
 import Colors from "../../../assets/constants/Colors";
-import { useAuth } from "../../hooks/useAuth";
 import PostsList from "../../components/home/post/PostList";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 
-const HomeScreen = ({ navigation }: any) => {
+interface HomeScreenProps {
+  navigation: StackNavigationProp<any, any>
+}
+
+const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <Animated.View style={{ flex: 1 }} sharedTransitionTag="container">
       <GradientBackground inverted centerItems>

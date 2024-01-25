@@ -6,7 +6,7 @@ export interface Post {
   content: string;
   contentPhoto: string;
   author: User;
-  createdAt: Date;
+  createdAt: Date | string;
   numberOfLikes: number;
   numberOfComments: number;
   numberOfBookmarks: number;

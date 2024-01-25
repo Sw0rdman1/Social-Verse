@@ -10,7 +10,6 @@ interface PostDescriptionProps {
 
 const PostDescription: React.FC<PostDescriptionProps> = ({ post }) => {
 
-    const date = moment(post.createdAt).fromNow();
 
     return (
         <View style={styles.container}>
@@ -18,7 +17,7 @@ const PostDescription: React.FC<PostDescriptionProps> = ({ post }) => {
                 {post.content}
             </Text>
             <Text style={styles.date}>
-                - {date}
+                - {String(post.createdAt)}
             </Text>
         </View>
     );

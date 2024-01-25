@@ -19,6 +19,8 @@ import Colors from "../../../../assets/constants/Colors";
 import { Post, getFakePosts } from "../../../models/Post";
 import Avatar from "../../ui/Avatar";
 import { useAuth } from "../../../hooks/useAuth";
+import { useBottomTab } from "../../../context/BottomBarContext";
+import moment from "moment";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -69,6 +71,7 @@ const PostsList = ({ navigation }: any) => {
   const scrollXIndex = React.useRef(new RNAnimated.Value(0)).current;
   const scrollXAnimated = React.useRef(new RNAnimated.Value(0)).current;
   const [index, setIndex] = React.useState(0);
+
 
   const setActiveIndex = (activeIndex: number) => {
     scrollXIndex.setValue(activeIndex);
@@ -177,6 +180,10 @@ const PostsList = ({ navigation }: any) => {
                   <TouchableOpacity
                     activeOpacity={0.9}
                     onPress={() => {
+                      if (posts[index].createdAt instanceof Date) {
+                        const date = moment(posts[index].createdAt).fromNow();
+                        posts[index].createdAt = date
+                      }
                       navigation.navigate("Post", {
                         post: posts[index],
                       });
@@ -201,7 +208,7 @@ const PostsList = ({ navigation }: any) => {
           />
         </View>
       </FlingGestureHandler>
-    </FlingGestureHandler>
+    </FlingGestureHandler >
   );
 };
 
