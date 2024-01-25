@@ -1,38 +1,56 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { User } from '../../models/User';
+import Colors from '../../../assets/constants/Colors';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 
 
 interface SearchResultsProps {
     users: User[];
+    navigation: StackNavigationProp<any, any>
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({ users }) => {
+
+const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
+
+    const openUserProfilePage = (user: User) => {
+        navigation.navigate("UserProfile", {
+            user
+        });
+    }
+
+
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             {users.map((user) => (
-                <View key={user.id} style={styles.userContainer}>
+                <TouchableOpacity onPress={() => openUserProfilePage(user)} key={user.id} style={styles.userContainer}>
                     <Image source={{ uri: user.profilePicture }} style={styles.avatar} />
                     <View style={styles.userInfo}>
                         <Text style={styles.firstName}>{user.displayName}</Text>
                         <Text style={styles.email}>{user.email.toLowerCase()}</Text>
                     </View>
-                </View>
+                </TouchableOpacity>
             ))}
-        </View>
+            <View style={{ height: 120 }} />
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
+        width: '100%',
+        paddingTop: 10,
+        paddingHorizontal: 10,
     },
     userContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.grayTransparentLess,
     },
     avatar: {
         width: 50,

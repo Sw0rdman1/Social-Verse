@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from 'react';
 import PostScreen from '../PostScreen';
 import SearchScreen from './SearchScreen';
-import UserScreen from '../UserScreen';
+import UserProfileScreen from '../UserProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,8 +17,8 @@ const SearchNavigation: React.FC = () => {
                 options={{ headerShown: false, gestureEnabled: false }}
             />
             <Stack.Screen
-                name="User"
-                component={UserScreen}
+                name="UserProfile"
+                component={UserProfileScreen}
                 options={{ headerShown: false, gestureEnabled: false }}
             />
         </Stack.Navigator>

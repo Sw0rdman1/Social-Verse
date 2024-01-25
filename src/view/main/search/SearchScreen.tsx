@@ -1,14 +1,28 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import GradientBackground from '../../../components/ui/GradientBackground'
 import Animated from "react-native-reanimated";
 import Colors from '../../../../assets/constants/Colors';
 import SearchInput from '../../../components/search/SearchInput';
 import SearchFilters from '../../../components/search/SearchFIlters';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import SearchResults from '../../../components/search/SearchResults';
+import { User, getFakeUsers } from '../../../models/User';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const SearchScreen = () => {
+interface SearchScreenProps {
+    navigation: StackNavigationProp<any, any>
+}
+
+const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
     const insets = useSafeAreaInsets();
+
+    const [users, setUsers] = useState<User[]>([])
+
+    useEffect(() => {
+        setUsers(getFakeUsers())
+    }, [])
+
 
     return (
         <View style={{ flex: 1 }}>
@@ -31,8 +45,8 @@ const SearchScreen = () => {
                         style={styles.formContainer}
                     >
                         <SearchFilters />
+                        <SearchResults users={users} navigation={navigation} />
 
-                        <Text>Search</Text>
                     </Animated.View>
                 </View>
             </GradientBackground>

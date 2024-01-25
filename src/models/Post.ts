@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User, getFakeUser } from "./User";
 import { faker } from "@faker-js/faker";
 
 export interface Post {
@@ -26,12 +26,7 @@ export const getFakePosts = (): Post[] => {
       id: `post-${i}`,
       content: faker.lorem.paragraph(),
       contentPhoto: faker.image.urlPicsumPhotos(),
-      author: {
-        id: i,
-        displayName: randomName,
-        email: randomEmail,
-        profilePicture: `https://picsum.photos/100/300`,
-      },
+      author: getFakeUser(),
       createdAt: new Date(),
       numberOfLikes: faker.number.int({ min: 0, max: 300 }),
       numberOfComments: 0,
