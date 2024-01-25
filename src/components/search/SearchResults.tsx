@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 import { User } from '../../models/User';
 import Colors from '../../../assets/constants/Colors';
 import { StackNavigationProp } from '@react-navigation/stack';
-
+import Animated from 'react-native-reanimated';
 
 
 interface SearchResultsProps {
@@ -25,7 +25,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
         <ScrollView style={styles.container}>
             {users.map((user) => (
                 <TouchableOpacity onPress={() => openUserProfilePage(user)} key={user.id} style={styles.userContainer}>
-                    <Image source={{ uri: user.profilePicture }} style={styles.avatar} />
+                    <Animated.Image
+                        sharedTransitionTag={user.id + ".image"}
+                        source={{ uri: user.profilePicture }} style={styles.avatar}
+                    />
                     <View style={styles.userInfo}>
                         <Text style={styles.firstName}>{user.displayName}</Text>
                         <Text style={styles.email}>{user.email.toLowerCase()}</Text>

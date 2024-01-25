@@ -1,7 +1,5 @@
 // import React, { useEffect, useRef, useState } from "react";
 import { Animated as RNAnimated, ScrollView, StyleSheet, View, Text, Dimensions } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Post } from "../../../models/Post";
 import Colors from "../../../../assets/constants/Colors";
 import { useEffect, useRef, useState } from "react";
