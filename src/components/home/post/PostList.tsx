@@ -72,7 +72,6 @@ const PostsList = ({ navigation }: any) => {
   const scrollXAnimated = React.useRef(new RNAnimated.Value(0)).current;
   const [index, setIndex] = React.useState(0);
 
-
   const setActiveIndex = (activeIndex: number) => {
     scrollXIndex.setValue(activeIndex);
     setIndex(activeIndex);
@@ -182,10 +181,11 @@ const PostsList = ({ navigation }: any) => {
                     onPress={() => {
                       if (posts[index].createdAt instanceof Date) {
                         const date = moment(posts[index].createdAt).fromNow();
-                        posts[index].createdAt = date
+                        posts[index].createdAt = date;
                       }
                       navigation.navigate("Post", {
                         post: posts[index],
+                        previousPage: "Home",
                       });
                     }}
                   >
@@ -200,7 +200,6 @@ const PostsList = ({ navigation }: any) => {
                         }}
                       />
                     </Animated.View>
-
                   </TouchableOpacity>
                 </RNAnimated.View>
               );
@@ -208,7 +207,7 @@ const PostsList = ({ navigation }: any) => {
           />
         </View>
       </FlingGestureHandler>
-    </FlingGestureHandler >
+    </FlingGestureHandler>
   );
 };
 
