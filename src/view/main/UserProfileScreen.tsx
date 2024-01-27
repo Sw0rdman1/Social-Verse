@@ -2,11 +2,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useBottomTab } from "../../context/BottomBarContext";
 import { useEffect } from "react";
-import { Ionicons } from "@expo/vector-icons";
+import UserImage from "../../components/profile/UserImage";
+import Colors from "../../../assets/constants/Colors";
+import UserInfo from "../../components/profile/UserInfo";
 
 const UserProfileScreen = ({ route, navigation }: any) => {
   const { user, previousPage } = route.params;
-
   const { setBottomTabVisible } = useBottomTab();
 
   const goBackHandler = () => {
@@ -16,32 +17,23 @@ const UserProfileScreen = ({ route, navigation }: any) => {
     navigation.goBack();
   };
 
+  const openPostHandler = () => {
+    navigation.navigate("Post", { post: user, previousPage: "UserProfile" });
+  };
+
   useEffect(() => {
     setBottomTabVisible(false);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Animated.Image
-        sharedTransitionTag={user.id + ".image"}
-        source={{
-          uri: user.profilePicture as string,
-        }}
-        style={{
-          width: "100%",
-          height: "50%",
-          position: "absolute",
-          top: 0,
-        }}
-      />
-      <Animated.Text
-        style={{ fontSize: 30, fontWeight: "bold", marginTop: 100 }}
+      <UserImage
+        user={user}
+        goBackHandler={goBackHandler}
+        openPost={openPostHandler}
       >
-        {user.displayName}
-      </Animated.Text>
-      <TouchableOpacity onPress={goBackHandler} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
+        <UserInfo user={user} />
+      </UserImage>
     </View>
   );
 };
@@ -51,19 +43,14 @@ export default UserProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    zIndex: 100,
+    backgroundColor: Colors.whiteBg,
   },
-  backButton: {
-    position: "absolute",
-    top: 50,
-    left: 20,
-    width: 40,
-    height: 40,
-    borderRadius: 25,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    opacity: 0.8,
+  infoContainer: {
+    flex: 1,
+    backgroundColor: Colors.whiteBg,
+    paddingBottom: 30,
   },
 });

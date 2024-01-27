@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  Image,
   FlatList,
   Dimensions,
   Animated as RNAnimated,
@@ -16,10 +15,9 @@ import {
 } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Colors from "../../../../assets/constants/Colors";
-import { Post, getFakePosts } from "../../../models/Post";
+import { Post } from "../../../models/Post";
 import Avatar from "../../ui/Avatar";
 import { useAuth } from "../../../hooks/useAuth";
-import { useBottomTab } from "../../../context/BottomBarContext";
 import moment from "moment";
 
 const { width, height } = Dimensions.get("screen");
