@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  Image,
   FlatList,
   Dimensions,
   Animated as RNAnimated,
@@ -16,10 +15,9 @@ import {
 } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import Colors from "../../../../assets/constants/Colors";
-import { Post, getFakePosts } from "../../../models/Post";
+import { Post } from "../../../models/Post";
 import Avatar from "../../ui/Avatar";
 import { useAuth } from "../../../hooks/useAuth";
-import { useBottomTab } from "../../../context/BottomBarContext";
 import moment from "moment";
 
 const { width, height } = Dimensions.get("screen");
@@ -71,7 +69,6 @@ const PostsList = ({ navigation }: any) => {
   const scrollXIndex = React.useRef(new RNAnimated.Value(0)).current;
   const scrollXAnimated = React.useRef(new RNAnimated.Value(0)).current;
   const [index, setIndex] = React.useState(0);
-
 
   const setActiveIndex = (activeIndex: number) => {
     scrollXIndex.setValue(activeIndex);
@@ -182,10 +179,11 @@ const PostsList = ({ navigation }: any) => {
                     onPress={() => {
                       if (posts[index].createdAt instanceof Date) {
                         const date = moment(posts[index].createdAt).fromNow();
-                        posts[index].createdAt = date
+                        posts[index].createdAt = date;
                       }
                       navigation.navigate("Post", {
                         post: posts[index],
+                        previousPage: "Home",
                       });
                     }}
                   >
@@ -200,7 +198,6 @@ const PostsList = ({ navigation }: any) => {
                         }}
                       />
                     </Animated.View>
-
                   </TouchableOpacity>
                 </RNAnimated.View>
               );
@@ -208,7 +205,7 @@ const PostsList = ({ navigation }: any) => {
           />
         </View>
       </FlingGestureHandler>
-    </FlingGestureHandler >
+    </FlingGestureHandler>
   );
 };
 

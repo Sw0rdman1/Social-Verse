@@ -1,86 +1,38 @@
-// import React, { useEffect, useRef, useState } from "react";
 import {
   Animated as RNAnimated,
   ScrollView,
   StyleSheet,
   View,
-  Text,
   Dimensions,
 } from "react-native";
-import { Post } from "../../../models/Post";
-import Colors from "../../../../assets/constants/Colors";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import { Ionicons } from "@expo/vector-icons";
-import AuthorInfo from "./AuthorInfo";
-import BackButton from "../../ui/BackButton";
-import { User } from "../../../models/User";
+import { User } from "../../models/User";
+import Colors from "../../../assets/constants/Colors";
+import BackButton from "../ui/BackButton";
+import { Post } from "../../models/Post";
 
 const { height } = Dimensions.get("window");
 
-const Header_Max_Height = height - 230;
-const Header_Min_Height = 220;
+const Header_Max_Height = 550;
+const Header_Min_Height = 320;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 const BORDER_RADIUS = 40;
 
-const Swipe = () => {
-  const animated = new RNAnimated.Value(0);
-  const duration = 1500;
-
-  useEffect(() => {
-    RNAnimated.loop(
-      RNAnimated.sequence([
-        RNAnimated.timing(animated, {
-          toValue: 10,
-          duration: duration,
-          useNativeDriver: true,
-        }),
-        RNAnimated.timing(animated, {
-          toValue: 0,
-          duration: duration,
-          useNativeDriver: true,
-        }),
-      ])
-    ).start();
-  }, []);
-
-  return (
-    <RNAnimated.View
-      style={[
-        {
-          transform: [{ translateY: animated }],
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-        },
-      ]}
-    >
-      <Ionicons name="ios-chevron-up" size={24} color="white" />
-      <Text style={styles.text}>Swipe for more info</Text>
-    </RNAnimated.View>
-  );
-};
-
 interface DynamicHeaderProps {
   value: RNAnimated.Value;
-  post: Post;
+  user: User;
   goBackHandler: () => void;
 }
 
 const DynamicHeader: React.FC<DynamicHeaderProps> = ({
   value,
-  post,
+  user,
   goBackHandler,
 }) => {
   const animatedHeaderHeight = value.interpolate({
     inputRange: [0, Scroll_Distance],
     outputRange: [Header_Max_Height, Header_Min_Height],
-    extrapolate: "clamp",
-  });
-
-  const animatedOpacity = value.interpolate({
-    inputRange: [0, 120],
-    outputRange: [1, 0],
     extrapolate: "clamp",
   });
 
@@ -113,29 +65,30 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
         >
           <BackButton size={26} handleBackButton={goBackHandler} />
         </RNAnimated.View>
+        <Animated.View
+          entering={FadeInDown.delay(600).duration(500)}
+          style={{
+            flex: 1,
+            backgroundColor: Colors.blackTransparent,
+            zIndex: 10,
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+          }}
+        />
         <Animated.Image
-          sharedTransitionTag={post.id + ".image"}
+          sharedTransitionTag={user.id + ".image"}
           source={{
-            uri: post.contentPhoto as string,
+            uri: user.profilePicture as string,
           }}
           style={{
             width: "100%",
-            height: "115%",
+            height: "100%",
             position: "absolute",
             top: 0,
+            left: 0,
           }}
         />
-        <RNAnimated.View
-          style={{
-            opacity: animatedOpacity,
-            position: "absolute",
-            bottom: 25,
-          }}
-        >
-          <Animated.View entering={FadeInDown.delay(700).duration(500)}>
-            <Swipe />
-          </Animated.View>
-        </RNAnimated.View>
       </View>
     </RNAnimated.View>
   );
@@ -143,18 +96,16 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
 
 interface ScrollViewScreenProps {
   children: React.ReactNode;
-  post: Post;
+  user: User;
   goBackHandler: () => void;
-  scrolViewRef: any;
-  openUserProfilHandler: (author: User) => void;
+  openPost: (post: Post) => void;
 }
 
-const PostImage: React.FC<ScrollViewScreenProps> = ({
+const UserImage: React.FC<ScrollViewScreenProps> = ({
   children,
-  post,
+  user,
   goBackHandler,
-  scrolViewRef,
-  openUserProfilHandler,
+  openPost,
 }) => {
   const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
 
@@ -168,17 +119,22 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
     <View style={styles.homeContainer}>
       <DynamicHeader
         value={scrollOffsetY}
-        post={post}
+        user={user}
         goBackHandler={goBackHandler}
       />
       <Animated.View entering={FadeInDown.delay(600).duration(500)}>
-        <AuthorInfo
-          author={post.author}
-          openUserProfilHandler={openUserProfilHandler}
+        <View
+          style={{
+            backgroundColor: Colors.whiteBg,
+            height: 25,
+            borderTopLeftRadius: BORDER_RADIUS,
+            borderTopRightRadius: BORDER_RADIUS,
+            marginTop: -25,
+            zIndex: 20,
+          }}
         />
       </Animated.View>
       <ScrollView
-        ref={scrolViewRef}
         bounces={false}
         style={{
           backgroundColor: Colors.whiteBg,
@@ -209,7 +165,7 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
   );
 };
 
-export default PostImage;
+export default UserImage;
 
 const styles = StyleSheet.create({
   homeContainer: {
@@ -226,7 +182,7 @@ const styles = StyleSheet.create({
   backButon: {
     position: "absolute",
     left: 5,
-    zIndex: 100,
+    zIndex: 20,
   },
   text: {
     fontSize: 20,

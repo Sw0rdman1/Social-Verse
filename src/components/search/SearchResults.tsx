@@ -1,30 +1,37 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { User } from '../../models/User';
-import Colors from '../../../assets/constants/Colors';
-import { StackNavigationProp } from '@react-navigation/stack';
-import Animated, { FadeIn, FadeOut, Layout } from 'react-native-reanimated';
-
+import React from "react";
+import {
+    View,
+    Text,
+    Image,
+    StyleSheet,
+    ScrollView,
+    TouchableOpacity,
+} from "react-native";
+import { User } from "../../models/User";
+import Colors from "../../../assets/constants/Colors";
+import { StackNavigationProp } from "@react-navigation/stack";
+import Animated, { FadeIn, FadeOut, Layout } from "react-native-reanimated";
 
 interface SearchResultsProps {
     users: User[];
-    navigation: StackNavigationProp<any, any>
+    navigation: StackNavigationProp<any, any>;
 }
 
-
 const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
-
     const openUserProfilePage = (user: User) => {
         navigation.navigate("UserProfile", {
-            user
+            user,
+            previousPage: "Search",
         });
-    }
-
+    };
 
     return (
         <ScrollView style={styles.container}>
             {users.map((user, index) => (
-                <TouchableOpacity onPress={() => openUserProfilePage(user)} key={user.id} >
+                <TouchableOpacity
+                    onPress={() => openUserProfilePage(user)}
+                    key={user.id}
+                >
                     <Animated.View
                         entering={FadeIn.delay(100 * index)}
                         exiting={FadeOut}
@@ -33,7 +40,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
                     >
                         <Animated.Image
                             sharedTransitionTag={user.id + ".image"}
-                            source={{ uri: user.profilePicture }} style={styles.avatar}
+                            source={{ uri: user.profilePicture }}
+                            style={styles.avatar}
                         />
                         <View style={styles.userInfo}>
                             <Text style={styles.firstName}>{user.displayName}</Text>
@@ -41,34 +49,25 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
                         </View>
                     </Animated.View>
                 </TouchableOpacity>
-
-            ))
-            }
+            ))}
             <View style={{ height: 120 }} />
-        </ScrollView >
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%',
+        width: "100%",
         paddingHorizontal: 10,
-        backgroundColor: Colors.grayTransparent,
-        paddingTop: 20,
-
     },
     userContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         paddingVertical: 12,
         paddingHorizontal: 10,
         borderBottomWidth: 1,
-        borderWidth: 1,
-        marginBottom: 10,
-        borderRadius: 15,
-        borderColor: Colors.grayTransparentLess,
-        backgroundColor: Colors.whiteBg,
+        borderBottomColor: Colors.grayTransparentLess,
     },
     avatar: {
         width: 50,
@@ -81,12 +80,12 @@ const styles = StyleSheet.create({
     },
     firstName: {
         fontSize: 18,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         marginBottom: 4,
     },
     email: {
         fontSize: 14,
-        color: 'gray',
+        color: "gray",
     },
 });
 

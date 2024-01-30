@@ -5,8 +5,11 @@ export interface User {
   displayName: string;
   email: string;
   profilePicture: string;
+  numberOfFollowers: number;
+  numberOfFollowing: number;
+  numberOfPosts: number;
+  isFollowing: boolean;
 }
-
 
 export const getFakeUsers = (): User[] => {
   const fakeUsers: User[] = [];
@@ -20,11 +23,15 @@ export const getFakeUsers = (): User[] => {
       displayName: randomName,
       email: randomEmail,
       profilePicture: faker.image.avatar(),
+      numberOfFollowers: faker.number.int({ min: 0, max: 500 }),
+      numberOfFollowing: faker.number.int({ min: 0, max: 500 }),
+      numberOfPosts: faker.number.int({ min: 0, max: 60 }),
+      isFollowing: faker.datatype.boolean(),
     };
     fakeUsers.push(fakeUser);
   }
   return fakeUsers;
-}
+};
 
 export const getFakeUser = (): User => {
   const randomName = faker.person.fullName(); // Rowan Nikolaus
@@ -35,6 +42,10 @@ export const getFakeUser = (): User => {
     displayName: randomName,
     email: randomEmail,
     profilePicture: faker.image.avatar(),
+    numberOfFollowers: faker.number.int({ min: 0, max: 500 }),
+    numberOfFollowing: faker.number.int({ min: 0, max: 500 }),
+    numberOfPosts: faker.number.int({ min: 0, max: 60 }),
+    isFollowing: faker.datatype.boolean(),
   };
   return fakeUser;
-}
+};

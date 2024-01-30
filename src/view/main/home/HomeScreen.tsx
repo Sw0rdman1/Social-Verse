@@ -6,7 +6,7 @@ import PostsList from "../../../components/home/post/PostList";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 
 interface HomeScreenProps {
-  navigation: StackNavigationProp<any, any>
+  navigation: StackNavigationProp<any, any>;
 }
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
