@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 50,
         display: "flex",
         alignItems: "center",
-        paddingTop: 20,
     },
     form: {
         width: "100%",

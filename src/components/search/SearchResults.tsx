@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         paddingHorizontal: 10,
+        backgroundColor: Colors.grayTransparent,
+        paddingTop: 20,
+
     },
     userContainer: {
         flexDirection: 'row',
@@ -61,7 +64,11 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 10,
         borderBottomWidth: 1,
-        borderBottomColor: Colors.grayTransparentLess,
+        borderWidth: 1,
+        marginBottom: 10,
+        borderRadius: 15,
+        borderColor: Colors.grayTransparentLess,
+        backgroundColor: Colors.whiteBg,
     },
     avatar: {
         width: 50,
