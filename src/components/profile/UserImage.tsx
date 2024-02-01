@@ -4,20 +4,22 @@ import {
   StyleSheet,
   View,
   Dimensions,
+  Text,
 } from "react-native";
-import { useRef } from "react";
-import Animated, { FadeInDown } from "react-native-reanimated";
+import { useEffect, useRef, useState } from "react";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { User } from "../../models/User";
 import Colors from "../../../assets/constants/Colors";
 import BackButton from "../ui/BackButton";
 import { Post } from "../../models/Post";
+import UserInfo from "./UserInfo";
 
 const { height } = Dimensions.get("window");
 
 const Header_Max_Height = 550;
-const Header_Min_Height = 320;
+const Header_Min_Height = 350;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
-const BORDER_RADIUS = 40;
+const BORDER_RADIUS = 20;
 
 interface DynamicHeaderProps {
   value: RNAnimated.Value;
@@ -30,6 +32,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
   user,
   goBackHandler,
 }) => {
+
   const animatedHeaderHeight = value.interpolate({
     inputRange: [0, Scroll_Distance],
     outputRange: [Header_Max_Height, Header_Min_Height],
@@ -39,6 +42,12 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
   const animatedArrowOpacity = value.interpolate({
     inputRange: [0, Scroll_Distance],
     outputRange: [0.8, 1],
+    extrapolate: "clamp",
+  });
+
+  const animatedImageOpacity = value.interpolate({
+    inputRange: [0, Scroll_Distance],
+    outputRange: [0.5, 1],
     extrapolate: "clamp",
   });
 
@@ -63,17 +72,19 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
             { top: animatedBackButtonTop, opacity: animatedArrowOpacity },
           ]}
         >
-          <BackButton size={26} handleBackButton={goBackHandler} />
+          <BackButton inverted size={26} handleBackButton={goBackHandler} />
         </RNAnimated.View>
-        <Animated.View
-          entering={FadeInDown.delay(600).duration(500)}
+        <RNAnimated.View
           style={{
             flex: 1,
             backgroundColor: Colors.blackTransparent,
+            opacity: animatedImageOpacity,
             zIndex: 10,
             position: "absolute",
             width: "100%",
             height: "100%",
+            borderBottomLeftRadius: BORDER_RADIUS,
+            borderBottomRightRadius: BORDER_RADIUS,
           }}
         />
         <Animated.Image
@@ -87,8 +98,12 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
             position: "absolute",
             top: 0,
             left: 0,
+            borderBottomLeftRadius: BORDER_RADIUS,
+            borderBottomRightRadius: BORDER_RADIUS,
+
           }}
         />
+        <UserInfo user={user} />
       </View>
     </RNAnimated.View>
   );
@@ -122,18 +137,7 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
         user={user}
         goBackHandler={goBackHandler}
       />
-      <Animated.View entering={FadeInDown.delay(600).duration(500)}>
-        <View
-          style={{
-            backgroundColor: Colors.whiteBg,
-            height: 25,
-            borderTopLeftRadius: BORDER_RADIUS,
-            borderTopRightRadius: BORDER_RADIUS,
-            marginTop: -25,
-            zIndex: 20,
-          }}
-        />
-      </Animated.View>
+
       <ScrollView
         bounces={false}
         style={{
@@ -170,12 +174,15 @@ export default UserImage;
 const styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
+    backgroundColor: Colors.whiteBg,
+
   },
   headerContainer: {
-    backgroundColor: "transparent",
+    backgroundColor: Colors.whiteBg,
     flexDirection: "row",
     display: "flex",
     justifyContent: "center",
+    alignItems: "flex-end",
     height: "100%",
   },
 

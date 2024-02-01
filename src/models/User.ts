@@ -5,6 +5,7 @@ export interface User {
   displayName: string;
   email: string;
   profilePicture: string;
+  backgroundImage?: string;
   numberOfFollowers: number;
   numberOfFollowing: number;
   numberOfPosts: number;
@@ -23,6 +24,10 @@ export const getFakeUsers = (): User[] => {
       displayName: randomName,
       email: randomEmail,
       profilePicture: faker.image.avatar(),
+      backgroundImage: faker.image.urlPicsumPhotos({
+        width: 1080,
+        height: 500,
+      }),
       numberOfFollowers: faker.number.int({ min: 0, max: 500 }),
       numberOfFollowing: faker.number.int({ min: 0, max: 500 }),
       numberOfPosts: faker.number.int({ min: 0, max: 60 }),

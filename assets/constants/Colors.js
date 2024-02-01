@@ -2,7 +2,7 @@ const Colors = {
   white: "#ffffff",
   whiteBg: "hsl(186, 65%, 99%)",
   black: "#333333",
-  blackTransparent: "rgba(51, 51, 51, 0.3)",
+  blackTransparent: "rgba(51, 51, 51, 0.6)",
   gradient1: "#2196f3",
   gradient1Transparent: "rgba(33, 150, 243, 0.35)",
   gradient2: "#2ec4b6",

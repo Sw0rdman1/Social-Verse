@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import UserImage from "../../components/profile/UserImage";
 import Colors from "../../../assets/constants/Colors";
 import UserInfo from "../../components/profile/UserInfo";
+import FollowerSection from "../../components/profile/FollowerSection";
 
 const UserProfileScreen = ({ route, navigation }: any) => {
   const { user, previousPage } = route.params;
@@ -32,7 +33,8 @@ const UserProfileScreen = ({ route, navigation }: any) => {
         goBackHandler={goBackHandler}
         openPost={openPostHandler}
       >
-        <UserInfo user={user} />
+        <FollowerSection user={user} />
+        <View style={{ height: 700 }} />
       </UserImage>
     </View>
   );
