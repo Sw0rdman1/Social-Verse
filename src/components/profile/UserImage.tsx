@@ -24,12 +24,14 @@ interface DynamicHeaderProps {
   value: RNAnimated.Value;
   user: User;
   goBackHandler: () => void;
+  isFollowing: boolean;
 }
 
 const DynamicHeader: React.FC<DynamicHeaderProps> = ({
   value,
   user,
   goBackHandler,
+  isFollowing
 }) => {
 
   const animatedHeaderHeight = value.interpolate({
@@ -88,7 +90,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
           source={{
             uri: user.profilePicture as string,
           }}
-          blurRadius={1}
+          blurRadius={isFollowing ? 1 : 10}
           style={[styles.image, styles.borderRadius, { zIndex: 0 }]}
         />
         <UserInfo user={user} />
@@ -102,6 +104,7 @@ interface ScrollViewScreenProps {
   user: User;
   goBackHandler: () => void;
   openPost: (post: Post) => void;
+  isFollowing: boolean;
 }
 
 const UserImage: React.FC<ScrollViewScreenProps> = ({
@@ -109,6 +112,7 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
   user,
   goBackHandler,
   openPost,
+  isFollowing
 }) => {
   const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
 
@@ -124,6 +128,7 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
         value={scrollOffsetY}
         user={user}
         goBackHandler={goBackHandler}
+        isFollowing={isFollowing}
       />
 
       <ScrollView
@@ -142,7 +147,7 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
         )}
       >
         <Animated.View
-          style={styles.borderRadius}
+          style={[styles.borderRadius, { flex: 1 }]}
           entering={FadeInDown.delay(600).duration(500)}
         >
           <RNAnimated.View

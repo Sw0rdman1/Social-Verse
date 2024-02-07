@@ -38,9 +38,10 @@ const UserProfileScreen = ({ route, navigation }: any) => {
         user={user}
         goBackHandler={goBackHandler}
         openPost={openPostHandler}
+        isFollowing={isFollowing}
       >
-        <View style={styles.infoContainer}>
-          <FollowerSection user={user} />
+        <View style={[styles.infoContainer, { height: isFollowing ? "auto" : 300, backgroundColor: isFollowing ? Colors.whiteBg : Colors.grayTransparentLess }]}>
+          <FollowerSection user={user} isFollowing={isFollowing} />
           <UserButtons user={user} isFollowing={isFollowing} setIsFollowing={setIsFollowing} />
           <UserFeed user={user} isFollowing={isFollowing} />
         </View>
@@ -60,14 +61,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.whiteBg,
   },
   infoContainer: {
-    flex: 1,
     width: "100%",
+    height: "100%",
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     gap: 25,
-    backgroundColor: Colors.whiteBg,
-    marginTop: 20,
+    paddingTop: 20,
   },
 
 });

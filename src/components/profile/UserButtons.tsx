@@ -23,7 +23,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({ isFollowing, setIsFollowing
                 style={[styles.button, !isFollowing ? styles.followingButton : styles.notFollowingButton]}
                 onPress={handleFollow}
             >
-                <Ionicons name={isFollowing ? 'checkmark' : 'add'} size={26} color={!isFollowing ? 'white' : Colors.gradient2} />
+                <Ionicons name={isFollowing ? 'checkmark' : 'add'} size={26} color={!isFollowing ? Colors.whiteBg : Colors.gradient2} />
                 <Text
                     style={[styles.buttonText, { color: !isFollowing ? Colors.white : Colors.gradient2 }]}
                 >
@@ -41,7 +41,7 @@ const WriteMessageButton = () => {
             exiting={FadeOutRight.duration(300)}
             style={{ flex: 1 }}>
             <TouchableOpacity
-                style={[styles.button, { backgroundColor: Colors.gradient2 }]}
+                style={[styles.button, { backgroundColor: Colors.gradient2, borderColor: Colors.gradient2 }]}
             >
                 <Ionicons name='chatbubble-ellipses' size={24} color={Colors.white} />
                 <Text
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: "85%",
         gap: 15,
+        height: 50,
     },
     button: {
         flex: 1,
@@ -92,13 +93,15 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: 'white',
         borderWidth: 1,
-        borderColor: Colors.gradient2,
     },
     followingButton: {
-        backgroundColor: Colors.gradient2,
+        backgroundColor: Colors.gray,
+        borderColor: Colors.gray,
     },
     notFollowingButton: {
-        backgroundColor: 'white',
+        backgroundColor: Colors.whiteBg,
+        borderColor: Colors.gradient2,
+
     },
     buttonText: {
         marginLeft: 5,

@@ -5,20 +5,21 @@ import Colors from '../../../assets/constants/Colors';
 
 interface FollowerSectionProps {
     user: User;
+    isFollowing: boolean;
 }
 
-const FollowerSection: React.FC<FollowerSectionProps> = ({ user }) => {
+const FollowerSection: React.FC<FollowerSectionProps> = ({ user, isFollowing }) => {
     return (
         <View style={styles.container}>
-            <View style={styles.item}>
+            <View style={[styles.item, { backgroundColor: isFollowing ? Colors.gradient2Transparent : Colors.grayTransparentLess }]}>
                 <Text style={styles.label}>Posts</Text>
                 <Text style={styles.count}>{user.numberOfPosts}</Text>
             </View>
-            <View style={styles.item}>
+            <View style={[styles.item, { backgroundColor: isFollowing ? Colors.gradient2Transparent : Colors.grayTransparentLess }]}>
                 <Text style={styles.label}>Followers</Text>
                 <Text style={styles.count}>{user.numberOfFollowers}</Text>
             </View>
-            <View style={styles.item}>
+            <View style={[styles.item, { backgroundColor: isFollowing ? Colors.gradient2Transparent : Colors.grayTransparentLess }]}>
                 <Text style={styles.label}>Following</Text>
                 <Text style={styles.count}>{user.numberOfFollowing}</Text>
             </View>
@@ -38,7 +39,6 @@ const styles = StyleSheet.create({
     item: {
         paddingVertical: 15,
         flex: 1,
-        backgroundColor: Colors.grayTransparentLess,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
