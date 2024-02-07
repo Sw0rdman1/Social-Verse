@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useBottomTab } from "../../context/BottomBarContext";
 import { useEffect } from "react";
@@ -6,6 +6,7 @@ import UserImage from "../../components/profile/UserImage";
 import Colors from "../../../assets/constants/Colors";
 import UserInfo from "../../components/profile/UserInfo";
 import FollowerSection from "../../components/profile/FollowerSection";
+
 
 const UserProfileScreen = ({ route, navigation }: any) => {
   const { user, previousPage } = route.params;
@@ -33,8 +34,7 @@ const UserProfileScreen = ({ route, navigation }: any) => {
         goBackHandler={goBackHandler}
         openPost={openPostHandler}
       >
-        <FollowerSection user={user} />
-        <View style={{ height: 700 }} />
+        <View style={{ height: 1500 }} />
       </UserImage>
     </View>
   );
@@ -55,4 +55,5 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.whiteBg,
     paddingBottom: 30,
   },
+
 });

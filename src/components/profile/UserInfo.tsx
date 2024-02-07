@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { User } from "../../models/User";
 import Colors from "../../../assets/constants/Colors";
 import { Entypo } from '@expo/vector-icons';
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 interface UserInfoProps {
   user: User;
@@ -16,7 +17,9 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Animated.View
+      entering={FadeInDown.delay(500).duration(500)}
+      style={styles.container}>
       <View style={styles.infoContainer}>
         <Text style={styles.username}>{user.displayName}</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -25,7 +28,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
         </View>
       </View>
 
-    </View>
+    </Animated.View>
   );
 };
 

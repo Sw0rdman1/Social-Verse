@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     View,
     Text,
@@ -18,6 +18,7 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
+
     const openUserProfilePage = (user: User) => {
         navigation.navigate("UserProfile", {
             user,
@@ -70,10 +71,10 @@ const styles = StyleSheet.create({
         borderBottomColor: Colors.grayTransparentLess,
     },
     avatar: {
-        width: 50,
-        height: 50,
         borderRadius: 200,
         marginRight: 16,
+        height: 60,
+        width: 60,
     },
     userInfo: {
         flex: 1,

@@ -4,9 +4,8 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  Text,
 } from "react-native";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { User } from "../../models/User";
 import Colors from "../../../assets/constants/Colors";
@@ -16,8 +15,8 @@ import UserInfo from "./UserInfo";
 
 const { height } = Dimensions.get("window");
 
-const Header_Max_Height = 550;
-const Header_Min_Height = 350;
+const Header_Max_Height = height - 250;
+const Header_Min_Height = Header_Max_Height * 0.5;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 const BORDER_RADIUS = 20;
 
@@ -41,13 +40,13 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
 
   const animatedArrowOpacity = value.interpolate({
     inputRange: [0, Scroll_Distance],
-    outputRange: [0.8, 1],
+    outputRange: [0.7, 1],
     extrapolate: "clamp",
   });
 
   const animatedImageOpacity = value.interpolate({
     inputRange: [0, Scroll_Distance],
-    outputRange: [0.5, 1],
+    outputRange: [0.6, 1],
     extrapolate: "clamp",
   });
 
@@ -74,34 +73,23 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
         >
           <BackButton inverted size={26} handleBackButton={goBackHandler} />
         </RNAnimated.View>
-        <RNAnimated.View
-          style={{
-            flex: 1,
-            backgroundColor: Colors.blackTransparent,
-            opacity: animatedImageOpacity,
-            zIndex: 10,
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            borderBottomLeftRadius: BORDER_RADIUS,
-            borderBottomRightRadius: BORDER_RADIUS,
-          }}
-        />
+
+
+        <Animated.View
+          entering={FadeInUp.delay(300).duration(500)}
+          style={[styles.image, styles.borderRadius]}
+        >
+          <RNAnimated.View
+            style={[styles.image, styles.borderRadius, { opacity: animatedImageOpacity, backgroundColor: Colors.blackTransparent }]}
+          />
+        </Animated.View>
         <Animated.Image
           sharedTransitionTag={user.id + ".image"}
           source={{
             uri: user.profilePicture as string,
           }}
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            borderBottomLeftRadius: BORDER_RADIUS,
-            borderBottomRightRadius: BORDER_RADIUS,
-
-          }}
+          blurRadius={1}
+          style={[styles.image, styles.borderRadius, { zIndex: 0 }]}
         />
         <UserInfo user={user} />
       </View>
@@ -191,13 +179,22 @@ const styles = StyleSheet.create({
     left: 5,
     zIndex: 20,
   },
+
   text: {
     fontSize: 20,
     fontWeight: "bold",
     color: Colors.white,
   },
   borderRadius: {
-    borderTopLeftRadius: BORDER_RADIUS,
-    borderTopRightRadius: BORDER_RADIUS,
+    borderBottomLeftRadius: BORDER_RADIUS,
+    borderBottomRightRadius: BORDER_RADIUS,
   },
+  image: {
+    flex: 1,
+    zIndex: 10,
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
+
 });
