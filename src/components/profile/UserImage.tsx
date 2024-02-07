@@ -15,10 +15,10 @@ import UserInfo from "./UserInfo";
 
 const { height } = Dimensions.get("window");
 
-const Header_Max_Height = height - 250;
+const Header_Max_Height = height - 300;
 const Header_Min_Height = Header_Max_Height * 0.5;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
-const BORDER_RADIUS = 20;
+const BORDER_RADIUS = 30;
 
 interface DynamicHeaderProps {
   value: RNAnimated.Value;

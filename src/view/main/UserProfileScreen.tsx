@@ -1,16 +1,20 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useBottomTab } from "../../context/BottomBarContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import UserImage from "../../components/profile/UserImage";
 import Colors from "../../../assets/constants/Colors";
 import UserInfo from "../../components/profile/UserInfo";
 import FollowerSection from "../../components/profile/FollowerSection";
+import UserButtons from "../../components/profile/UserButtons";
+import UserFeed from "../../components/profile/UserFeed";
 
 
 const UserProfileScreen = ({ route, navigation }: any) => {
   const { user, previousPage } = route.params;
   const { setBottomTabVisible } = useBottomTab();
+
+  const [isFollowing, setIsFollowing] = useState(user.isFollowing)
 
   const goBackHandler = () => {
     if (previousPage === "Search" || previousPage === "Home") {
@@ -27,6 +31,7 @@ const UserProfileScreen = ({ route, navigation }: any) => {
     setBottomTabVisible(false);
   }, []);
 
+
   return (
     <View style={styles.container}>
       <UserImage
@@ -34,7 +39,11 @@ const UserProfileScreen = ({ route, navigation }: any) => {
         goBackHandler={goBackHandler}
         openPost={openPostHandler}
       >
-        <View style={{ height: 1500 }} />
+        <View style={styles.infoContainer}>
+          <FollowerSection user={user} />
+          <UserButtons user={user} isFollowing={isFollowing} setIsFollowing={setIsFollowing} />
+          <UserFeed user={user} isFollowing={isFollowing} />
+        </View>
       </UserImage>
     </View>
   );
@@ -52,8 +61,13 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 25,
     backgroundColor: Colors.whiteBg,
-    paddingBottom: 30,
+    marginTop: 20,
   },
 
 });
