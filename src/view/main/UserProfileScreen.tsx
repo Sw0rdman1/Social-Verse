@@ -8,6 +8,7 @@ import UserInfo from "../../components/profile/UserInfo";
 import FollowerSection from "../../components/profile/FollowerSection";
 import UserButtons from "../../components/profile/UserButtons";
 import UserFeed from "../../components/profile/UserFeed";
+import { Post } from "../../models/Post";
 
 
 const UserProfileScreen = ({ route, navigation }: any) => {
@@ -23,8 +24,8 @@ const UserProfileScreen = ({ route, navigation }: any) => {
     navigation.goBack();
   };
 
-  const openPostHandler = () => {
-    navigation.navigate("Post", { post: user, previousPage: "UserProfile" });
+  const openPostHandler = (post: Post) => {
+    navigation.navigate("Post", { post: post, previousPage: "UserProfile" });
   };
 
   useEffect(() => {
@@ -37,13 +38,12 @@ const UserProfileScreen = ({ route, navigation }: any) => {
       <UserImage
         user={user}
         goBackHandler={goBackHandler}
-        openPost={openPostHandler}
         isFollowing={isFollowing}
       >
         <View style={[styles.infoContainer, { height: isFollowing ? "auto" : 300, backgroundColor: isFollowing ? Colors.whiteBg : Colors.grayTransparentLess }]}>
           <FollowerSection user={user} isFollowing={isFollowing} />
           <UserButtons user={user} isFollowing={isFollowing} setIsFollowing={setIsFollowing} />
-          <UserFeed user={user} isFollowing={isFollowing} />
+          <UserFeed user={user} isFollowing={isFollowing} openPost={openPostHandler} />
         </View>
       </UserImage>
     </View>

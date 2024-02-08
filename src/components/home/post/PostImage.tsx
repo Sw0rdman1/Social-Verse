@@ -147,6 +147,7 @@ interface ScrollViewScreenProps {
   goBackHandler: () => void;
   scrolViewRef: any;
   openUserProfilHandler: (author: User) => void;
+  enableNavigation?: boolean;
 }
 
 const PostImage: React.FC<ScrollViewScreenProps> = ({
@@ -155,6 +156,7 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
   goBackHandler,
   scrolViewRef,
   openUserProfilHandler,
+  enableNavigation
 }) => {
   const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
 
@@ -175,6 +177,7 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
         <AuthorInfo
           author={post.author}
           openUserProfilHandler={openUserProfilHandler}
+          enableNavigation={enableNavigation}
         />
       </Animated.View>
       <ScrollView

@@ -6,14 +6,16 @@ import Animated from "react-native-reanimated";
 interface AuthorInfoProps {
   author: User;
   openUserProfilHandler: (author: User) => void;
+  enableNavigation?: boolean;
 }
 
 const AuthorInfo: React.FC<AuthorInfoProps> = ({
   author,
   openUserProfilHandler,
+  enableNavigation
 }) => {
   return (
-    <TouchableOpacity
+    enableNavigation ? (<TouchableOpacity
       style={styles.container}
       onPress={() => openUserProfilHandler(author)}
     >
@@ -28,7 +30,20 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
         </Text>
         <Text style={[styles.email]}>{author.email}</Text>
       </View>
-    </TouchableOpacity>
+    </TouchableOpacity>) : (<View
+      style={styles.container}
+    >
+      <Animated.Image
+        source={{ uri: author.profilePicture }}
+        style={styles.avatar}
+      />
+      <View>
+        <Text style={[styles.name]} numberOfLines={1}>
+          {author.displayName}
+        </Text>
+        <Text style={[styles.email]}>{author.email}</Text>
+      </View>
+    </View>)
   );
 };
 

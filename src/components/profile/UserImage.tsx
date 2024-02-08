@@ -103,7 +103,6 @@ interface ScrollViewScreenProps {
   children: React.ReactNode;
   user: User;
   goBackHandler: () => void;
-  openPost: (post: Post) => void;
   isFollowing: boolean;
 }
 
@@ -111,7 +110,6 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
   children,
   user,
   goBackHandler,
-  openPost,
   isFollowing
 }) => {
   const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
@@ -130,6 +128,7 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
         goBackHandler={goBackHandler}
         isFollowing={isFollowing}
       />
+      <View style={{ height: 5 }} />
 
       <ScrollView
         bounces={false}

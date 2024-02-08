@@ -13,6 +13,7 @@ const PostScreen = ({ route, navigation }: any) => {
   const { post, previousPage } = route.params;
   const scrolViewRef = useRef(null);
   const [commentsDisplayed, setCommentsDisplayed] = useState(false);
+  const [enableNavigation, setEnableNavigation] = useState(false);
 
   const { setBottomTabVisible } = useBottomTab();
 
@@ -29,6 +30,9 @@ const PostScreen = ({ route, navigation }: any) => {
 
   useEffect(() => {
     setBottomTabVisible(false);
+    if (previousPage === "Search" || previousPage === "Home") {
+      setEnableNavigation(true);
+    }
   }, []);
 
   return (
@@ -38,6 +42,7 @@ const PostScreen = ({ route, navigation }: any) => {
         goBackHandler={goBackHandler}
         scrolViewRef={scrolViewRef}
         openUserProfilHandler={openUserProfilHandler}
+        enableNavigation={enableNavigation}
       >
         <View style={styles.infoContainer}>
           <PostDescription post={post} />

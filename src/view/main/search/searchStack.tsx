@@ -20,6 +20,11 @@ const SearchNavigation: React.FC = () => {
         component={UserProfileScreen}
         options={{ headerShown: false, gestureEnabled: false }}
       />
+      <Stack.Screen
+        name="Post"
+        component={PostScreen}
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
     </Stack.Navigator>
   );
 };

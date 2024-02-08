@@ -38,3 +38,25 @@ export const getFakePosts = (): Post[] => {
   }
   return fakePosts;
 };
+
+export const getUserFakePosts = (user: User): Post[] => {
+  const fakePosts: Post[] = [];
+
+  for (let i = 0; i < 5; i++) {
+    const fakePost: Post = {
+      id: `postss-${i}`,
+      content: faker.lorem.paragraph(),
+      contentPhoto: faker.image.urlPicsumPhotos(),
+      author: user,
+      createdAt: new Date(),
+      numberOfLikes: faker.number.int({ min: 0, max: 300 }),
+      numberOfComments: 0,
+      numberOfBookmarks: faker.number.int({ min: 0, max: 100 }),
+      liked: faker.datatype.boolean(),
+      bookmarked: faker.datatype.boolean(),
+    };
+    fakePosts.push(fakePost);
+  }
+  return fakePosts;
+};
+

@@ -1,9 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
 import { User } from '../../models/User';
 import Colors from '../../../assets/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import usePosts from '../../hooks/usePosts';
+import { Post } from '../../models/Post';
+import moment from 'moment';
+
+const { width } = Dimensions.get('window');
 
 
 const NotFollowingFeed = ({ displayName }: { displayName: string }) => {
@@ -24,20 +29,68 @@ const NotFollowingFeed = ({ displayName }: { displayName: string }) => {
 interface UserFeedProps {
     user: User;
     isFollowing: boolean;
+    openPost: (post: Post) => void;
 }
 
-const UserFeed: React.FC<UserFeedProps> = ({ user, isFollowing }) => {
+const UserFeed: React.FC<UserFeedProps> = ({ user, isFollowing, openPost }) => {
+    const posts = usePosts(user);
+    const [isGrid, setIsGrid] = useState(true);
 
+    const openPostHandler = (post: Post) => {
+        if (post.createdAt instanceof Date) {
+            const date = moment(post.createdAt).fromNow();
+            post.createdAt = date;
+        }
+        openPost(post);
+    }
 
     if (!isFollowing) {
         return <NotFollowingFeed displayName={user.displayName} />
     }
 
+
+
     return (
         <Animated.View
             entering={FadeInDown.delay(500).duration(500)}
-            style={{ height: 700 }}>
-            <Text>User Feed</Text>
+            style={styles.container}
+        >
+            <View style={styles.postsContainer}>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.title}>
+                        Posts
+                    </Text>
+                    <View style={styles.viewOptions}>
+                        <TouchableOpacity onPress={() => setIsGrid(true)}>
+                            <Ionicons
+                                name={isGrid ? 'grid' : 'grid-outline'}
+                                size={24}
+                                color={isGrid ? Colors.primary : Colors.gray}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setIsGrid(false)}>
+                            <Ionicons
+                                name={isGrid ? 'list-outline' : 'list'}
+                                size={28}
+                                color={isGrid ? Colors.gray : Colors.primary}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                {posts.map((post, index) => (
+                    <View key={post.id} style={[styles.postContainer, (!isGrid || index % 3 === 0) && styles.fullWidthPost]}>
+                        <TouchableOpacity onPress={() => openPostHandler(post)} style={styles.image}>
+                            <Animated.Image
+                                sharedTransitionTag={post.id + ".image"}
+                                source={{ uri: post.contentPhoto }}
+                                style={styles.image}
+
+                            />
+                        </TouchableOpacity>
+                    </View>
+
+                ))}
+            </View>
         </Animated.View>
     )
 
@@ -59,5 +112,53 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: Colors.gray
     },
+    container: {
+        flex: 1,
+        backgroundColor: Colors.whiteBg,
+        paddingBottom: 50,
+    },
+    titleContainer: {
+        width: '95%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginHorizontal: 10,
+        marginTop: 5,
+        marginBottom: 25,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.black,
+    },
+    postsContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        marginHorizontal: 10,
+        gap: 5,
+    },
+    postContainer: {
+        width: '49%',
+        height: width * 0.7,
+        marginBottom: 5,
+    },
+    fullWidthPost: {
+        width: '100%',
+    },
+    image: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        borderRadius: 10,
+    },
+    viewOptions: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        gap: 10,
+    },
+
+
 
 })
