@@ -7,8 +7,8 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import usePosts from '../../hooks/usePosts';
 import { Post } from '../../models/Post';
 import moment from 'moment';
+import UserFeedPost from './UserFeedPost';
 
-const { width } = Dimensions.get('window');
 
 
 const NotFollowingFeed = ({ displayName }: { displayName: string }) => {
@@ -78,17 +78,7 @@ const UserFeed: React.FC<UserFeedProps> = ({ user, isFollowing, openPost }) => {
                     </View>
                 </View>
                 {posts.map((post, index) => (
-                    <View key={post.id} style={[styles.postContainer, (!isGrid || index % 3 === 0) && styles.fullWidthPost]}>
-                        <TouchableOpacity onPress={() => openPostHandler(post)} style={styles.image}>
-                            <Animated.Image
-                                sharedTransitionTag={post.id + ".image"}
-                                source={{ uri: post.contentPhoto }}
-                                style={styles.image}
-
-                            />
-                        </TouchableOpacity>
-                    </View>
-
+                    <UserFeedPost key={post.id} post={post} index={index} isGrid={isGrid} openPostHandler={openPostHandler} />
                 ))}
             </View>
         </Animated.View>
@@ -138,27 +128,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         gap: 5,
     },
-    postContainer: {
-        width: '49%',
-        height: width * 0.7,
-        marginBottom: 5,
-    },
-    fullWidthPost: {
-        width: '100%',
-    },
-    image: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        borderRadius: 10,
-    },
     viewOptions: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
         gap: 10,
     },
-
-
 
 })

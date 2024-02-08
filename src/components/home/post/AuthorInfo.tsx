@@ -15,35 +15,39 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
   enableNavigation
 }) => {
   return (
-    enableNavigation ? (<TouchableOpacity
-      style={styles.container}
-      onPress={() => openUserProfilHandler(author)}
-    >
-      <Animated.Image
-        sharedTransitionTag={author.id + ".image"}
-        source={{ uri: author.profilePicture }}
-        style={styles.avatar}
-      />
-      <View>
-        <Text style={[styles.name]} numberOfLines={1}>
-          {author.displayName}
-        </Text>
-        <Text style={[styles.email]}>{author.email}</Text>
-      </View>
-    </TouchableOpacity>) : (<View
-      style={styles.container}
-    >
-      <Animated.Image
-        source={{ uri: author.profilePicture }}
-        style={styles.avatar}
-      />
-      <View>
-        <Text style={[styles.name]} numberOfLines={1}>
-          {author.displayName}
-        </Text>
-        <Text style={[styles.email]}>{author.email}</Text>
-      </View>
-    </View>)
+    enableNavigation ? (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.container}
+        onPress={() => openUserProfilHandler(author)}
+      >
+        <Animated.Image
+          sharedTransitionTag={author.id + ".image"}
+          source={{ uri: author.profilePicture }}
+          style={styles.avatar}
+        />
+        <View>
+          <Text style={[styles.name]} numberOfLines={1}>
+            {author.displayName}
+          </Text>
+          <Text style={[styles.email]}>{author.email}</Text>
+        </View>
+      </TouchableOpacity>
+    ) : (
+      <View
+        style={styles.container}
+      >
+        <Animated.Image
+          source={{ uri: author.profilePicture }}
+          style={styles.avatar}
+        />
+        <View>
+          <Text style={[styles.name]} numberOfLines={1}>
+            {author.displayName}
+          </Text>
+          <Text style={[styles.email]}>{author.email}</Text>
+        </View>
+      </View>)
   );
 };
 

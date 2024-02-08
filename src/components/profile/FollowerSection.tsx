@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        width: "85%",
-        gap: 20,
+        marginHorizontal: 15,
+        gap: 25,
     },
     item: {
         paddingVertical: 15,
