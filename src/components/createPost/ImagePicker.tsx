@@ -25,13 +25,14 @@ const ImagePickerGallery: React.FC<ImagePickerProps> = ({ image, setImage }) => 
     };
 
     return (
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <TouchableOpacity style={styles.button} onPress={pickImage}>
-                <Ionicons name="md-images" size={24} color={Colors.whiteBg} />
-                <Text style={styles.buttonText}>Camera Roll</Text>
-            </TouchableOpacity>
-
-        </View>
+        <TouchableOpacity style={styles.button} onPress={pickImage}>
+            {image ?
+                <Image source={{ uri: image }} style={styles.image} />
+                : <View style={styles.noPhotoContainer}>
+                    <Ionicons name="md-images" size={24} color={Colors.whiteBg} />
+                    <Text style={styles.buttonText}>Gallery</Text>
+                </View>}
+        </TouchableOpacity>
     );
 }
 
@@ -62,9 +63,8 @@ const ImagePickerCamera: React.FC<ImagePickerProps> = ({ image, setImage }) => {
 
 const MyImagePicker = ({ image, setImage }: ImagePickerProps) => {
     return (
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
             <ImagePickerGallery image={image} setImage={setImage} />
-            <ImagePickerCamera image={image} setImage={setImage} />
         </View>
     );
 }
@@ -73,19 +73,29 @@ export default MyImagePicker;
 
 const styles = StyleSheet.create({
     button: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        width: "100%",
+        height: 270,
+        backgroundColor: Colors.grayTransparentLess,
         justifyContent: 'center',
-        backgroundColor: Colors.gradient2,
-        padding: 10,
-        borderRadius: 25,
-        margin: 10,
-        width: 300,
+        alignItems: 'center',
+        borderRadius: 10,
+
     },
     buttonText: {
-        fontSize: 24,
-        marginLeft: 10,
         color: Colors.whiteBg,
-        fontWeight: 'bold',
+        fontSize: 20
     },
+    image: {
+        width: "100%",
+        height: "100%",
+        flex: 1,
+    },
+    noPhotoContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 10,
+        flex: 1,
+
+    }
+
 });

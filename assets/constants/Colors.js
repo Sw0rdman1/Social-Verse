@@ -15,6 +15,7 @@ const Colors = {
   gray: "#999DA0",
   grayTransparent: "rgba(153, 157, 160, 0.1)",
   grayTransparentLess: "rgba(153, 157, 160, 0.15)",
+  grayTransparentMore: "rgba(153, 157, 160, 0.45)",
   success: "#7ac142",
   likeColor: "#ff0000",
   likeColorTransparent: "rgba(255, 0, 0, 0.15)",
