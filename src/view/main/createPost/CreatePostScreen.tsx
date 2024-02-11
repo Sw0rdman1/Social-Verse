@@ -19,23 +19,7 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
 
     return (
         <GradientBackground inverted centerItems>
-            import {StyleSheet} from 'react-native';
-            import {BlurView} from '@react-native-community/blur';
-
-            // ...
-
-            const CreatePostScreen: React.FC<CreatePostScreenProps> = ({navigation}) => {
-                // ...
-
-                return (
-                <BlurView style={styles.container} blurType="light" blurAmount={10}>
-                    {/* Your content here */}
-                </BlurView>
-                );
-            }
-
-                // ...
-
+            <View style={styles.container}>
                 <Text style={{ color: Colors.whiteBg }}>Create Post</Text>
                 <MyImagePicker image={image} setImage={setImage} />
 
