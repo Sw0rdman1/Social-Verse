@@ -12,6 +12,7 @@ import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { useBottomTab } from "../../context/BottomBarContext";
 import HomeNavigation from "../../view/main/home/homeStack";
 import SearchNavigation from "../../view/main/search/searchStack";
+import CreatePostNavigation from "../../view/main/createPost/createPostStack";
 
 
 interface BottomNavigationProps {
@@ -70,7 +71,8 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
                 name="SearchTab"
                 children={() => (
                     <SearchNavigation />
-                )} options={{
+                )}
+                options={{
                     tabBarIcon: ({ focused }) => {
                         return (
                             <TabContainer focused={focused}>
@@ -86,8 +88,10 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
             />
             <Tab.Group>
                 <Tab.Screen
-                    name="NewPost"
-                    component={SearchScreen}
+                    name="NewPostTab"
+                    children={() => (
+                        <CreatePostNavigation />
+                    )}
                     options={{
                         tabBarIcon: ({ focused }) => {
                             return (

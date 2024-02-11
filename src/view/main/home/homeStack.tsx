@@ -1,7 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./HomeScreen";
-import React from "react";
 import PostScreen from "../PostScreen";
 import UserProfileScreen from "../UserProfileScreen";
 

@@ -22,6 +22,5 @@ const WelcomeScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({});
 
 export default WelcomeScreen;
