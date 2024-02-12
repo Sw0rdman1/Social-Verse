@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 20,
-        width: "80%",
+        width: "100%",
         marginHorizontal: 20,
     },
     button: {

@@ -29,7 +29,7 @@ const ImagePickerGallery: React.FC<ImagePickerProps> = ({ image, setImage }) => 
             {image ?
                 <Image source={{ uri: image }} style={styles.image} />
                 : <View style={styles.noPhotoContainer}>
-                    <Ionicons name="md-images" size={24} color={Colors.whiteBg} />
+                    <Ionicons name="md-images" size={32} color={Colors.whiteBg} />
                     <Text style={styles.buttonText}>Gallery</Text>
                 </View>}
         </TouchableOpacity>
@@ -63,9 +63,7 @@ const ImagePickerCamera: React.FC<ImagePickerProps> = ({ image, setImage }) => {
 
 const MyImagePicker = ({ image, setImage }: ImagePickerProps) => {
     return (
-        <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-            <ImagePickerGallery image={image} setImage={setImage} />
-        </View>
+        <ImagePickerGallery image={image} setImage={setImage} />
     );
 }
 
@@ -73,22 +71,24 @@ export default MyImagePicker;
 
 const styles = StyleSheet.create({
     button: {
-        width: "100%",
         height: 270,
+        width: "100%",
         backgroundColor: Colors.grayTransparentLess,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 20,
 
     },
     buttonText: {
         color: Colors.whiteBg,
-        fontSize: 20
+        fontSize: 22,
+        fontWeight: '600',
     },
     image: {
         width: "100%",
         height: "100%",
         flex: 1,
+        borderRadius: 20,
     },
     noPhotoContainer: {
         justifyContent: 'center',

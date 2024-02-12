@@ -32,8 +32,8 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
             <View style={styles.container}>
                 <BlurView intensity={100} tint="dark" style={styles.blurContainer}>
                     {image && <Image source={{ uri: image }} style={styles.image} />}
-                    <Text style={[styles.title, { marginTop: top + 10 }]}>Create New Post</Text>
-                    <View style={styles.inputContainer}>
+                    <View style={styles.formContainer}>
+                        <Text style={[styles.title, { marginTop: top + 10 }]}>Create New Post</Text>
                         <MyImagePicker image={image} setImage={setImage} />
                         <View
                             style={styles.captionInputContainer}
@@ -41,20 +41,20 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
                             <Text style={styles.captionInputTitle}>Caption</Text>
                             <TextInput
                                 style={styles.captionInput}
-                                multiline
                                 placeholder="Enter post caption"
+                                placeholderTextColor={Colors.gray}
                                 value={caption}
                                 onChangeText={setCaption}
                             />
                         </View>
-                    </View>
-                    {image &&
-                        <CreatePostButtons
-                            clickPostHandler={clickPostHandler}
-                            clickCancelHandler={clickCancelHandler}
-                        />
-                    }
 
+                        {image &&
+                            <CreatePostButtons
+                                clickPostHandler={clickPostHandler}
+                                clickCancelHandler={clickCancelHandler}
+                            />
+                        }
+                    </View>
                 </BlurView >
 
             </View>
@@ -67,8 +67,6 @@ export default CreatePostScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         width: '100%',
     },
     blurContainer: {
@@ -76,6 +74,13 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         gap: 30,
+    },
+    formContainer: {
+        width: "100%",
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 20,
+        paddingHorizontal: 20,
     },
     image: {
         width: "100%",
@@ -91,21 +96,14 @@ const styles = StyleSheet.create({
         color: Colors.whiteBg,
         textTransform: 'uppercase'
     },
-    inputContainer: {
-        width: "100%",
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        gap: 15,
-        marginTop: 20,
-        paddingHorizontal: 10
-    },
+
     captionInputContainer: {
-        height: 270,
-        width: "40%",
+        width: "100%",
         borderColor: Colors.grayTransparentMore,
         borderWidth: 1,
         borderRadius: 10,
+        paddingBottom: 10,
+
     },
     captionInputTitle: {
         fontSize: 20,
@@ -116,7 +114,6 @@ const styles = StyleSheet.create({
     },
     captionInput: {
         width: "100%",
-        height: "100%",
         padding: 10,
         fontSize: 18,
         marginTop: 10,
