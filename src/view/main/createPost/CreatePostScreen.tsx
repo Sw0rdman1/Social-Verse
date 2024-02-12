@@ -7,6 +7,10 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { BlurView } from 'expo-blur'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import CreatePostButtons from '../../../components/createPost/CreatePostButtons'
+import { useBottomTab } from '../../../context/BottomBarContext'
+import Animated, { FadeInDown } from 'react-native-reanimated'
+import CaptionInput from '../../../components/createPost/CaptionInput'
+import CancelButton from '../../../components/createPost/CancelButton'
 
 interface CreatePostScreenProps {
     navigation: StackNavigationProp<any, any>;
@@ -15,11 +19,14 @@ interface CreatePostScreenProps {
 const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
     const [image, setImage] = useState("")
     const [caption, setCaption] = useState("")
-    const { top } = useSafeAreaInsets()
+    const { top, bottom } = useSafeAreaInsets()
+
+    const { setBottomTabVisible } = useBottomTab()
 
     const clickCancelHandler = () => {
         setImage("")
-        // navigation.goBack()
+        setBottomTabVisible(true)
+        navigation.goBack()
     }
 
     const clickPostHandler = () => {
@@ -35,27 +42,13 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
                     <View style={styles.formContainer}>
                         <Text style={[styles.title, { marginTop: top + 10 }]}>Create New Post</Text>
                         <MyImagePicker image={image} setImage={setImage} />
-                        <View
-                            style={styles.captionInputContainer}
-                        >
-                            <Text style={styles.captionInputTitle}>Caption</Text>
-                            <TextInput
-                                style={styles.captionInput}
-                                placeholder="Enter post caption"
-                                placeholderTextColor={Colors.gray}
-                                value={caption}
-                                onChangeText={setCaption}
-                            />
-                        </View>
-
-                        {image &&
-                            <CreatePostButtons
-                                clickPostHandler={clickPostHandler}
-                                clickCancelHandler={clickCancelHandler}
-                            />
-                        }
+                        <CaptionInput caption={caption} setCaption={setCaption} />
+                        <CreatePostButtons
+                            clickPostHandler={clickPostHandler}
+                        />
                     </View>
-                </BlurView >
+                    <CancelButton clickCancelHandler={clickCancelHandler} />
+                </BlurView>
 
             </View>
         </GradientBackground >
@@ -97,28 +90,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase'
     },
 
-    captionInputContainer: {
-        width: "100%",
-        borderColor: Colors.grayTransparentMore,
-        borderWidth: 1,
-        borderRadius: 10,
-        paddingBottom: 10,
 
-    },
-    captionInputTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: Colors.whiteBg,
-        marginTop: 10,
-        marginLeft: 10
-    },
-    captionInput: {
-        width: "100%",
-        padding: 10,
-        fontSize: 18,
-        marginTop: 10,
-        color: Colors.whiteBg
-    }
 
 
 })

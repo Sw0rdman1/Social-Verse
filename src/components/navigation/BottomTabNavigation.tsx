@@ -6,13 +6,12 @@ import { Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TabContainer from "./TabContainer";
 import Colors from "../../../assets/constants/Colors";
-import HomeScreen from "../../view/main/home/HomeScreen";
 import SearchScreen from "../../view/main/search/SearchScreen";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { useBottomTab } from "../../context/BottomBarContext";
 import HomeNavigation from "../../view/main/home/homeStack";
 import SearchNavigation from "../../view/main/search/searchStack";
-import CreatePostNavigation from "../../view/main/createPost/createPostStack";
+import CreatePostScreen from "../../view/main/createPost/CreatePostScreen";
 
 
 interface BottomNavigationProps {
@@ -21,7 +20,6 @@ interface BottomNavigationProps {
 
 const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) => {
     const Tab = createBottomTabNavigator();
-    const [tabBarVisible, setTabBarVisible] = useState(true);
     const { isBottomTabVisible } = useBottomTab();
 
     return (
@@ -89,22 +87,22 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
             <Tab.Group>
                 <Tab.Screen
                     name="NewPostTab"
-                    children={() => (
-                        <CreatePostNavigation />
-                    )}
+                    component={CreatePostScreen}
+
                     options={{
                         tabBarIcon: ({ focused }) => {
                             return (
-                                <TabContainer focused={focused}>
+                                <TabContainer focused={focused} addPost>
                                     <Ionicons
                                         name="ios-add-sharp"
                                         size={32}
                                         style={{ fontWeight: "800" }}
-                                        color={focused ? Colors.gradient2 : Colors.gray}
+                                        color={Colors.whiteBg}
                                     />
                                 </TabContainer>
                             );
                         },
+                        tabBarStyle: { display: "none" }
                     }}
                 />
             </Tab.Group>

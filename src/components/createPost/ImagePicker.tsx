@@ -71,7 +71,7 @@ export default MyImagePicker;
 
 const styles = StyleSheet.create({
     button: {
-        height: 270,
+        aspectRatio: 1,
         width: "100%",
         backgroundColor: Colors.grayTransparentLess,
         justifyContent: 'center',

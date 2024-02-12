@@ -4,10 +4,9 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 
 interface CreatePostButtonsProps {
     clickPostHandler: () => void;
-    clickCancelHandler: () => void;
 }
 
-const CreatePostButtons: React.FC<CreatePostButtonsProps> = ({ clickPostHandler, clickCancelHandler }) => {
+const CreatePostButtons: React.FC<CreatePostButtonsProps> = ({ clickPostHandler }) => {
     return (
         <View style={styles.buttonsContainer}>
 
@@ -20,14 +19,7 @@ const CreatePostButtons: React.FC<CreatePostButtonsProps> = ({ clickPostHandler,
                     <Text style={[{ color: Colors.black }, styles.buttonText]}>Post</Text>
                 </TouchableOpacity>
             </Animated.View>
-            <Animated.View
-                entering={FadeInDown.delay(400).duration(500)}
-                style={styles.button}
-            >
-                <TouchableOpacity style={styles.cancelButton} onPress={clickCancelHandler}>
-                    <Text style={[{ color: Colors.whiteBg }, styles.buttonText]}>Cancel</Text>
-                </TouchableOpacity>
-            </Animated.View>
+
         </View>
     )
 }
