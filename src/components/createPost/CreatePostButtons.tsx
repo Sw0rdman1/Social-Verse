@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 20,
-        width: "100%",
+        width: "95%",
         marginHorizontal: 20,
     },
     button: {

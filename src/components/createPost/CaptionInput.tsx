@@ -28,12 +28,11 @@ export default CaptionInput
 
 const styles = StyleSheet.create({
     captionInputContainer: {
-        width: "100%",
+        width: "95%",
         borderColor: Colors.grayTransparentMore,
         borderWidth: 1,
         borderRadius: 10,
-        paddingBottom: 10,
-
+        paddingBottom: 5,
     },
     captionInputTitle: {
         fontSize: 16,

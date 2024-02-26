@@ -11,6 +11,7 @@ import { useBottomTab } from '../../../context/BottomBarContext'
 import Animated, { FadeInDown } from 'react-native-reanimated'
 import CaptionInput from '../../../components/createPost/CaptionInput'
 import CancelButton from '../../../components/createPost/CancelButton'
+import PostOptions from '../../../components/createPost/PostOptions'
 
 interface CreatePostScreenProps {
     navigation: StackNavigationProp<any, any>;
@@ -43,6 +44,7 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
                         <Text style={[styles.title, { marginTop: top + 10 }]}>Create New Post</Text>
                         <MyImagePicker image={image} setImage={setImage} />
                         <CaptionInput caption={caption} setCaption={setCaption} />
+                        <PostOptions />
                         <CreatePostButtons
                             clickPostHandler={clickPostHandler}
                         />
@@ -84,13 +86,11 @@ const styles = StyleSheet.create({
         zIndex: -1
     },
     title: {
-        fontSize: 22,
+        fontSize: 24,
         fontWeight: 'bold',
         color: Colors.whiteBg,
         textTransform: 'uppercase'
     },
-
-
 
 
 })

@@ -20,10 +20,7 @@ export interface Post {
 export const getFakePosts = (): Post[] => {
   const fakePosts: Post[] = [];
 
-  for (let i = 0; i < 10; i++) {
-    const randomName = faker.person.fullName(); // Rowan Nikolaus
-    const randomEmail = faker.internet.email();
-
+  for (let i = 0; i < 20; i++) {
     const fakePost: Post = {
       id: `post-${i}`,
       content: faker.lorem.paragraph(),
