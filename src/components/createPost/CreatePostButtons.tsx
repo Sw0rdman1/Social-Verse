@@ -4,9 +4,10 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 
 interface CreatePostButtonsProps {
     clickPostHandler: () => void;
+    clickCancelHandler: () => void;
 }
 
-const CreatePostButtons: React.FC<CreatePostButtonsProps> = ({ clickPostHandler }) => {
+const CreatePostButtons: React.FC<CreatePostButtonsProps> = ({ clickPostHandler, clickCancelHandler }) => {
     return (
         <View style={styles.buttonsContainer}>
 
@@ -18,8 +19,17 @@ const CreatePostButtons: React.FC<CreatePostButtonsProps> = ({ clickPostHandler 
                 <TouchableOpacity style={styles.postButton} onPress={clickPostHandler}>
                     <Text style={[{ color: Colors.black }, styles.buttonText]}>Post</Text>
                 </TouchableOpacity>
-            </Animated.View>
 
+            </Animated.View>
+            <Animated.View
+                entering={FadeInDown.delay(200).duration(500)}
+                style={styles.button}
+
+            >
+                <TouchableOpacity style={styles.cancelButton} onPress={clickCancelHandler}>
+                    <Text style={[{ color: Colors.black }, styles.cancelButtonText]}>Cancel</Text>
+                </TouchableOpacity>
+            </Animated.View>
         </View>
     )
 }
@@ -30,9 +40,8 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 20,
+        gap: 15,
         width: "95%",
-        marginHorizontal: 20,
     },
     button: {
         width: "100%",
@@ -56,5 +65,10 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,
         fontWeight: 'bold'
+    },
+    cancelButtonText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.whiteBg
     }
 })

@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
     },
     captionInput: {
         width: "100%",
-        padding: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
         fontSize: 20,
         color: Colors.whiteBg
     },

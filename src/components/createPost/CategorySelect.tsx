@@ -1,16 +1,12 @@
 import { StyleSheet, Text, View, Switch, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Colors from '../../../assets/constants/Colors'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Category, { CATEGORY_LIST } from '../../models/Category';
 
-const PostOptions = () => {
-    const [enableComments, setEnableComments] = useState(false)
+const CategorySelect = () => {
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([])
 
-    const handleToggleComments = () => {
-        setEnableComments(!enableComments)
-    }
+    const displayedCategories = [...selectedCategories, ...CATEGORY_LIST.filter((c) => !selectedCategories.includes(c))]
 
     const handleSelectCategory = (category: Category) => {
         if (selectedCategories.includes(category)) {
@@ -21,7 +17,7 @@ const PostOptions = () => {
             setSelectedCategories([...selectedCategories.slice(1), category])
             return
         }
-        setSelectedCategories([...selectedCategories.slice(1), category])
+        setSelectedCategories([...selectedCategories, category])
     }
 
     return (
@@ -33,7 +29,7 @@ const PostOptions = () => {
                     showsHorizontalScrollIndicator={false}
                 >
                     {
-                        CATEGORY_LIST.map((category) => (
+                        displayedCategories.map((category) => (
                             <TouchableOpacity
                                 key={category.id}
                                 style={[
@@ -51,65 +47,33 @@ const PostOptions = () => {
                     }
                 </ScrollView>
             </View>
-            <View style={styles.commentEnableContainer}>
-                <View style={styles.textContainer}>
-                    <MaterialCommunityIcons name="comment-processing-outline" size={30} color={Colors.whiteBg} />
-                    <Text style={styles.commentEnable}>Allow Comments</Text>
-                </View>
-                <Switch
-                    value={enableComments}
-                    onValueChange={handleToggleComments}
-                    trackColor={{ false: Colors.gradient2, true: Colors.gradient2 }}
-                />
-            </View>
+
         </View>
     )
 }
 
-export default PostOptions
+export default CategorySelect
 
 const styles = StyleSheet.create({
     container: {
-        width: "100%",
+        width: "95%",
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'left',
     },
-
-    commentEnableContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 10,
-        width: "90%",
-    },
-
-    textContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    commentEnable: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: Colors.whiteBg,
-        marginLeft: 10,
-    },
-
     titleText: {
         color: Colors.whiteBg,
         fontSize: 22,
         fontWeight: '700',
-        marginBottom: 10,
-        width: "90%"
+        marginBottom: 15,
+        width: "95%"
     },
 
     option: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,
-        width: "95%"
+        width: "100%"
     },
     categories: {
         flexDirection: 'row',

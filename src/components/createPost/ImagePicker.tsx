@@ -72,7 +72,7 @@ export default MyImagePicker;
 const styles = StyleSheet.create({
     button: {
         aspectRatio: 1,
-        width: "95%",
+        width: "90%",
         backgroundColor: Colors.grayTransparentLess,
         justifyContent: 'center',
         alignItems: 'center',
