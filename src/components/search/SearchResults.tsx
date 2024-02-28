@@ -58,8 +58,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         width: "100%",
+        backgroundColor: Colors.white,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        display: "flex",
+        flex: 1,
+        paddingTop: 10,
         paddingHorizontal: 10,
     },
     userContainer: {

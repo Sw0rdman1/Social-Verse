@@ -4,41 +4,44 @@ import React, { useState } from 'react';
 import Colors from '../../../assets/constants/Colors';
 
 interface SearchFiltersProps {
-    isFollowing: boolean;
-    setIsFollowing: (value: boolean) => void;
-    includeEmail: boolean;
-    setIncludeEmail: (value: boolean) => void;
+    setSearchCriteria: (searchCriteria: any) => void;
+    searchCriteria: {
+        filtersDisplayed: boolean;
+        searchTerm: string;
+        isFollowing: boolean;
+        includeEmail: boolean;
+    };
 }
 
-const SearchFilters: React.FC<SearchFiltersProps> = ({ isFollowing, setIsFollowing, includeEmail, setIncludeEmail }) => {
+const SearchFilters: React.FC<SearchFiltersProps> = ({ searchCriteria, setSearchCriteria }) => {
 
     const handleFollowingFilter = () => {
-        setIsFollowing(!isFollowing);
+        setSearchCriteria({ ...searchCriteria, isFollowing: !searchCriteria.isFollowing });
     };
 
     const handleEmailFilter = () => {
-        setIncludeEmail(!includeEmail);
+        setSearchCriteria({ ...searchCriteria, includeEmail: !searchCriteria.includeEmail });
     };
 
     return (
         <View style={styles.container}>
             <TouchableOpacity
-                style={[styles.button, isFollowing && styles.activeButton]}
+                style={[styles.button, searchCriteria.isFollowing && styles.activeButton]}
                 onPress={handleFollowingFilter}
             >
                 <Text style={[styles.buttonText, {
-                    color: isFollowing ? Colors.white : Colors.black
+                    color: searchCriteria.isFollowing ? Colors.white : Colors.black
                 }]}>
                     Only Followers
                 </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={[styles.button, includeEmail && styles.activeButton]}
+                style={[styles.button, searchCriteria.includeEmail && styles.activeButton]}
                 onPress={handleEmailFilter}
             >
                 <Text style={[styles.buttonText, {
-                    color: includeEmail ? Colors.white : Colors.black
+                    color: searchCriteria.includeEmail ? Colors.white : Colors.black
                 }]}>
                     Include Email
                 </Text>
@@ -58,12 +61,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 22,
         gap: 15,
         paddingBottom: 20,
-        backgroundColor: Colors.whiteBg,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
     },
     button: {
-        backgroundColor: Colors.grayTransparentLess,
+        backgroundColor: Colors.white,
         borderRadius: 20,
         flex: 1,
         padding: 10,
