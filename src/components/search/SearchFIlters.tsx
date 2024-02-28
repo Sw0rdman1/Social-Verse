@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Switch } from 'react-native';
 import React, { useState } from 'react';
 import Colors from '../../../assets/constants/Colors';
 
@@ -25,27 +25,25 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({ searchCriteria, setSearch
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={[styles.button, searchCriteria.isFollowing && styles.activeButton]}
-                onPress={handleFollowingFilter}
-            >
-                <Text style={[styles.buttonText, {
-                    color: searchCriteria.isFollowing ? Colors.white : Colors.black
-                }]}>
-                    Only Followers
-                </Text>
-            </TouchableOpacity>
+            <View style={styles.filterContainer}>
+                <Text style={styles.buttonText}>Only user you are following</Text>
+                <Switch
+                    value={searchCriteria.isFollowing}
+                    onValueChange={handleFollowingFilter}
+                    trackColor={{ false: Colors.whiteBg, true: Colors.whiteBg }}
+                    thumbColor={searchCriteria.isFollowing ? Colors.gradient2 : Colors.whiteBg}
+                />
+            </View>
+            <View style={styles.filterContainer}>
+                <Text style={styles.buttonText}>Include email in search</Text>
+                <Switch
+                    value={searchCriteria.includeEmail}
+                    onValueChange={handleEmailFilter}
+                    trackColor={{ false: Colors.whiteBg, true: Colors.whiteBg }}
+                    thumbColor={searchCriteria.includeEmail ? Colors.gradient2 : Colors.whiteBg}
 
-            <TouchableOpacity
-                style={[styles.button, searchCriteria.includeEmail && styles.activeButton]}
-                onPress={handleEmailFilter}
-            >
-                <Text style={[styles.buttonText, {
-                    color: searchCriteria.includeEmail ? Colors.white : Colors.black
-                }]}>
-                    Include Email
-                </Text>
-            </TouchableOpacity>
+                />
+            </View>
         </View>
     );
 };
@@ -54,31 +52,26 @@ export default SearchFilters
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-around',
         width: '100%',
         paddingTop: 20,
         paddingHorizontal: 22,
-        gap: 15,
+        gap: 10,
         paddingBottom: 20,
     },
-    button: {
-        backgroundColor: Colors.white,
-        borderRadius: 20,
-        flex: 1,
-        padding: 10,
-        justifyContent: 'center',
+    filterContainer: {
+        flexDirection: 'row',
         alignItems: 'center',
-
+        justifyContent: 'space-between',
+        padding: 5,
+        borderRadius: 10,
     },
 
-    activeButton: {
-        backgroundColor: Colors.gradient2TransparentLess,
-    },
     buttonText: {
-        textAlign: 'center',
         fontWeight: "600",
-        fontSize: 15,
+        fontSize: 19,
+        color: Colors.whiteBg,
     },
 });
 
