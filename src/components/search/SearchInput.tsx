@@ -26,6 +26,8 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchUsers, searchCriteria, 
         searchUsers(searchCriteria.searchTerm)
     }
 
+    const isIconColored = searchCriteria.filtersDisplayed || searchCriteria.includeEmail || searchCriteria.isFollowing
+
     return (
         <View style={styles.mainContainer}>
             <View style={styles.container}>
@@ -41,10 +43,10 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchUsers, searchCriteria, 
                     <Ionicons name="search" size={22} color={Colors.black} style={styles.searchIcon} />
                 </View>
                 <TouchableOpacity
-                    style={!searchCriteria.filtersDisplayed ? styles.selectedFilterContainer : styles.filterContainer}
+                    style={isIconColored ? styles.selectedFilterContainer : styles.filterContainer}
                     onPress={displayFilters}
                 >
-                    <Ionicons name="filter" size={24} color={!searchCriteria.filtersDisplayed ? Colors.whiteBg : Colors.gradient2} />
+                    <Ionicons name="filter" size={24} color={isIconColored ? Colors.gradient2 : Colors.whiteBg} />
                 </TouchableOpacity>
             </View>
             {searchCriteria.filtersDisplayed && <SearchFilters searchCriteria={searchCriteria} setSearchCriteria={setSearchCriteria} />}
@@ -104,15 +106,6 @@ const styles = StyleSheet.create({
         marginRight: 15,
     },
     filterContainer: {
-        backgroundColor: Colors.whiteBg,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: 45,
-        aspectRatio: 1,
-        borderRadius: 30,
-    },
-    selectedFilterContainer: {
         backgroundColor: "transparent",
         display: "flex",
         justifyContent: "center",
@@ -120,6 +113,17 @@ const styles = StyleSheet.create({
         height: 45,
         aspectRatio: 1,
         borderRadius: 30,
+
+    },
+    selectedFilterContainer: {
+        borderRadius: 30,
+        backgroundColor: Colors.whiteBg,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: 45,
+        aspectRatio: 1,
+
     },
 
 })

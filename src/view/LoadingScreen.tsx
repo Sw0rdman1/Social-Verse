@@ -19,7 +19,7 @@ const LoadingScreen = ({ route, navigation }: any) => {
       setFontSize(60);
       navigation.navigate("Welcome");
     } else if (!loadingData) {
-      setFontSize(45);
+      setFontSize(40);
       navigation.navigate("Main");
     }
   }, [initialized, user, loadingData]);

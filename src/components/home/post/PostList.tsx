@@ -216,8 +216,7 @@ const styles = StyleSheet.create({
     flex: 7,
     justifyContent: "center",
     backgroundColor: Colors.white,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
+    borderTopLeftRadius: 45,
     width: "100%",
   },
   name: {
