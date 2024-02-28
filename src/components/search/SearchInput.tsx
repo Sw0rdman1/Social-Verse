@@ -48,7 +48,6 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchUsers, searchCriteria, 
                 </TouchableOpacity>
             </View>
             {searchCriteria.filtersDisplayed && <SearchFilters searchCriteria={searchCriteria} setSearchCriteria={setSearchCriteria} />}
-
         </View>
 
 
