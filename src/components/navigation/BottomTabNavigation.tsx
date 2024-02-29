@@ -12,6 +12,7 @@ import { useBottomTab } from "../../context/BottomBarContext";
 import HomeNavigation from "../../view/main/home/homeStack";
 import SearchNavigation from "../../view/main/search/searchStack";
 import CreatePostScreen from "../../view/main/createPost/CreatePostScreen";
+import MyProfileNavigation from "../../view/main/myProfile/myProfileStack";
 
 
 interface BottomNavigationProps {
@@ -124,8 +125,10 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
                 }}
             />
             <Tab.Screen
-                name="Profile"
-                component={SearchScreen}
+                name="MyProfileTab"
+                children={() => (
+                    <MyProfileNavigation />
+                )}
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (
