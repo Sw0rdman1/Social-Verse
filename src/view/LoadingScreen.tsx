@@ -26,7 +26,7 @@ const LoadingScreen = ({ route, navigation }: any) => {
 
   return (
     <Animated.View style={styles.fullContainer} sharedTransitionTag="container">
-      <GradientBackground centerItems>
+      <GradientBackground centerItems inverted>
         {initialized && user && (
           <View style={styles.container}>
             <Animated.Text
