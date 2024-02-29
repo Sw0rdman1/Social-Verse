@@ -5,7 +5,7 @@ import Colors from '../../../assets/constants/Colors';
 
 interface FollowerSectionProps {
     user: User;
-    isFollowing: boolean;
+    isFollowing?: boolean;
 }
 
 const FollowerSection: React.FC<FollowerSectionProps> = ({ user, isFollowing }) => {

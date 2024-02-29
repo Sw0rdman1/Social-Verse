@@ -72,3 +72,16 @@ export const getFakeUser = (): User => {
   };
   return fakeUser;
 };
+
+export const getCurrentUser = (): User => {
+  return {
+    id: 0,
+    displayName: NAME,
+    email: EMAIL,
+    profilePicture: BOZA_URL,
+    numberOfFollowers: faker.number.int({ min: 0, max: 500 }),
+    numberOfFollowing: faker.number.int({ min: 0, max: 500 }),
+    numberOfPosts: faker.number.int({ min: 0, max: 60 }),
+    isFollowing: faker.datatype.boolean(),
+  };
+};
