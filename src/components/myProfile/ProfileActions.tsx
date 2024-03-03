@@ -1,62 +1,124 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import Colors from '../../../assets/constants/Colors';
+import { useState } from 'react';
 
 const ProfileActions: React.FC = () => {
+    const [newNotification, setNewNotification] = useState(false)
     return (
         <View style={styles.container}>
-            <Option color="rgba(255, 0, 0, 0.5)" icon="newspaper-variant-multiple" text="See Posts" />
-            <Option color="rgba(0, 255, 0, 0.5)" icon="edit" text="Edit Profile" />
-            <Option color="rgba(0, 0, 255, 0.5)" icon="setting" text="Settings" />
-            <Option color="rgba(255, 255, 0, 0.5)" icon="notifications" text="Notifications" />
-            <Option color="rgba(0, 255, 255, 0.5)" icon="logout" text="Log Out" />
+            <View style={styles.rowContainer}>
+                <TouchableOpacity style={[styles.option, { backgroundColor: Colors.gradient2TransparentMore }]}>
+                    <MaterialCommunityIcons
+                        name="newspaper-variant-multiple"
+                        style={styles.icon}
+                        size={ICON_SIZE}
+                    />
+                    <Text style={styles.text}>See Posts</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.option, { backgroundColor: Colors.gradient1Transparent }]}>
+                    <AntDesign
+                        name="edit" style={styles.icon}
+                        size={ICON_SIZE}
+                    />
+                    <Text style={styles.text}>Edit Profile</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.rowContainer}>
+                <TouchableOpacity onPress={() => setNewNotification(!newNotification)}
+                    style={[styles.option, { backgroundColor: newNotification ? Colors.gradient2TransparentLess : Colors.grayTransparent }]}
+                >
+                    <Ionicons name="notifications" style={styles.icon} size={ICON_SIZE} />
+                    <Text style={styles.text}>Notifications</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.rowContainer}>
+
+                <Option color={Colors.grayTransparentMore} icon="setting" text="Settings" />
+                <Option color={Colors.likeColorTransparent} icon="logout" text="Log Out" />
+            </View>
         </View>
     );
 };
+
+const ICON_SIZE = 24;
 
 const Option: React.FC<{ color: string; icon: 'notifications' | 'edit' | 'setting' | 'logout' | 'newspaper-variant-multiple'; text: string }> = ({ color, icon, text }) => {
 
     const returnIcon = () => {
         switch (icon) {
-            case 'edit' || 'setting' || 'logout':
-                return <AntDesign name={icon} />;
+            case 'edit':
+                return <AntDesign
+                    name="edit" style={styles.icon}
+                    size={ICON_SIZE}
+                />;
+
+            case 'setting':
+                return <AntDesign
+                    name="setting" style={styles.icon}
+                    size={ICON_SIZE}
+                />;
+
+            case 'logout':
+                return <AntDesign
+                    name="logout" style={styles.icon}
+                    size={ICON_SIZE}
+                />;
+
             case 'newspaper-variant-multiple':
-                return <MaterialCommunityIcons name="newspaper-variant-multiple" style={styles.icon} />;
+                return <MaterialCommunityIcons
+                    name="newspaper-variant-multiple"
+                    style={styles.icon}
+                    size={ICON_SIZE}
+                />;
             case 'notifications':
-                return <Ionicons name="notifications" style={styles.icon} />
+                return <Ionicons name="notifications" style={styles.icon} size={ICON_SIZE} />
             default:
-                return <AntDesign name="edit" style={styles.icon} />;
+                return <AntDesign name="edit" style={styles.icon} size={ICON_SIZE} />;
         }
     }
 
     return (
-        <View style={[styles.option, { backgroundColor: color }]}>
+        <TouchableOpacity style={[styles.option, { backgroundColor: color }]}>
             {returnIcon()}
             <Text style={styles.text}>{text}</Text>
-        </View>
+        </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        width: '100%',
+        paddingHorizontal: 20,
+        height: 250,
+        marginTop: 20,
+        gap: 10,
+    },
+    rowContainer: {
+        flex: 1,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        gap: 10,
     },
     option: {
+        flex: 1,
+        paddingHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 10,
-        marginVertical: 5,
-        borderRadius: 5,
+        width: '100%',
+        borderRadius: 10,
     },
     icon: {
         marginRight: 10,
     },
     text: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
+        color: Colors.black
     },
 });
 

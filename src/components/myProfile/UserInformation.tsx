@@ -22,7 +22,6 @@ const UserInformation: React.FC<UserInformationProps> = ({ user }) => {
                     </Text>
                 </View>
             </View>
-            <FollowerSection user={user} isFollowing={true} />
         </View>
     )
 }
@@ -32,7 +31,6 @@ export default UserInformation
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
-        paddingBottom: 30,
     },
     nameContainer: {
         display: 'flex',

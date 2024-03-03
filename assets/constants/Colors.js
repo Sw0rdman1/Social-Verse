@@ -7,6 +7,7 @@ const Colors = {
   gradient1Transparent: "rgba(33, 150, 243, 0.35)",
   gradient2: "#2ec4b6",
   gradient2Transparent: "rgba(46, 196, 182, 0.15)",
+  gradient2TransparentMore: "rgba(46, 196, 182, 0.35)",
   gradient2TransparentLess: "rgba(46, 196, 182, 0.55)",
   primary: "#2AB7C7",
   titleColor: "#ffea00",
