@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         paddingHorizontal: 25,
         gap: 5,
-        borderBottomRightRadius: 25,
+        height: 85,
+        borderBottomRightRadius: 30,
         backgroundColor: Colors.gradient2,
     },
     item: {

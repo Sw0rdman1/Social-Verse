@@ -21,9 +21,6 @@ const UserInformation: React.FC<UserInformationProps> = ({ user }) => {
                     </Text>
                 </View>
             </View>
-            <TouchableOpacity style={styles.editButon}>
-                <Entypo name="edit" size={24} color={Colors.gradient2} />
-            </TouchableOpacity>
         </View>
     )
 }
@@ -44,7 +41,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingVertical: 20,
         marginLeft: 10,
-        borderTopLeftRadius: 50,
         gap: 5,
     },
     displayName: {
@@ -62,13 +58,6 @@ const styles = StyleSheet.create({
         color: Colors.gray,
         fontWeight: '500',
     },
-    editButon: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
-        borderRadius: 15,
-        backgroundColor: Colors.grayTransparent,
-    }
+
 
 })

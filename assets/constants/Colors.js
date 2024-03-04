@@ -15,12 +15,14 @@ const Colors = {
   titleColorTransparent: "rgba(255, 234, 0, 0.15)",
   error: "#fd3737",
   gray: "#999DA0",
+  grayDark: "#5a5a5a",
   grayTransparent: "rgba(153, 157, 160, 0.1)",
   grayTransparentLess: "rgba(153, 157, 160, 0.15)",
   grayTransparentMore: "rgba(153, 157, 160, 0.45)",
   success: "#7ac142",
   likeColor: "#ff0000",
   likeColorTransparent: "rgba(255, 0, 0, 0.15)",
+  redLighter: "#ff8080",
 };
 
 export default Colors;
