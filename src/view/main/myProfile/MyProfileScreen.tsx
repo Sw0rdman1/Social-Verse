@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Colors from '../../../../assets/constants/Colors'
 import UserInformation from '../../../components/myProfile/UserInformation'
 import ProfileActions from '../../../components/myProfile/ProfileActions'
+import FollowerSection from '../../../components/myProfile/FollowerSection'
 
 const { height } = Dimensions.get('window')
 
@@ -36,6 +37,7 @@ const MyProfileScreen = () => {
             <View style={styles.middleContainer} />
             <View style={styles.bottomContainer}>
                 <UserInformation user={user} />
+                <FollowerSection user={user} />
                 <ProfileActions />
 
             </View>

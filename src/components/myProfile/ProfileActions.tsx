@@ -9,36 +9,7 @@ const ProfileActions: React.FC = () => {
     const [newNotification, setNewNotification] = useState(false)
     return (
         <View style={styles.container}>
-            <View style={styles.rowContainer}>
-                <TouchableOpacity style={[styles.option, { backgroundColor: Colors.gradient2TransparentMore }]}>
-                    <MaterialCommunityIcons
-                        name="newspaper-variant-multiple"
-                        style={styles.icon}
-                        size={ICON_SIZE}
-                    />
-                    <Text style={styles.text}>See Posts</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.option, { backgroundColor: Colors.gradient1Transparent }]}>
-                    <AntDesign
-                        name="edit" style={styles.icon}
-                        size={ICON_SIZE}
-                    />
-                    <Text style={styles.text}>Edit Profile</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.rowContainer}>
-                <TouchableOpacity onPress={() => setNewNotification(!newNotification)}
-                    style={[styles.option, { backgroundColor: newNotification ? Colors.gradient2TransparentLess : Colors.grayTransparent }]}
-                >
-                    <Ionicons name="notifications" style={styles.icon} size={ICON_SIZE} />
-                    <Text style={styles.text}>Notifications</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.rowContainer}>
-
-                <Option color={Colors.grayTransparentMore} icon="setting" text="Settings" />
-                <Option color={Colors.likeColorTransparent} icon="logout" text="Log Out" />
-            </View>
+            <Option color={Colors.grayTransparentLess} icon="setting" text="Settings" />
         </View>
     );
 };
@@ -93,8 +64,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         paddingHorizontal: 20,
-        height: 250,
-        marginTop: 20,
+        height: 65,
+        marginTop: 10,
         gap: 10,
     },
     rowContainer: {
