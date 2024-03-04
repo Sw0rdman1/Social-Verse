@@ -9,87 +9,90 @@ const ProfileActions: React.FC = () => {
     const [newNotification, setNewNotification] = useState(false)
     return (
         <View style={styles.container}>
-            <Option color={Colors.grayTransparentLess} icon="setting" text="Settings" />
+            <View style={styles.rowContainer}>
+                <Option color={Colors.grayTransparent} icon="newspaper-variant-multiple" text="My Posts" />
+                <Option color={Colors.grayTransparent} icon="notifications" text="Notifications" />
+                <Option color={Colors.grayTransparent} icon="setting" text="Settings" />
+            </View>
         </View>
+
     );
 };
 
-const ICON_SIZE = 24;
+const ICON_SIZE = 28;
 
-const Option: React.FC<{ color: string; icon: 'notifications' | 'edit' | 'setting' | 'logout' | 'newspaper-variant-multiple'; text: string }> = ({ color, icon, text }) => {
+const Option: React.FC<{ color: string; icon: 'notifications' | 'setting' | 'logout' | 'newspaper-variant-multiple'; text: string }> = ({ color, icon, text }) => {
 
     const returnIcon = () => {
         switch (icon) {
-            case 'edit':
-                return <AntDesign
-                    name="edit" style={styles.icon}
-                    size={ICON_SIZE}
-                />;
-
-            case 'setting':
-                return <AntDesign
-                    name="setting" style={styles.icon}
-                    size={ICON_SIZE}
-                />;
-
-            case 'logout':
-                return <AntDesign
-                    name="logout" style={styles.icon}
-                    size={ICON_SIZE}
-                />;
-
             case 'newspaper-variant-multiple':
                 return <MaterialCommunityIcons
+                    color={Colors.gradient2}
                     name="newspaper-variant-multiple"
-                    style={styles.icon}
+                    size={ICON_SIZE}
+                />;
+            case 'setting':
+                return <AntDesign
+                    name="setting"
                     size={ICON_SIZE}
                 />;
             case 'notifications':
-                return <Ionicons name="notifications" style={styles.icon} size={ICON_SIZE} />
-            default:
-                return <AntDesign name="edit" style={styles.icon} size={ICON_SIZE} />;
+                return <Ionicons name="notifications" size={ICON_SIZE} />
+
+            case 'logout':
+                return <AntDesign
+                    name="logout"
+                    size={ICON_SIZE}
+                />;
+
+
+
         }
     }
 
     return (
-        <TouchableOpacity style={[styles.option, { backgroundColor: color }]}>
+        <TouchableOpacity style={[styles.option, {
+            borderColor: Colors.grayTransparentMore,
+        }]}>
             {returnIcon()}
             <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
     );
 };
-
+0
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        width: '100%',
-        paddingHorizontal: 20,
-        height: 65,
-        marginTop: 10,
-        gap: 10,
+        paddingHorizontal: 10,
+        marginHorizontal: 10,
+        paddingVertical: 20,
+        marginTop: 20,
+        gap: 0,
+        backgroundColor: Colors.white,
+        borderRadius: 35,
     },
     rowContainer: {
-        flex: 1,
-        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        gap: 10,
-    },
-    option: {
-        flex: 1,
-        paddingHorizontal: 20,
-        flexDirection: 'row',
         alignItems: 'center',
         width: '100%',
+        gap: 10,
+    },
+
+    option: {
+        flex: 1,
+        height: 65,
+        alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: 10,
+        gap: 5,
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     },
-    icon: {
-        marginRight: 10,
-    },
+
     text: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: Colors.black
+        fontSize: 12,
+        fontWeight: '600',
+        color: Colors.gray
     },
 });
 

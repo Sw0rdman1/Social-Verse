@@ -32,8 +32,10 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginHorizontal: 25,
+        paddingHorizontal: 25,
         gap: 5,
+        borderBottomRightRadius: 25,
+        backgroundColor: Colors.gradient2,
     },
     item: {
         paddingVertical: 15,
@@ -46,10 +48,11 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 15,
-        color: Colors.gray,
+        color: Colors.whiteBg,
     },
     count: {
         fontSize: 20,
+        color: Colors.whiteBg,
         fontWeight: 'bold',
     },
 })

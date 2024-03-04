@@ -1,6 +1,7 @@
 const Colors = {
   white: "#ffffff",
   whiteBg: "hsl(186, 65%, 99%)",
+  whiteSmoke: "#f5f5f5",
   black: "#333333",
   blackTransparent: "rgba(51, 51, 51, 0.6)",
   gradient1: "#2196f3",

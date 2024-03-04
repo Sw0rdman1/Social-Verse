@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 100,
-    backgroundColor: Colors.whiteBg,
+    backgroundColor: Colors.white,
   },
   infoContainer: {
     width: "100%",
