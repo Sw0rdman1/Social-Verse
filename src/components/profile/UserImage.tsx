@@ -10,7 +10,6 @@ import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { User } from "../../models/User";
 import Colors from "../../../assets/constants/Colors";
 import BackButton from "../ui/BackButton";
-import { Post } from "../../models/Post";
 import UserInfo from "./UserInfo";
 
 const { height } = Dimensions.get("window");
