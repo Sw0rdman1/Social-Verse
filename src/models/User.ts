@@ -85,3 +85,7 @@ export const getCurrentUser = (): User => {
     isFollowing: faker.datatype.boolean(),
   };
 };
+
+export const getOnlineUsers = (): User[] => {
+  return getFakeUsers().slice(0, 5);
+}

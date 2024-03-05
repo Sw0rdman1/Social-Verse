@@ -7,11 +7,16 @@ import InboxHeader from '../../../components/chat/InboxHeader';
 const InboxScreen = () => {
     const { top } = useSafeAreaInsets();
 
+    const array1to100 = Array.from({ length: 100 }, (_, i) => i + 1);
 
     return (
         <GradientBackground inverted>
             <InboxHeader>
-                <View style={{ height: 2000, borderRadius: 50 }} />
+                {array1to100.map((i) => (
+                    <View key={i} style={styles.chatContainers}>
+                        <Text>Chat {i}</Text>
+                    </View>
+                ))}
             </InboxHeader>
         </GradientBackground>
     )
@@ -20,18 +25,6 @@ const InboxScreen = () => {
 export default InboxScreen
 
 const styles = StyleSheet.create({
-    headerContainer: {
-        flex: 3,
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        paddingHorizontal: 20,
-    },
-    headerText: {
-        fontSize: 34,
-        fontWeight: "bold",
-        color: Colors.whiteBg,
-    },
     mainContainer: {
         flex: 8,
         width: "100%",

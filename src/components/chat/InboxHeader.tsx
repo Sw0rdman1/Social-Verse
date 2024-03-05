@@ -9,10 +9,11 @@ import {
 import { useRef } from "react";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import Colors from "../../../assets/constants/Colors";
+import InboxHeaderContent from "./InboxHeaderContent";
 
 const { height } = Dimensions.get("window");
 
-const Header_Max_Height = height - 470;
+const Header_Max_Height = height - 500;
 const Header_Min_Height = Header_Max_Height - 200;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 const BORDER_RADIUS = 30;
@@ -21,28 +22,22 @@ interface DynamicHeaderProps {
   value: RNAnimated.Value;
 }
 
-const DynamicHeader: React.FC<DynamicHeaderProps> = ({
-  value,
-}) => {
+const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
 
-  const animatedHeaderHeight = value.interpolate({
+  const height = value.interpolate({
     inputRange: [0, Scroll_Distance],
     outputRange: [Header_Max_Height, Header_Min_Height],
     extrapolate: "clamp",
   });
 
 
+
+
   return (
     <RNAnimated.View
-      style={[
-        {
-          height: animatedHeaderHeight,
-        },
-        styles.headerContainer
-      ]}
+      style={[{ height }, styles.headerContainer]}
     >
-      <Text style={styles.headerText}>Inbox</Text>
-
+      <InboxHeaderContent unreadMessages={5} />
     </RNAnimated.View>
   );
 };
@@ -108,17 +103,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%"
   },
-  headerText: {
-    fontSize: 34,
-    fontWeight: "bold",
-    color: Colors.whiteBg,
-  },
+
   headerContainer: {
     width: "100%",
     flexDirection: "row",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
 
   borderRadius: {
