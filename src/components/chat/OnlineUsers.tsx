@@ -8,7 +8,13 @@ const OnlineUsers = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Your friends</Text>
+            <View style={{
+                flexDirection: "row",
+                paddingHorizontal: 20,
+            }}>
+                <Text style={styles.title}>Friend</Text>
+                <Text style={[styles.title, { fontWeight: "400", marginLeft: 3 }]}>List</Text>
+            </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {onlineUsers.map((user, index) => (
                     <View key={index} style={styles.avatarContainer}>
@@ -29,36 +35,37 @@ export default OnlineUsers
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         width: "100%",
         display: "flex",
         flexDirection: "column",
+        gap: 20,
     },
     title: {
-        paddingHorizontal: 20,
-        fontSize: 16,
+        fontSize: 21,
         fontWeight: "600",
         color: Colors.whiteBg,
     },
     avatarContainer: {
+        height: 120,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
-        marginHorizontal: 10,
+        width: 90,
+        marginHorizontal: 5,
+        gap: 10,
     },
     avatar: {
         width: 70,
         height: 70,
-        borderRadius: 30,
+        borderRadius: 40,
         position: "relative",
-
         borderWidth: 1,
         borderColor: Colors.grayTransparentLess,
     },
     username: {
-        marginTop: 10,
+        textAlign: "center",
         fontSize: 12,
+        fontWeight: "500",
         color: Colors.whiteBg,
     },
     onlineIndicator: {
@@ -67,10 +74,10 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: Colors.success,
         position: "absolute",
-        bottom: 0,
-        right: 0,
+        bottom: 2,
+        right: 2,
         borderWidth: 1,
-        borderColor: Colors.grayTransparent
+        borderColor: Colors.whiteSmoke
     },
 
 })

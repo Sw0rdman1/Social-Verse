@@ -13,8 +13,8 @@ import InboxHeaderContent from "./InboxHeaderContent";
 
 const { height } = Dimensions.get("window");
 
-const Header_Max_Height = height - 500;
-const Header_Min_Height = Header_Max_Height - 200;
+const Header_Max_Height = 320;
+const Header_Min_Height = 120;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 const BORDER_RADIUS = 30;
 
@@ -110,10 +110,6 @@ const styles = StyleSheet.create({
     display: "flex",
   },
 
-  borderRadius: {
-    backgroundColor: Colors.black,
-    zIndex: -11,
-    borderRadius: BORDER_RADIUS,
-  },
+
 
 });

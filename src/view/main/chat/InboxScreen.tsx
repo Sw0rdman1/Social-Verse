@@ -5,8 +5,6 @@ import GradientBackground from '../../../components/ui/GradientBackground';
 import InboxHeader from '../../../components/chat/InboxHeader';
 
 const InboxScreen = () => {
-    const { top } = useSafeAreaInsets();
-
     const array1to100 = Array.from({ length: 100 }, (_, i) => i + 1);
 
     return (

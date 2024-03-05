@@ -11,21 +11,11 @@ interface InboxHeaderContentProps {
 const InboxHeaderContent: React.FC<InboxHeaderContentProps> = ({ unreadMessages }) => {
     const { top } = useSafeAreaInsets();
 
-
-
     return (
         <View style={[styles.container, {
             paddingTop: top + 10,
         }]}>
             <Text style={styles.headerText}>Messages</Text>
-            {unreadMessages > 0 ? (
-                <View style={styles.subtitleContainer}>
-                    <Text style={styles.subtitle}>You have</Text>
-                    <Text style={styles.subtitleNumber}>{unreadMessages} unread messages</Text>
-                </View>
-            ) :
-                <Text style={styles.subtitle}>You have no unread messages</Text>
-            }
             <OnlineUsers />
         </View>
     )
@@ -39,7 +29,7 @@ const styles = StyleSheet.create({
         width: "100%",
         display: "flex",
         flexDirection: "column",
-        gap: 15,
+        gap: 25,
     },
     headerText: {
         paddingHorizontal: 20,
