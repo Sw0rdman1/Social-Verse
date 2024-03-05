@@ -13,6 +13,7 @@ import HomeNavigation from "../../view/main/home/homeStack";
 import SearchNavigation from "../../view/main/search/searchStack";
 import CreatePostScreen from "../../view/main/createPost/CreatePostScreen";
 import MyProfileNavigation from "../../view/main/myProfile/myProfileStack";
+import ChatNavigation from "../../view/main/chat/chatStack";
 
 
 interface BottomNavigationProps {
@@ -108,8 +109,10 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
                 />
             </Tab.Group>
             <Tab.Screen
-                name="Chat"
-                component={SearchScreen}
+                name="ChatTab"
+                children={() => (
+                    <ChatNavigation />
+                )}
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (
