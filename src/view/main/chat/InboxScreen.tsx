@@ -1,22 +1,26 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Colors from '../../../../assets/constants/Colors';
 import GradientBackground from '../../../components/ui/GradientBackground';
 import InboxHeader from '../../../components/chat/InboxHeader';
+import InboxChat from '../../../components/chat/InboxChat';
+import { useFakeChats } from '../../../models/Chat';
 
 const InboxScreen = () => {
-    const array1to100 = Array.from({ length: 100 }, (_, i) => i + 1);
+
+    const chats = useFakeChats();
 
     return (
-        <GradientBackground inverted>
+        <>
+            <SafeAreaView style={{ flex: 0, backgroundColor: Colors.gradient2 }} />
             <InboxHeader>
-                {array1to100.map((i) => (
-                    <View key={i} style={styles.chatContainers}>
-                        <Text>Chat {i}</Text>
-                    </View>
-                ))}
+                <View style={styles.chatContainers}>
+                    {chats.map((chat) => (
+                        <InboxChat key={chat.id} chat={chat} />
+                    ))}
+                </View>
             </InboxHeader>
-        </GradientBackground>
+        </>
     )
 }
 
@@ -24,18 +28,22 @@ export default InboxScreen
 
 const styles = StyleSheet.create({
     mainContainer: {
-        flex: 8,
         width: "100%",
+        display: "flex",
+    },
+    headerContainer: {
+        width: "100%",
+        height: 100,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: Colors.whiteBg,
-        borderTopLeftRadius: 40,
-        borderTopRightRadius: 40,
     },
+
     chatContainers: {
         display: "flex",
         flexDirection: "column",
-        padding: 20,
+        backgroundColor: Colors.whiteBg,
+        flex: 1,
+
     }
 })
