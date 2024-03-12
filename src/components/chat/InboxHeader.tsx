@@ -36,7 +36,8 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
 
   return (
     <RNAnimated.View style={{ height }}>
-      <RNAnimated.View
+      <Animated.View
+        entering={FadeInUp.delay(200).duration(500)}
         style={styles.headerContainer}
       >
         <RNAnimated.Text style={[styles.title, { fontSize }]}>
@@ -45,7 +46,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
         <View>
           <Ionicons name="search" size={24} color={Colors.white} />
         </View>
-      </RNAnimated.View>
+      </Animated.View>
     </RNAnimated.View>
   );
 };
@@ -93,9 +94,8 @@ const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
           />
         }
       >
-        <Animated.View
+        <View
           style={[styles.borderRadius, { flex: 1 }]}
-          entering={FadeInDown.delay(600).duration(500)}
         >
           <RNAnimated.View
             style={{
@@ -105,7 +105,7 @@ const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
           <DynamicHeader value={scrollOffsetY} />
 
           {children}
-        </Animated.View>
+        </View>
       </ScrollView>
     </View>
   );

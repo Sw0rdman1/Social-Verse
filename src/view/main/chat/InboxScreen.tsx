@@ -31,7 +31,8 @@ const InboxScreen: React.FC<InboxScreenProps> = ({ navigation }) => {
           {sortByLastMessageDate(chats)
             .map((chat, index) => (
               <InboxChat
-                key={index}
+                key={chat.id}
+                index={index}
                 chat={chat}
                 openChatHandler={openChatHandler}
               />
