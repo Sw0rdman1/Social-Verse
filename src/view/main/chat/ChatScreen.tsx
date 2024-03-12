@@ -26,7 +26,6 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ route, navigation }) => {
           />
         </TouchableOpacity>
         <Animated.Image
-          sharedTransitionTag={`avatar-${chat.id}`}
           source={{ uri: chat.user.profilePicture }}
           style={styles.avatar}
         />

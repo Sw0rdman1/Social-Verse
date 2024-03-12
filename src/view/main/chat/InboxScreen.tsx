@@ -5,6 +5,8 @@ import GradientBackground from "../../../components/ui/GradientBackground";
 import InboxHeader from "../../../components/chat/InboxHeader";
 import InboxChat from "../../../components/chat/InboxChat";
 import Chat, { useFakeChats } from "../../../models/Chat";
+import moment from "moment";
+import { sortByLastMessageDate } from "../../../utils/time";
 
 interface InboxScreenProps {
   navigation: any;
@@ -14,6 +16,10 @@ const InboxScreen: React.FC<InboxScreenProps> = ({ navigation }) => {
   const chats = useFakeChats();
 
   const openChatHandler = (chat: Chat) => {
+    if (chat.lastMessageDate instanceof Date) {
+      const date = moment(chat.lastMessageDate).fromNow();
+      chat.lastMessageDate = date;
+    }
     navigation.navigate("Chat", { chat });
   };
 
@@ -22,11 +28,7 @@ const InboxScreen: React.FC<InboxScreenProps> = ({ navigation }) => {
       <SafeAreaView style={{ flex: 0, backgroundColor: Colors.gradient2 }} />
       <InboxHeader>
         <View style={styles.chatContainers}>
-          {chats
-            .sort(
-              (a, b) =>
-                b.lastMessageDate.getTime() - a.lastMessageDate.getTime()
-            )
+          {sortByLastMessageDate(chats)
             .map((chat, index) => (
               <InboxChat
                 key={index}
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     width: "100%",
     display: "flex",
+    backgroundColor: Colors.gradient2,
   },
   headerContainer: {
     width: "100%",

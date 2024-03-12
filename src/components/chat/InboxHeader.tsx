@@ -11,7 +11,7 @@ import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import Colors from "../../../assets/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 
-const Header_Max_Height = 200;
+const Header_Max_Height = 100;
 const Header_Min_Height = 0;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 const BORDER_RADIUS = 35;
@@ -28,21 +28,16 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
   });
 
   const fontSize = value.interpolate({
-    inputRange: [0, Scroll_Distance],
-    outputRange: [36, 16],
+    inputRange: [-40, Scroll_Distance],
+    outputRange: [38, 16],
     extrapolate: "clamp",
   });
 
-  const borderBottomLeftRadius = value.interpolate({
-    inputRange: [0, Scroll_Distance],
-    outputRange: [0, 0],
-    extrapolate: "clamp",
-  });
 
   return (
     <RNAnimated.View style={{ height }}>
       <RNAnimated.View
-        style={[styles.headerContainer, { borderBottomLeftRadius }]}
+        style={styles.headerContainer}
       >
         <RNAnimated.Text style={[styles.title, { fontSize }]}>
           Messages
@@ -71,12 +66,11 @@ const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
 
   return (
     <View style={styles.homeContainer}>
-      <DynamicHeader value={scrollOffsetY} />
 
       <ScrollView
         style={{
-          backgroundColor: Colors.whiteBg,
           paddingTop: 0,
+          backgroundColor: Colors.gradient2,
         }}
         scrollEventThrottle={5}
         showsVerticalScrollIndicator={false}
@@ -95,7 +89,7 @@ const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
                 setRefreshing(false);
               }, 2000);
             }}
-            tintColor={Colors.gradient2}
+            tintColor={Colors.whiteBg}
           />
         }
       >
@@ -108,6 +102,8 @@ const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
               height: animatedPaddingTop,
             }}
           />
+          <DynamicHeader value={scrollOffsetY} />
+
           {children}
         </Animated.View>
       </ScrollView>
@@ -120,6 +116,7 @@ export default InboxHeader;
 const styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
+
   },
   headerContainer: {
     backgroundColor: Colors.gradient2,

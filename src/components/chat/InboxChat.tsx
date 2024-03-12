@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Chat from "../../models/Chat";
 import moment from "moment";
 import Animated from "react-native-reanimated";
+import Colors from "../../../assets/constants/Colors";
 
 interface InboxChatProps {
   chat: Chat;
@@ -16,7 +17,6 @@ const InboxChat: React.FC<InboxChatProps> = ({ chat, openChatHandler }) => {
       style={styles.container}
     >
       <Animated.Image
-        sharedTransitionTag={`avatar-${chat.id}`}
         source={{ uri: chat.user.profilePicture }}
         style={styles.avatar}
       />
@@ -44,6 +44,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     gap: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.grayTransparentLess,
   },
   avatar: {
     width: 60,
