@@ -10,12 +10,12 @@ const ChatNavigation: React.FC = () => {
             <Stack.Screen
                 name="Inbox"
                 component={InboxScreen}
-                options={{ headerShown: false, gestureEnabled: false }}
+                options={{ headerShown: false }}
             />
             <Stack.Screen
                 name="Chat"
                 component={ChatScreen}
-                options={{ headerShown: false, gestureEnabled: false }}
+                options={{ headerShown: false }}
             />
 
         </Stack.Navigator>
