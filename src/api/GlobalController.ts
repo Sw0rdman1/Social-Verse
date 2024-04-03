@@ -8,6 +8,7 @@ class GlobalController {
     private supabase: SupabaseClient;
 
     private constructor() {
+        console.log("GlobalController created");
         this.supabase = supabase;
         this.posts = new PostController(this.supabase);
     }

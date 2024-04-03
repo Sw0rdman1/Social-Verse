@@ -7,11 +7,7 @@ import { useApi } from '../../context/AppContext'
 
 const MainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
-    const { api } = useApi();
 
-    useEffect(() => {
-        api.posts.getAllPosts();
-    }, [])
 
     return (
         <BottomTabProvider>
