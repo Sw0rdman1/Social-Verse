@@ -6,10 +6,10 @@ export interface User {
   email: string;
   profilePicture: string;
   backgroundImage?: string;
-  numberOfFollowers: number;
-  numberOfFollowing: number;
-  numberOfPosts: number;
-  isFollowing: boolean;
+  numberOfFollowers?: number;
+  numberOfFollowing?: number;
+  numberOfPosts?: number;
+  isFollowing?: boolean;
 }
 
 export const BOZA_URL = "https://rfbvbbnkgaplbwzfumul.supabase.co/storage/v1/object/sign/avatars/WhatsApp%20Image%202024-02-07%20at%2000.19.24.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL1doYXRzQXBwIEltYWdlIDIwMjQtMDItMDcgYXQgMDAuMTkuMjQuanBlZyIsImlhdCI6MTcwNzI2MTU4OSwiZXhwIjoxNzM4Nzk3NTg5fQ.64bbVLqECpU1OLoimrE3bdVlVxQI0Yp2gsc_A9tqWOA&t=2024-02-06T23%3A19%3A49.572Z"
