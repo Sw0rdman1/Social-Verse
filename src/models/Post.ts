@@ -5,8 +5,8 @@ const BEBE = "https://rfbvbbnkgaplbwzfumul.supabase.co/storage/v1/object/sign/av
 
 export interface Post {
   id: string;
-  content: string;
-  contentPhoto: string;
+  caption: string;
+  imageUrl: string;
   author: User;
   createdAt: Date | string;
   numberOfLikes: number;
@@ -23,8 +23,8 @@ export const getFakePosts = (): Post[] => {
   for (let i = 0; i < 20; i++) {
     const fakePost: Post = {
       id: `post-${i}`,
-      content: faker.lorem.paragraph(),
-      contentPhoto: faker.image.urlPicsumPhotos(),
+      caption: faker.lorem.paragraph(),
+      imageUrl: faker.image.urlPicsumPhotos(),
       author: getFakeUser(),
       createdAt: new Date(),
       numberOfLikes: faker.number.int({ min: 0, max: 300 }),
@@ -44,8 +44,8 @@ export const getUserFakePosts = (user: User): Post[] => {
   for (let i = 0; i < 5; i++) {
     const fakePost: Post = {
       id: `postss-${i}`,
-      content: i === 3 ? "Happy New Year!!!" : faker.lorem.paragraph(),
-      contentPhoto: i === 3 ? BEBE : faker.image.urlPicsumPhotos(),
+      caption: i === 3 ? "Happy New Year!!!" : faker.lorem.paragraph(),
+      imageUrl: i === 3 ? BEBE : faker.image.urlPicsumPhotos(),
       author: user,
       createdAt: new Date(),
       numberOfLikes: faker.number.int({ min: 0, max: 300 }),

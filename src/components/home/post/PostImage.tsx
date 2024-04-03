@@ -116,7 +116,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
         <Animated.Image
           sharedTransitionTag={post.id + ".image"}
           source={{
-            uri: post.contentPhoto as string,
+            uri: post.imageUrl as string,
           }}
           style={{
             width: "100%",

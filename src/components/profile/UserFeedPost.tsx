@@ -25,7 +25,7 @@ const UserFeedPost: React.FC<UserFeedPostProps> = ({ post, index, isGrid, openPo
                 onPress={() => openPostHandler(post)} style={styles.image}>
                 <Animated.Image
                     sharedTransitionTag={post.id + ".image"}
-                    source={{ uri: post.contentPhoto }}
+                    source={{ uri: post.imageUrl }}
                     style={styles.image}
 
                 />

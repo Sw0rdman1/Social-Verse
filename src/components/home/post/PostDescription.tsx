@@ -14,7 +14,7 @@ const PostDescription: React.FC<PostDescriptionProps> = ({ post }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>
-                {post.content}
+                {post.caption}
             </Text>
             <Text style={styles.date}>
                 - {String(post.createdAt)}
