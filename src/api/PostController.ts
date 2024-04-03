@@ -41,6 +41,9 @@ export class PostController {
                 console.log('Error fetching post:', error.message);
                 throw error;
             }
+
+
+
             return post ? post[0] : null;
 
         } catch (error) {
