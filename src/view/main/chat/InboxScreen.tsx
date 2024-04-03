@@ -15,6 +15,7 @@ interface InboxScreenProps {
 const InboxScreen: React.FC<InboxScreenProps> = ({ navigation }) => {
   const chats = useFakeChats();
 
+
   const openChatHandler = (chat: Chat) => {
     if (chat.lastMessageDate instanceof Date) {
       const date = moment(chat.lastMessageDate).fromNow();

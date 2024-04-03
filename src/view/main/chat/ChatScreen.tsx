@@ -1,4 +1,4 @@
-import { Image, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, Keyboard, KeyboardAvoidingView, KeyboardEvent, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Chat from "../../../models/Chat";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Animated from "react-native-reanimated";
@@ -28,13 +28,20 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ route, navigation }) => {
     navigation.goBack();
   };
 
+
   useEffect(() => {
     setBottomTabVisible(false);
+    ;
+    return () => {
+      setBottomTabVisible(true);
+    };
   }, []);
+
+
 
   return (
     <KeyboardAvoidingView
-      behavior="height"
+      behavior="padding"
       style={styles.container}
     >
       <GradientBackground inverted>
@@ -75,7 +82,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     gap: 15,
-    backgroundColor: Colors.gradient2,
   },
   avatar: {
     width: 50,

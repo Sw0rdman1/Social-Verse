@@ -1,9 +1,16 @@
-import { StyleSheet, Text, View, TextInput, Button, Touchable, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Button, Touchable, TouchableOpacity, LayoutAnimation, KeyboardEvent, Keyboard } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+
+
+
 
 const MessageInput = () => {
     const [message, setMessage] = useState('');
+
+
+
+
 
     const handleMessageChange = (text: string) => {
         setMessage(text);
