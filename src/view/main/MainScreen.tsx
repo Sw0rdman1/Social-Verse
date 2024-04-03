@@ -1,10 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BottomTabNavigation from '../../components/navigation/BottomTabNavigation'
 import { StackScreenProps } from '@react-navigation/stack'
 import { BottomTabProvider } from '../../context/BottomBarContext'
+import { useApi } from '../../context/AppContext'
 
 const MainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+
+    const { api } = useApi();
+
+    useEffect(() => {
+        api.posts.getAllPosts();
+    }, [])
 
     return (
         <BottomTabProvider>
