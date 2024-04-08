@@ -13,9 +13,9 @@ export class PostController {
         this.global = global;
     }
 
-    public async getPosts(page = 1, pageSize = 10): Promise<Post[]> {
+    public async getPosts(userID: string, page = 1, pageSize = 10): Promise<Post[]> {
         try {
-            let { data: posts, error } = await this.supabase
+            let { data, error } = await this.supabase
                 .from('posts')
                 .select('*, author:users(*)')
                 .range((page - 1) * pageSize, page * pageSize - 1);
@@ -26,7 +26,14 @@ export class PostController {
                 throw error;
             }
 
-            return snakeToCamel(posts) || [];
+            let posts = snakeToCamel(data);
+
+            for (let post of posts) {
+                post.numberOfLikes = await this.global.likes.getLikesForPost(post.id);
+                post.liked = await this.global.likes.isPostLikedByUser(post.id, userID);
+            }
+
+            return posts;
         } catch (error) {
             console.error('Error fetching posts:', (error as Error).message);
             return [];
@@ -34,7 +41,7 @@ export class PostController {
     }
 
     // Get a single post by ID
-    public async getPostById(id: number): Promise<Post | null> {
+    public async getPostById(id: number, userID: string): Promise<Post | null> {
         try {
             let { data, error } = await this.supabase
                 .from('posts')
@@ -53,7 +60,7 @@ export class PostController {
 
             let post = data as Post;
             post.numberOfLikes = await this.global.likes.getLikesForPost(id);
-            post.liked = await this.global.likes.isPostLikedByUser(id, 1);
+            post.liked = await this.global.likes.isPostLikedByUser(id, userID);
 
 
             return post;

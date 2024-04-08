@@ -67,7 +67,7 @@ export class LikeController {
     }
 
 
-    public async isPostLikedByUser(postId: number, userId: number): Promise<boolean> {
+    public async isPostLikedByUser(postId: number, userId: string): Promise<boolean> {
         try {
             let { data: likes, error } = await this.supabase
                 .from('likes')

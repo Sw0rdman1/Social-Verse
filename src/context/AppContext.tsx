@@ -26,6 +26,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const { user, initialized } = useAuth();
 
+
     useEffect(() => {
         const fetchData = async () => {
             console.log('AppProvider', user, initialized);
@@ -38,10 +39,9 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
                 setLoading(false);
                 return;
             }
-
             const currentUser = await api.users.getCurrentUserInformations(user.id);
             setCurrentUser(currentUser);
-            const posts = await api.posts.getPosts();
+            const posts = await api.posts.getPosts(user.id);
             setInitialPosts(posts);
             setLoading(false);
         };
