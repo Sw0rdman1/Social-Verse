@@ -9,7 +9,6 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import MainScreen from "../view/main/MainScreen";
 import GlobalController from "../api/GlobalController";
-import { AppProvider } from "../context/AppContext";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,44 +17,42 @@ export default function RootNavigation() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <AppProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Loading"
-              component={LoadingScreen}
-              options={{ headerShown: false, gestureEnabled: false }}
-            />
-            {user ? (
-              <>
-                <Stack.Screen
-                  name="Main"
-                  component={MainScreen}
-                  options={{ headerShown: false, gestureEnabled: false }}
-                />
-              </>
-            ) : (
-              <>
-                <Stack.Screen
-                  name="Welcome"
-                  component={WelcomeScreen}
-                  options={{ headerShown: false, gestureEnabled: false }}
-                />
-                <Stack.Screen
-                  name="LogIn"
-                  component={LogInScreen}
-                  options={{ headerShown: false, gestureEnabled: false }}
-                />
-                <Stack.Screen
-                  name="Registration"
-                  component={RegistrationScreen}
-                  options={{ headerShown: false, gestureEnabled: false }}
-                />
-              </>
-            )}
-          </Stack.Navigator>
-        </NavigationContainer>
-      </AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Loading"
+            component={LoadingScreen}
+            options={{ headerShown: false, gestureEnabled: false }}
+          />
+          {user ? (
+            <>
+              <Stack.Screen
+                name="Main"
+                component={MainScreen}
+                options={{ headerShown: false, gestureEnabled: false }}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen
+                name="Welcome"
+                component={WelcomeScreen}
+                options={{ headerShown: false, gestureEnabled: false }}
+              />
+              <Stack.Screen
+                name="LogIn"
+                component={LogInScreen}
+                options={{ headerShown: false, gestureEnabled: false }}
+              />
+              <Stack.Screen
+                name="Registration"
+                component={RegistrationScreen}
+                options={{ headerShown: false, gestureEnabled: false }}
+              />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
     </GestureHandlerRootView >
   );
 }

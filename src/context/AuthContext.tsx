@@ -3,14 +3,10 @@ import { createContext, useEffect, useState } from "react";
 // import * as AppleAuthentication from "expo-apple-authentication";
 import { supabase } from "../config/supabase";
 import * as AppleAuthentication from "expo-apple-authentication";
-import { getFakePosts } from "../models/Post";
 
 type AuthContextProps = {
   user: User | null;
-  session: Session | null;
   initialized?: boolean;
-  loadingData?: boolean;
-  posts: any[];
   signUp: (email: string, password: string) => Promise<void>;
   signInWithPassword: (email: string, password: string) => Promise<void>;
   signInWithApple: () => Promise<void>;
@@ -23,10 +19,7 @@ type AuthProviderProps = {
 
 export const AuthContext = createContext<AuthContextProps>({
   user: null,
-  session: null,
   initialized: false,
-  loadingData: false,
-  posts: [],
   signUp: async () => { },
   signInWithPassword: async () => { },
   signInWithApple: async () => { },
@@ -37,8 +30,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [loadingData, setLoadingData] = useState<boolean>(true);
-  const [posts, setPosts] = useState<any[]>([]);
 
   const signUp = async (email: string, password: string) => {
     const { error, data } = await supabase.auth.signUp({
@@ -104,20 +95,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     // Listen for changes to authentication state
     const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session);
-      setInitialized(true);
+      console.log("AuthContext: ", event);
 
 
       if (session?.user) {
-        setLoadingData(true);
         setUser(session.user);
-        setTimeout(() => {
-          const posts = getFakePosts();
-          setPosts(posts);
-          setLoadingData(false);
-        }, 2000);
       } else {
         setUser(null);
       }
+      setInitialized(true);
+
     });
     return () => {
       data.subscription.unsubscribe();
@@ -128,10 +115,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     <AuthContext.Provider
       value={{
         user,
-        session,
         initialized,
-        loadingData,
-        posts,
         signUp,
         signInWithPassword,
         signInWithApple,

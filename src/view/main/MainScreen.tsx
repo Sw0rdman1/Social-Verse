@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react'
 import BottomTabNavigation from '../../components/navigation/BottomTabNavigation'
 import { StackScreenProps } from '@react-navigation/stack'
 import { BottomTabProvider } from '../../context/BottomBarContext'
-import { useApi } from '../../context/AppContext'
+import { useAppContext } from '../../context/AppContext'
 
 const MainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
-    const { api } = useApi();
+    const { api } = useAppContext();
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const data = await api.posts.getAllPosts(1, 10)
+            const data = await api.posts.getPosts(1, 10)
             console.log(data)
         }
         fetchPosts();

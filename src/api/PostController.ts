@@ -1,6 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Post } from "../models/Post";
 import GlobalController from "./GlobalController";
+import { snakeToCamel } from "../utils/caseConverter";
 
 export class PostController {
 
@@ -12,7 +13,7 @@ export class PostController {
         this.global = global;
     }
 
-    public async getAllPosts(page: number, pageSize: number): Promise<Post[]> {
+    public async getPosts(page = 1, pageSize = 10): Promise<Post[]> {
         try {
             let { data: posts, error } = await this.supabase
                 .from('posts')
@@ -25,7 +26,7 @@ export class PostController {
                 throw error;
             }
 
-            return posts || [];
+            return snakeToCamel(posts) || [];
         } catch (error) {
             console.error('Error fetching posts:', (error as Error).message);
             return [];

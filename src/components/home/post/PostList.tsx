@@ -19,6 +19,7 @@ import { Post } from "../../../models/Post";
 import Avatar from "../../ui/Avatar";
 import { useAuth } from "../../../hooks/useAuth";
 import moment from "moment";
+import { useAppContext } from "../../../context/AppContext";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -64,7 +65,7 @@ const OverflowItems: React.FC<OverflowItemsProps> = ({
 };
 
 const PostsList = ({ navigation }: any) => {
-  const { posts } = useAuth();
+  const { initialPosts } = useAppContext();
 
   const scrollXIndex = React.useRef(new RNAnimated.Value(0)).current;
   const scrollXAnimated = React.useRef(new RNAnimated.Value(0)).current;
@@ -76,12 +77,12 @@ const PostsList = ({ navigation }: any) => {
   };
 
   React.useEffect(() => {
-    if (index === posts.length - VISIBLE_ITEMS - 1) {
+    if (index === initialPosts.length - VISIBLE_ITEMS - 1) {
       // get new data
       // fetch more data
-      const newData = [...posts, ...posts];
+      const newData = [...initialPosts, ...initialPosts];
     }
-  }, [index, posts]);
+  }, [index, initialPosts]);
 
   React.useEffect(() => {
     RNAnimated.spring(scrollXAnimated, {
@@ -96,7 +97,7 @@ const PostsList = ({ navigation }: any) => {
       direction={Directions.LEFT}
       onHandlerStateChange={(ev) => {
         if (ev.nativeEvent.state === State.END) {
-          if (index === posts.length - 1) {
+          if (index === initialPosts.length - 1) {
             return;
           }
           setActiveIndex(index + 1);
@@ -116,10 +117,10 @@ const PostsList = ({ navigation }: any) => {
         }}
       >
         <View style={styles.container}>
-          <OverflowItems data={posts} scrollXAnimated={scrollXAnimated} />
+          <OverflowItems data={initialPosts} scrollXAnimated={scrollXAnimated} />
           <FlatList
-            data={posts}
-            keyExtractor={(post) => post.id}
+            data={initialPosts}
+            keyExtractor={(post: Post) => post.id.toString()}
             horizontal
             inverted
             contentContainerStyle={{
@@ -138,7 +139,7 @@ const PostsList = ({ navigation }: any) => {
               style,
               ...props
             }) => {
-              const newStyle = [style, { zIndex: posts.length - index }];
+              const newStyle = [style, { zIndex: initialPosts.length - index }];
               return (
                 <View style={newStyle} {...props}>
                   {children}
@@ -177,12 +178,12 @@ const PostsList = ({ navigation }: any) => {
                   <TouchableOpacity
                     activeOpacity={0.9}
                     onPress={() => {
-                      if (posts[index].createdAt instanceof Date) {
-                        const date = moment(posts[index].createdAt).fromNow();
-                        posts[index].createdAt = date;
+                      if (initialPosts[index].createdAt instanceof Date) {
+                        const date = moment(initialPosts[index].createdAt).fromNow();
+                        initialPosts[index].createdAt = date;
                       }
                       navigation.navigate("Post", {
-                        post: posts[index],
+                        post: initialPosts[index],
                         previousPage: "Home",
                       });
                     }}

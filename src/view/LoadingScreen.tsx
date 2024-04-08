@@ -6,28 +6,29 @@ import { useEffect, useState } from "react";
 import FormsTemplate from "../components/auth/welcome/FormsTemplate";
 import { useAuth } from "../hooks/useAuth";
 import HomeScreenTemplate from "../components/HomeScreenTemplate";
+import { useAppContext } from "../context/AppContext";
 
 const LoadingScreen = ({ navigation }: any) => {
-  const { loadingData, initialized, user } = useAuth();
+  const { currentUser, loading } = useAppContext();
   const [fontSize, setFontSize] = useState(60);
 
 
   useEffect(() => {
-    if (!initialized) return;
+    if (loading) return;
 
-    if (!user) {
+    if (!currentUser) {
       setFontSize(60);
       navigation.navigate("Welcome");
-    } else if (!loadingData) {
+    } else {
       setFontSize(40);
       navigation.navigate("Main");
     }
-  }, [initialized, user, loadingData]);
+  }, [currentUser, loading]);
 
   return (
     <Animated.View style={styles.fullContainer} sharedTransitionTag="container">
       <GradientBackground centerItems inverted>
-        {initialized && user && (
+        {loading && currentUser && (
           <View style={styles.container}>
             <Animated.Text
               entering={FadeInDown.delay(500).duration(500)}
