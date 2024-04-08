@@ -1,12 +1,15 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Post } from "../models/Post";
+import GlobalController from "./GlobalController";
 
 export class PostController {
 
     private supabase: SupabaseClient;
+    private global: GlobalController;
 
-    constructor(supabase: SupabaseClient) {
+    constructor(global: GlobalController, supabase: SupabaseClient) {
         this.supabase = supabase;
+        this.global = global;
     }
 
     public async getAllPosts(page: number, pageSize: number): Promise<Post[]> {
@@ -32,19 +35,27 @@ export class PostController {
     // Get a single post by ID
     public async getPostById(id: number): Promise<Post | null> {
         try {
-            let { data: post, error } = await this.supabase
+            let { data, error } = await this.supabase
                 .from('posts')
                 .select('*, author:users(*)')
-                .eq('id', 'id');
+                .eq('id', id)
+                .limit(1)
+                .single();
 
             if (error) {
-                console.log('Error fetching post:', error.message);
                 throw error;
             }
 
+            if (!data) {
+                throw new Error('Post not found');
+            }
+
+            let post = data as Post;
+            post.numberOfLikes = await this.global.likes.getLikesForPost(id);
+            post.liked = await this.global.likes.isPostLikedByUser(id, 1);
 
 
-            return post ? post[0] : null;
+            return post;
 
         } catch (error) {
             console.error('Error fetching post:', (error as Error).message);

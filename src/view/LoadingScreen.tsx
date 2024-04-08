@@ -7,7 +7,7 @@ import FormsTemplate from "../components/auth/welcome/FormsTemplate";
 import { useAuth } from "../hooks/useAuth";
 import HomeScreenTemplate from "../components/HomeScreenTemplate";
 
-const LoadingScreen = ({ route, navigation }: any) => {
+const LoadingScreen = ({ navigation }: any) => {
   const { loadingData, initialized, user } = useAuth();
   const [fontSize, setFontSize] = useState(60);
 

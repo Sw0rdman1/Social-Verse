@@ -5,7 +5,7 @@ import { supabase } from "../config/supabase";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { getFakePosts } from "../models/Post";
 
-type SupabaseContextProps = {
+type AuthContextProps = {
   user: User | null;
   session: Session | null;
   initialized?: boolean;
@@ -17,23 +17,23 @@ type SupabaseContextProps = {
   signOut: () => Promise<void>;
 };
 
-type SupabaseProviderProps = {
+type AuthProviderProps = {
   children: React.ReactNode;
 };
 
-export const SupabaseContext = createContext<SupabaseContextProps>({
+export const AuthContext = createContext<AuthContextProps>({
   user: null,
   session: null,
   initialized: false,
   loadingData: false,
   posts: [],
-  signUp: async () => {},
-  signInWithPassword: async () => {},
-  signInWithApple: async () => {},
-  signOut: async () => {},
+  signUp: async () => { },
+  signInWithPassword: async () => { },
+  signInWithApple: async () => { },
+  signOut: async () => { },
 });
 
-export const SupabaseProvider = ({ children }: SupabaseProviderProps) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [initialized, setInitialized] = useState<boolean>(false);
@@ -106,7 +106,6 @@ export const SupabaseProvider = ({ children }: SupabaseProviderProps) => {
       setSession(session);
       setInitialized(true);
 
-      console.log(session?.user);
 
       if (session?.user) {
         setLoadingData(true);
@@ -126,7 +125,7 @@ export const SupabaseProvider = ({ children }: SupabaseProviderProps) => {
   }, []);
 
   return (
-    <SupabaseContext.Provider
+    <AuthContext.Provider
       value={{
         user,
         session,
@@ -140,6 +139,6 @@ export const SupabaseProvider = ({ children }: SupabaseProviderProps) => {
       }}
     >
       {children}
-    </SupabaseContext.Provider>
+    </AuthContext.Provider>
   );
 };

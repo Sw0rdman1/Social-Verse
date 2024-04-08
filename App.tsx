@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { SupabaseProvider } from "./src/context/SupabaseProvider";
+import { AuthProvider } from "./src/context/AuthContext";
 import "react-native-gesture-handler";
 import WelcomeScreen from "./src/view/auth/WelcomeScreen";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -15,9 +15,9 @@ type Props = StackScreenProps<RootStackParamList, "Welcome">;
 
 export default function App() {
   return (
-    <SupabaseProvider>
+    <AuthProvider>
       <RootNavigation />
-    </SupabaseProvider>
+    </AuthProvider>
   );
 }
 

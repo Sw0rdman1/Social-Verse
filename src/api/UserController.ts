@@ -8,20 +8,10 @@ export class UserController {
         this.supabase = supabase;
     }
 
-    // Get all users
-    async getAllUsers() {
-        console.log("Getting all users...");
+    async getCurrentUserInformations() {
+        const user = this.supabase.auth.getUser();
+        console.log(user);
     }
-    // Get a single user by ID
-    async getUserById() {
-    }
-    // Create a new user
-    async createUser() {
-    }
-    // Update an existing user
-    async updateUser() {
-    }
-    // Delete a user
-    async deleteUser() {
-    }
+
+
 }

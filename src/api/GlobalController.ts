@@ -2,6 +2,7 @@ import { SupabaseClient, User } from '@supabase/supabase-js';
 import { PostController } from './PostController';
 import { supabase } from '../config/supabase';
 import { UserController } from './UserController';
+import { LikeController } from './LikeController';
 
 class GlobalController {
     private static instance: GlobalController;
@@ -9,12 +10,15 @@ class GlobalController {
 
     public posts: PostController;
     public users: UserController;
+    public likes: LikeController;
+
 
     private constructor() {
         console.log("GlobalController created");
         this.supabase = supabase;
-        this.posts = new PostController(this.supabase);
+        this.posts = new PostController(this, this.supabase);
         this.users = new UserController(this.supabase);
+        this.likes = new LikeController(this.supabase);
     }
 
     public static getInstance(): GlobalController {

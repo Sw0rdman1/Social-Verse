@@ -1,4 +1,4 @@
 import { useContext } from "react";
-import { SupabaseContext } from "../context/SupabaseProvider";
+import { AuthContext } from "../context/AuthContext";
 
-export const useAuth = () => useContext(SupabaseContext);
+export const useAuth = () => useContext(AuthContext);
