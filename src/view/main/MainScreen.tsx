@@ -7,16 +7,6 @@ import { useAppContext } from '../../context/AppContext'
 
 const MainScreen: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
-    const { api } = useAppContext();
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            const data = await api.posts.getPosts(1, 10)
-            console.log(data)
-        }
-        fetchPosts();
-    }, [])
-
     return (
         <BottomTabProvider>
             <View style={styles.container}>

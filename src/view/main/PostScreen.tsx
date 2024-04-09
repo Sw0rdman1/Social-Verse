@@ -36,7 +36,7 @@ const PostScreen = ({ route, navigation }: any) => {
   }, []);
 
   return (
-    <Animated.View sharedTransitionTag={post.id} style={styles.container}>
+    <Animated.View sharedTransitionTag={post.id as string} style={styles.container}>
       <PostImage
         post={post}
         goBackHandler={goBackHandler}

@@ -9,9 +9,9 @@ export interface Post {
   imageUrl: string;
   author: User;
   createdAt: Date | string;
-  numberOfLikes?: number;
-  numberOfComments?: number;
-  numberOfBookmarks?: number;
+  numberOfLikes: number;
+  numberOfComments: number;
+  numberOfBookmarks: number;
   liked?: boolean;
   bookmarked?: boolean;
   newPost?: boolean;

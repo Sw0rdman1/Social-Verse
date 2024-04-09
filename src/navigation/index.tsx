@@ -9,11 +9,12 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import MainScreen from "../view/main/MainScreen";
 import GlobalController from "../api/GlobalController";
+import { useAppContext } from "../context/AppContext";
 
 const Stack = createNativeStackNavigator();
 
 export default function RootNavigation() {
-  const { user } = useAuth();
+  const { currentUser } = useAppContext();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -24,7 +25,7 @@ export default function RootNavigation() {
             component={LoadingScreen}
             options={{ headerShown: false, gestureEnabled: false }}
           />
-          {user ? (
+          {currentUser ? (
             <>
               <Stack.Screen
                 name="Main"

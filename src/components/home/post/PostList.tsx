@@ -25,7 +25,7 @@ const { width, height } = Dimensions.get("screen");
 
 const OVERFLOW_HEIGHT = 75;
 const SPACING = 10;
-const ITEM_WIDTH = width * 0.8;
+const ITEM_WIDTH = width * 0.85;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.5;
 const VISIBLE_ITEMS = 3;
 
@@ -190,7 +190,7 @@ const PostsList = ({ navigation }: any) => {
                   >
                     <Animated.View>
                       <Animated.Image
-                        sharedTransitionTag={post.id + ".image"}
+                        sharedTransitionTag={post.id as string + ".image"}
                         source={{ uri: post.imageUrl }}
                         style={{
                           width: ITEM_WIDTH,

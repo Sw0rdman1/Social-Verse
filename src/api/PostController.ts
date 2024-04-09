@@ -62,7 +62,6 @@ export class PostController {
             post.numberOfLikes = await this.global.likes.getLikesForPost(id);
             post.liked = await this.global.likes.isPostLikedByUser(id, userID);
 
-
             return post;
 
         } catch (error) {
@@ -73,6 +72,7 @@ export class PostController {
 
     // Create a new post
     public async createPost(): Promise<void> {
+
 
     }
 
