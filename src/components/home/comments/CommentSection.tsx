@@ -30,7 +30,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef, com
     const [comments, setComments] = useState<CommentEntity[]>([]);
 
     useEffect(() => {
-        setComments(getFakeComments(post.id));
+        // setComments(getFakeComments(post.id));
     }, [])
 
     return (

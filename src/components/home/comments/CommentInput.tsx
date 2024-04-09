@@ -16,7 +16,7 @@ const Button = ({ onPress }: any) => {
 }
 
 interface CommentInputProps {
-    postID: string;
+    postID: number;
     scrolViewRef: any;
 }
 

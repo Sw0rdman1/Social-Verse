@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 const BEBE = "https://rfbvbbnkgaplbwzfumul.supabase.co/storage/v1/object/sign/avatars/WhatsApp%20Image%202024-02-08%20at%2023.20.31.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL1doYXRzQXBwIEltYWdlIDIwMjQtMDItMDggYXQgMjMuMjAuMzEuanBlZyIsImlhdCI6MTcwNzQzMDk2MCwiZXhwIjoxNzM4OTY2OTYwfQ.0jH9R_-S6x9-FEpCw0YGiJxxKlpa3ap5BzicwtZ0yh8&t=2024-02-08T22%3A22%3A40.669Z"
 
 export interface Post {
-  id: number | string;
+  id: number;
   caption: string;
   imageUrl: string;
   author: User;
@@ -22,7 +22,7 @@ export const getFakePosts = (): Post[] => {
 
   for (let i = 0; i < 20; i++) {
     const fakePost: Post = {
-      id: `post-${i}`,
+      id: i,
       caption: faker.lorem.paragraph(),
       imageUrl: faker.image.urlPicsumPhotos(),
       author: getFakeUser(),
@@ -43,7 +43,7 @@ export const getUserFakePosts = (user: User): Post[] => {
 
   for (let i = 0; i < 5; i++) {
     const fakePost: Post = {
-      id: `postss-${i}`,
+      id: i,
       caption: i === 3 ? "Happy New Year!!!" : faker.lorem.paragraph(),
       imageUrl: i === 3 ? BEBE : faker.image.urlPicsumPhotos(),
       author: user,

@@ -190,7 +190,7 @@ const PostsList = ({ navigation }: any) => {
                   >
                     <Animated.View>
                       <Animated.Image
-                        sharedTransitionTag={post.id as string + ".image"}
+                        sharedTransitionTag={post.id + ".image"}
                         source={{ uri: post.imageUrl }}
                         style={{
                           width: ITEM_WIDTH,
