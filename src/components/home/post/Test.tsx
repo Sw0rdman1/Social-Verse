@@ -53,14 +53,14 @@ export default function TestPostList({ navigation }: any) {
                     <View style={{ width, justifyContent: "center", alignItems: "center" }}>
                         <View style={{
                             borderRadius: 18,
-                            shadowColor: Colors.gradient2TransparentLess,
-                            shadowOpacity: 0.6,
+                            shadowColor: Colors.black,
+                            shadowOpacity: 0.2,
                             shadowRadius: 20,
                             shadowOffset: {
                                 width: 0,
                                 height: 0,
                             },
-                            padding: 8,
+                            padding: 2,
                             backgroundColor: 'white',
                         }}>
                             <TouchableOpacity
@@ -70,7 +70,7 @@ export default function TestPostList({ navigation }: any) {
                                     height: ITEM_HEIGHT,
                                     overflow: 'hidden',
                                     alignItems: 'center',
-                                    borderRadius: 12,
+                                    borderRadius: 16,
                                 }}
                                 onPress={() => {
                                     if (initialPosts[index].createdAt instanceof Date) {
@@ -113,8 +113,8 @@ export default function TestPostList({ navigation }: any) {
                                     backgroundColor: 'white',
                                     paddingRight: 20,
                                     borderRadius: 60,
-                                    shadowColor: Colors.gradient2TransparentLess,
-                                    shadowOpacity: 0.6,
+                                    shadowColor: Colors.black,
+                                    shadowOpacity: 0.2,
                                     shadowRadius: 20,
                                     shadowOffset: {
                                         width: 0,
