@@ -1,21 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import Colors from '../../../assets/constants/Colors'
 import { Entypo } from '@expo/vector-icons';
 import { useBottomTab } from '../../context/BottomBarContext';
 
-const AddNewPostButton = () => {
+const AddNewPostButton = ({ navigation }: any) => {
     const { isBottomTabVisible } = useBottomTab();
 
     if (!isBottomTabVisible) {
         return null;
     }
 
-
     return (
-        <View style={styles.addPostStyle}>
+
+        <TouchableOpacity
+            style={styles.addPostStyle}
+            onPress={() => navigation.navigate("CreatePostScreen")}
+        >
             <Entypo name="plus" size={32} color={Colors.white} />
-        </View>
+        </TouchableOpacity>
     )
 }
 

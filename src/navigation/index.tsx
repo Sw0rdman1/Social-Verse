@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import MainScreen from "../view/main/MainScreen";
 import GlobalController from "../api/GlobalController";
 import { useAppContext } from "../context/AppContext";
+import CreatePostScreen from "../view/main/createPost/CreatePostScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,16 +21,21 @@ export default function RootNavigation() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="Loading"
-            component={LoadingScreen}
-            options={{ headerShown: false, gestureEnabled: false }}
-          />
           {currentUser ? (
             <>
               <Stack.Screen
                 name="Main"
                 component={MainScreen}
+                options={{ headerShown: false, gestureEnabled: false }}
+              />
+              <Stack.Screen
+                name="CreatePostScreen"
+                component={CreatePostScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Loading"
+                component={LoadingScreen}
                 options={{ headerShown: false, gestureEnabled: false }}
               />
             </>

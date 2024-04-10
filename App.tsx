@@ -4,13 +4,16 @@ import { AuthProvider } from "./src/context/AuthContext";
 import RootNavigation from "./src/navigation";
 import { AppProvider } from "./src/context/AppContext";
 import "react-native-gesture-handler";
+import { BottomTabProvider } from "./src/context/BottomBarContext";
 
 export default function App() {
   return (
     <AuthProvider>
       <AppProvider>
-        <StatusBar style="auto" />
-        <RootNavigation />
+        <BottomTabProvider>
+          <StatusBar style="auto" />
+          <RootNavigation />
+        </BottomTabProvider>
       </AppProvider >
     </AuthProvider>
   );
