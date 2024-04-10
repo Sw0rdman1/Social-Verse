@@ -20,6 +20,7 @@ import Avatar from "../../ui/Avatar";
 import { useAuth } from "../../../hooks/useAuth";
 import moment from "moment";
 import { useAppContext } from "../../../context/AppContext";
+import { Image } from "expo-image";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -123,6 +124,7 @@ const PostsList = ({ navigation }: any) => {
             keyExtractor={(post: Post) => post.id.toString()}
             horizontal
             inverted
+            initialNumToRender={5}
             contentContainerStyle={{
               flex: 1,
               justifyContent: "center",
@@ -186,11 +188,14 @@ const PostsList = ({ navigation }: any) => {
                         post: initialPosts[index],
                         previousPage: "Home",
                       });
+                      console.log("Post clicked" + post.id);
+
                     }}
                   >
-                    <Animated.View>
-                      <Animated.Image
-                        sharedTransitionTag={post.id + ".image"}
+                    <Animated.View
+                      sharedTransitionTag={post.id + ".image"}
+                    >
+                      <Image
                         source={{ uri: post.imageUrl }}
                         style={{
                           width: ITEM_WIDTH,
