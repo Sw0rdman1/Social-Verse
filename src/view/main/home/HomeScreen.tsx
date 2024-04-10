@@ -7,6 +7,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 import { BOZA_URL } from "../../../models/User";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import TestPostList from "../../../components/home/post/Test";
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<any, any>;
@@ -53,7 +54,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           style={styles.formContainer}
           sharedTransitionTag="home-screen"
         >
-          <PostsList navigation={navigation} />
+          <TestPostList navigation={navigation} />
+          <View style={{ height: 120 }} />
         </Animated.View>
       </View>
     </Animated.View>

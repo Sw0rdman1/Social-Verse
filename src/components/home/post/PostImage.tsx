@@ -6,6 +6,7 @@ import {
   View,
   Text,
   Dimensions,
+  Image,
 } from "react-native";
 import { Post } from "../../../models/Post";
 import Colors from "../../../../assets/constants/Colors";
@@ -97,13 +98,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
   });
 
   return (
-    <RNAnimated.View
-      style={[
-        {
-          height: animatedHeaderHeight,
-        },
-      ]}
-    >
+    <RNAnimated.View style={{ height: animatedHeaderHeight }}>
       <View style={styles.headerContainer}>
         <RNAnimated.View
           style={[
@@ -113,19 +108,21 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
         >
           <BackButton size={26} handleBackButton={goBackHandler} />
         </RNAnimated.View>
+
+
         <Animated.Image
           sharedTransitionTag={post.id + ".image"}
           source={{
-            uri: post.imageUrl as string,
+            uri: post.imageUrl,
           }}
           style={{
             width: "100%",
             height: "115%",
-            position: "absolute",
-            top: 0,
           }}
         />
-        <RNAnimated.View
+
+
+        {/* <RNAnimated.View
           style={{
             opacity: animatedOpacity,
             position: "absolute",
@@ -135,7 +132,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
           <Animated.View entering={FadeInDown.delay(700).duration(500)}>
             <Swipe />
           </Animated.View>
-        </RNAnimated.View>
+        </RNAnimated.View> */}
       </View>
     </RNAnimated.View>
   );
