@@ -16,7 +16,7 @@ import Animated from 'react-native-reanimated';
 import moment from 'moment';
 
 const { width } = Dimensions.get('screen');
-const ITEM_WIDTH = width * 0.85;
+const ITEM_WIDTH = width * 0.87;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.45;
 
 
@@ -105,14 +105,17 @@ export default function TestPostList({ navigation }: any) {
                             <View
                                 style={{
                                     position: 'absolute',
-                                    bottom: -30,
-                                    right: 10,
+                                    width: ITEM_WIDTH,
+                                    height: 65,
+                                    padding: 10,
+                                    bottom: -10,
+                                    right: 2,
+                                    borderBottomLeftRadius: 16,
+                                    borderBottomRightRadius: 16,
                                     display: 'flex',
                                     flexDirection: 'row',
                                     alignItems: 'center',
                                     backgroundColor: 'white',
-                                    paddingRight: 20,
-                                    borderRadius: 60,
                                     shadowColor: Colors.black,
                                     shadowOpacity: 0.2,
                                     shadowRadius: 20,
@@ -134,9 +137,9 @@ export default function TestPostList({ navigation }: any) {
                                         marginRight: 5,
                                     }}
                                 />
-                                <View >
+                                <View style={{ gap: 2 }}>
                                     <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>{item.author.displayName}</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: '600', color: 'gray' }}>{item.author.email}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: '600', color: 'gray' }}> - "{item.caption}"</Text>
                                 </View>
 
                             </View>

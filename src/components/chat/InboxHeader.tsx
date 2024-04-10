@@ -10,6 +10,7 @@ import { useRef, useState } from "react";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import Colors from "../../../assets/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Header_Max_Height = 100;
 const Header_Min_Height = 0;
@@ -67,7 +68,6 @@ const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
 
   return (
     <View style={styles.homeContainer}>
-
       <ScrollView
         style={{
           paddingTop: 0,
@@ -94,9 +94,7 @@ const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
           />
         }
       >
-        <View
-          style={[styles.borderRadius, { flex: 1 }]}
-        >
+        <LinearGradient colors={[Colors.gradient2, Colors.whiteBg]}>
           <RNAnimated.View
             style={{
               height: animatedPaddingTop,
@@ -105,7 +103,7 @@ const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
           <DynamicHeader value={scrollOffsetY} />
 
           {children}
-        </View>
+        </LinearGradient>
       </ScrollView>
     </View>
   );
@@ -119,7 +117,6 @@ const styles = StyleSheet.create({
 
   },
   headerContainer: {
-    backgroundColor: Colors.gradient2,
     flexDirection: "row",
     display: "flex",
     alignItems: "center",

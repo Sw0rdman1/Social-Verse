@@ -21,6 +21,12 @@ export default function RootNavigation() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+            name="Loading"
+            component={LoadingScreen}
+            options={{ headerShown: false, gestureEnabled: false }}
+          />
+
           {currentUser ? (
             <>
               <Stack.Screen
@@ -33,11 +39,7 @@ export default function RootNavigation() {
                 component={CreatePostScreen}
                 options={{ headerShown: false }}
               />
-              <Stack.Screen
-                name="Loading"
-                component={LoadingScreen}
-                options={{ headerShown: false, gestureEnabled: false }}
-              />
+
             </>
           ) : (
             <>

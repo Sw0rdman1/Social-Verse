@@ -5,19 +5,28 @@ import Colors from '../../../../assets/constants/Colors'
 import UserInformation from '../../../components/myProfile/UserInformation'
 import ProfileActions from '../../../components/myProfile/ProfileActions'
 import FollowerSection from '../../../components/myProfile/FollowerSection'
+import { useAppContext } from '../../../context/AppContext'
 
 const { height } = Dimensions.get('window')
 
 const MyProfileScreen = () => {
-    const [user, setUser] = useState<User>()
+    const { api, currentUser } = useAppContext()
+    if (!currentUser) return null
+
+    const [user, setUser] = useState<User>(currentUser)
+
 
     useEffect(() => {
-        setUser(getCurrentUser())
+        async function fetchUser() {
+            if (!currentUser) return
+
+            const user = await api.users.getProfileInformations(currentUser)
+            setUser(user)
+        }
+
+        fetchUser()
     }, [])
 
-    if (!user) {
-        return null
-    }
 
     return (
         <View style={styles.container}>

@@ -12,8 +12,8 @@ const HomeHeader = () => {
 
     return (
         <LinearGradient
-            colors={[Colors.gradient2, Colors.whiteBg]}
-            style={[styles.titleContainer, { paddingTop: top + 20 }]}
+            colors={[Colors.gradient2, Colors.gradient2TransparentLess, Colors.whiteBg]}
+            style={[styles.titleContainer, { paddingTop: top + 25 }]}
         >
             <Animated.Text
                 style={styles.title}
@@ -35,20 +35,8 @@ const HomeHeader = () => {
 export default HomeHeader
 
 const styles = StyleSheet.create({
-    avatar: {
-        width: 45,
-        height: 45,
-        borderRadius: 50,
-        borderWidth: 1,
-        borderColor: Colors.whiteBg,
-    },
-    title: {
-        color: Colors.whiteBg,
-        fontWeight: "700",
-        fontSize: 40,
-    },
     titleContainer: {
-        height: 320,
+        height: 350,
         width: "100%",
         display: "flex",
         flexDirection: "row",
@@ -58,4 +46,28 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
     },
+
+    title: {
+        color: Colors.whiteBg,
+        fontWeight: "700",
+        fontSize: 42,
+        shadowColor: Colors.black,
+        shadowOpacity: 0.4,
+        shadowRadius: 20,
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+
+    },
+
+    avatar: {
+        width: 45,
+        height: 45,
+        borderRadius: 50,
+        borderWidth: 1,
+        borderColor: Colors.whiteBg,
+    },
+
+
 })

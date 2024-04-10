@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     width: "100%",
     display: "flex",
-    backgroundColor: Colors.gradient2,
   },
   headerContainer: {
     width: "100%",
