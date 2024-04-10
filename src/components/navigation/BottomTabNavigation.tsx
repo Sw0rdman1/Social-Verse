@@ -14,6 +14,7 @@ import SearchNavigation from "../../view/main/search/searchStack";
 import CreatePostScreen from "../../view/main/createPost/CreatePostScreen";
 import MyProfileNavigation from "../../view/main/myProfile/myProfileStack";
 import ChatNavigation from "../../view/main/chat/chatStack";
+import AddNewPostButton from "./AddNewPostButton";
 
 
 interface BottomNavigationProps {
@@ -31,17 +32,18 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
                 headerShown: false,
                 tabBarStyle:
                     isBottomTabVisible ? {
-                        position: "absolute",
-                        bottom: 35,
-                        backgroundColor: Colors.black,
-                        height: 60,
+                        width: "70%",
+                        backgroundColor: Colors.white,
+                        height: 65,
                         paddingBottom: 0,
                         marginHorizontal: 15,
-                        borderRadius: 15,
+                        borderRadius: 35,
                         shadowColor: Colors.black,
                         shadowOffset: { width: 0, height: 5 },
-                        shadowOpacity: 0.6,
+                        shadowOpacity: 0.65,
                         shadowRadius: 3,
+                        position: "absolute",
+                        bottom: 40,
                     } : {
                         display: "none"
                     }
@@ -86,28 +88,7 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
                     },
                 }}
             />
-            <Tab.Group>
-                <Tab.Screen
-                    name="NewPostTab"
-                    component={CreatePostScreen}
 
-                    options={{
-                        tabBarIcon: ({ focused }) => {
-                            return (
-                                <TabContainer focused={focused} addPost>
-                                    <Ionicons
-                                        name="ios-add-sharp"
-                                        size={32}
-                                        style={{ fontWeight: "800" }}
-                                        color={Colors.whiteBg}
-                                    />
-                                </TabContainer>
-                            );
-                        },
-                        tabBarStyle: { display: "none" }
-                    }}
-                />
-            </Tab.Group>
             <Tab.Screen
                 name="ChatTab"
                 children={() => (

@@ -14,14 +14,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
 
   return (
-    <Animated.View style={{ flex: 1, backgroundColor: Colors.whiteBg }} sharedTransitionTag="container">
+    <Animated.View style={{ flex: 1, backgroundColor: Colors.whiteBg, paddingBottom: 100 }} sharedTransitionTag="container">
       <HomeHeader />
       <Animated.View
         style={styles.formContainer}
         entering={FadeIn.delay(300).duration(500)}
       >
         <TestPostList navigation={navigation} />
-        <View style={{ height: 120 }} />
       </Animated.View>
     </Animated.View>
   );
