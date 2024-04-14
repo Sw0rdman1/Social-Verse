@@ -10,7 +10,7 @@ const { height } = Dimensions.get("window");
 const Button = ({ onPress }: any) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
-            <Ionicons name="send" size={24} color="black" />
+            <Ionicons name="send" size={24} color={Colors.gradient2} />
         </TouchableOpacity>
     )
 }
@@ -70,20 +70,20 @@ const styles = StyleSheet.create({
 
     },
     input: {
-        backgroundColor: Colors.whiteBg,
-        padding: 15,
+        backgroundColor: Colors.whiteSmoke,
+        padding: 18,
         borderRadius: 15,
         flex: 1,
         marginRight: 5,
-        fontSize: 16,
+        fontSize: 18,
     },
     buttonContainer: {
-        backgroundColor: Colors.gradient2TransparentLess,
+        backgroundColor: Colors.gradient2Transparent,
         padding: 10,
         borderRadius: 15,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 45,
-        width: 45,
+        height: 54,
+        width: 54,
     }
 })

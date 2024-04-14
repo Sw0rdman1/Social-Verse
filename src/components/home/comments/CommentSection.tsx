@@ -14,8 +14,9 @@ const { height } = Dimensions.get("window");
 
 const NoComments: React.FC = () => {
     return (
-        <View>
-            <Text>No comments yet</Text>
+        <View style={styles.noCommentContainer}>
+            <Text style={styles.noCommentText}>No comments yet 😔</Text>
+            <Text style={styles.noCommentText}>Be the first to comment!</Text>
         </View>
     )
 }
@@ -52,8 +53,21 @@ export default CommentSection
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: Colors.grayTransparent,
+        backgroundColor: Colors.whiteBg,
         borderRadius: 20,
         marginHorizontal: 5,
     },
+    noCommentContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 10,
+        height: 270,
+        gap: 5,
+    },
+    noCommentText: {
+        fontSize: 18,
+        color: Colors.grayDark,
+        marginLeft: 5,
+    }
+
 })
