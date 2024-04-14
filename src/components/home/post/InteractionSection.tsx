@@ -1,9 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import Colors from '../../../../assets/constants/Colors';
 import { Post } from '../../../models/Post';
+import { useAppContext } from '../../../context/AppContext';
 
 
 const ICON_SIZE = 22;
@@ -15,8 +16,32 @@ interface InteractionSectionProps {
 
 const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
 
-    const [isLiked, setIsLiked] = useState(post.liked);
-    const [isBookmarked, setIsBookmarked] = useState(post.bookmarked);
+    const [isLiked, setIsLiked] = useState(false);
+    const [isBookmarked, setIsBookmarked] = useState(false);
+    const { api, currentUser } = useAppContext();
+
+    useEffect(() => {
+        async function fetchData() {
+            if (!currentUser) return;
+            const numberOfLikes = await api.likes.getLikesForPost(post.id);
+            post.numberOfLikes = numberOfLikes;
+
+            console.log(numberOfLikes);
+
+
+
+            const numberOfBookmarks = await api.likes.getLikesForPost(post.id);
+            post.numberOfBookmarks = numberOfBookmarks;
+
+            const isPostLIked = await api.likes.isPostLikedByUser(post.id, currentUser.id);
+            setIsLiked(isPostLIked);
+
+            const isPostBookmarked = await api.likes.isPostLikedByUser(post.id, currentUser.id);
+            setIsBookmarked(isPostBookmarked);
+        }
+
+        fetchData();
+    }, [])
 
     return (
         <View style={styles.container}>

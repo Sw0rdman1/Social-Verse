@@ -29,6 +29,7 @@ const PostScreen = ({ route, navigation }: any) => {
   };
 
   useEffect(() => {
+
     setBottomTabVisible(false);
     if (previousPage === "Search" || previousPage === "Home") {
       setEnableNavigation(true);

@@ -13,7 +13,7 @@ export class PostController {
         this.global = global;
     }
 
-    public async getPosts(userID: string, page = 1, pageSize = 10): Promise<Post[]> {
+    public async getPosts(userID: number, page = 1, pageSize = 10): Promise<Post[]> {
         try {
             let { data, error } = await this.supabase
                 .from('posts')
@@ -40,8 +40,7 @@ export class PostController {
         }
     }
 
-    // Get a single post by ID
-    public async getPostById(id: number, userID: string): Promise<Post | null> {
+    public async getPostById(id: number, userID: number): Promise<Post | null> {
         try {
             let { data, error } = await this.supabase
                 .from('posts')
@@ -61,6 +60,8 @@ export class PostController {
             let post = data as Post;
             post.numberOfLikes = await this.global.likes.getLikesForPost(id);
             post.liked = await this.global.likes.isPostLikedByUser(id, userID);
+
+            console.log('Post:', post);
 
             return post;
 
