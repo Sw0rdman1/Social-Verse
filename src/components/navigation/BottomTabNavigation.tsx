@@ -39,7 +39,7 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
                         marginHorizontal: 15,
                         borderRadius: 35,
                         shadowColor: Colors.black,
-                        shadowOffset: { width: 0, height: 5 },
+                        shadowOffset: { width: 0, height: 2 },
                         shadowOpacity: 0.65,
                         shadowRadius: 3,
                         position: "absolute",

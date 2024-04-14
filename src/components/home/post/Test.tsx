@@ -61,7 +61,7 @@ export default function TestPostList({ navigation }: any) {
                                 height: 0,
                             },
                             padding: 2,
-                            backgroundColor: 'white',
+                            backgroundColor: Colors.white,
                         }}>
                             <TouchableOpacity
                                 activeOpacity={0.95}
@@ -115,7 +115,7 @@ export default function TestPostList({ navigation }: any) {
                                     display: 'flex',
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    backgroundColor: 'white',
+                                    backgroundColor: Colors.white,
                                     shadowColor: Colors.black,
                                     shadowOpacity: 0.2,
                                     shadowRadius: 20,
@@ -133,13 +133,13 @@ export default function TestPostList({ navigation }: any) {
                                         height: 60,
                                         borderRadius: 60,
                                         borderWidth: 6,
-                                        borderColor: 'white',
+                                        borderColor: Colors.white,
                                         marginRight: 5,
                                     }}
                                 />
                                 <View style={{ gap: 2 }}>
-                                    <Text style={{ fontSize: 18, fontWeight: '600', color: 'black' }}>{item.author.displayName}</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: '600', color: 'gray' }}> - "{item.caption}"</Text>
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: Colors.black }}>{item.author.displayName}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: '600', color: Colors.gray }}> - "{item.caption}"</Text>
                                 </View>
 
                             </View>
