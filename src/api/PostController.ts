@@ -28,11 +28,6 @@ export class PostController {
 
             let posts = snakeToCamel(data);
 
-            for (let post of posts) {
-                post.numberOfLikes = await this.global.likes.getLikesForPost(post.id);
-                post.liked = await this.global.likes.isPostLikedByUser(post.id, userID);
-            }
-
             return posts;
         } catch (error) {
             console.error('Error fetching posts:', (error as Error).message);

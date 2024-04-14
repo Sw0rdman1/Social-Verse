@@ -17,45 +17,75 @@ interface InteractionSectionProps {
 const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
 
     const [isLiked, setIsLiked] = useState(false);
+    const [numberOfLikes, setNumberOfLikes] = useState(0);
+
     const [isBookmarked, setIsBookmarked] = useState(false);
+    const [numberOfBookmarks, setNumberOfBookmarks] = useState(0);
+
     const { api, currentUser } = useAppContext();
 
-    useEffect(() => {
-        async function fetchData() {
-            if (!currentUser) return;
-            const numberOfLikes = await api.likes.getLikesForPost(post.id);
-            post.numberOfLikes = numberOfLikes;
+    const handleLike = async () => {
+        if (!currentUser) return;
 
-            console.log(numberOfLikes);
+        if (isLiked) {
+            await api.likes.unlikePost(post.id, currentUser.id);
+            setNumberOfLikes(numberOfLikes - 1);
+        } else {
+            await api.likes.likePost(post.id, currentUser.id);
+            setNumberOfLikes(numberOfLikes + 1);
+        }
+        setIsLiked(!isLiked);
+    }
 
+    const handleBookmark = async () => {
+        if (!currentUser) return;
 
-
-            const numberOfBookmarks = await api.likes.getLikesForPost(post.id);
-            post.numberOfBookmarks = numberOfBookmarks;
-
-            const isPostLIked = await api.likes.isPostLikedByUser(post.id, currentUser.id);
-            setIsLiked(isPostLIked);
-
-            const isPostBookmarked = await api.likes.isPostLikedByUser(post.id, currentUser.id);
-            setIsBookmarked(isPostBookmarked);
+        if (isBookmarked) {
+            await api.bookmarks.unbookmarkPost(post.id, currentUser.id);
+            setNumberOfBookmarks(numberOfBookmarks - 1);
+        } else {
+            await api.bookmarks.bookmarkPost(post.id, currentUser.id);
+            setNumberOfBookmarks(numberOfBookmarks + 1);
         }
 
+        setIsBookmarked(!isBookmarked);
+
+    }
+
+
+    async function fetchData() {
+        if (!currentUser) return;
+
+        const numberOfLikes = await api.likes.getLikesForPost(post.id);
+        setNumberOfLikes(numberOfLikes);
+
+        console.log(numberOfLikes);
+
+        const numberOfBookmarks = await api.bookmarks.getBookmarksForPost(post.id);
+        setNumberOfBookmarks(numberOfBookmarks);
+
+        const isPostLIked = await api.likes.isPostLikedByUser(post.id, currentUser.id);
+        setIsLiked(isPostLIked);
+
+        const isPostBookmarked = await api.bookmarks.isPostBookmarkedByUser(post.id, currentUser.id);
+        setIsBookmarked(isPostBookmarked);
+    }
+
+    useEffect(() => {
         fetchData();
     }, [])
+
 
     return (
         <View style={styles.container}>
             <TouchableOpacity
-                onPress={() => {
-                    setIsLiked(!isLiked);
-                    post.numberOfLikes += isLiked ? -1 : 1;
-                }}
+                onPress={handleLike}
                 style={[styles.interactionContainer,
                 {
                     backgroundColor: isLiked ? Colors.likeColorTransparent : "whitesmoke",
                 }]}
             >
-                <Text style={styles.interactionText}>{post.numberOfLikes}</Text>
+                <Text style={styles.interactionText}>{numberOfLikes}</Text>
                 {isLiked ?
                     <AntDesign name="heart" size={ICON_SIZE} color={Colors.likeColor} /> :
                     <AntDesign name="hearto" size={ICON_SIZE} color={Colors.black} />
@@ -63,17 +93,13 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => {
-                    setIsBookmarked(!isBookmarked);
-                    post.numberOfBookmarks += isBookmarked ? -1 : 1;
-
-                }}
+                onPress={handleBookmark}
                 style={[styles.interactionContainer,
                 {
                     backgroundColor: isBookmarked ? Colors.gradient2Transparent : "whitesmoke",
                 }]}
             >
-                <Text style={styles.interactionText}>{post.numberOfBookmarks}</Text>
+                <Text style={styles.interactionText}>{numberOfBookmarks}</Text>
 
                 {isBookmarked ?
                     <FontAwesome name="bookmark" size={ICON_SIZE} color={Colors.gradient2} /> :
