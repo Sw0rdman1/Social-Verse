@@ -8,7 +8,7 @@ export interface Post {
   caption: string;
   imageUrl: string;
   author: User;
-  createdAt: Date | string;
+  createdAt: Date;
   numberOfLikes: number;
   numberOfComments: number;
   numberOfBookmarks: number;

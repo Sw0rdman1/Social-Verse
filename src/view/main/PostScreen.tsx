@@ -8,11 +8,11 @@ import CommentSection from "../../components/home/comments/CommentSection";
 import { useEffect, useRef, useState } from "react";
 import { useBottomTab } from "../../context/BottomBarContext";
 import { User } from "../../models/User";
+import AuthorInfo from "../../components/home/post/AuthorInfo";
 
 const PostScreen = ({ route, navigation }: any) => {
   const { post, previousPage } = route.params;
   const scrolViewRef = useRef(null);
-  const [commentsDisplayed, setCommentsDisplayed] = useState(false);
   const [enableNavigation, setEnableNavigation] = useState(false);
 
   const { setBottomTabVisible } = useBottomTab();
@@ -41,20 +41,20 @@ const PostScreen = ({ route, navigation }: any) => {
         post={post}
         goBackHandler={goBackHandler}
         scrolViewRef={scrolViewRef}
-        openUserProfilHandler={openUserProfilHandler}
-        enableNavigation={enableNavigation}
       >
         <View style={styles.infoContainer}>
+          <AuthorInfo
+            author={post.author}
+            openUserProfilHandler={openUserProfilHandler}
+            enableNavigation={enableNavigation}
+          />
           <PostDescription post={post} />
           <InteractionSection
             post={post}
-            setCommentsDisplayed={setCommentsDisplayed}
-            commentsDisplayed={commentsDisplayed}
           />
           <CommentSection
             post={post}
             scrolViewRef={scrolViewRef}
-            commentsDisplayed={commentsDisplayed}
           />
         </View>
       </PostImage>
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    backgroundColor: Colors.whiteBg,
     paddingBottom: 30,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
   },
 });

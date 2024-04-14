@@ -23,10 +23,9 @@ const NoComments: React.FC = () => {
 interface CommentSectionProps {
     post: Post;
     scrolViewRef: any;
-    commentsDisplayed: boolean;
 }
 
-const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef, commentsDisplayed }) => {
+const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) => {
     const [comments, setComments] = useState<CommentEntity[]>([]);
 
     useEffect(() => {
@@ -35,18 +34,15 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef, com
 
     return (
         <View style={styles.mainContainer}>
-
-            {commentsDisplayed &&
-                <View style={{ marginHorizontal: 5 }}>
-                    <CommentInput postID={post.id} scrolViewRef={scrolViewRef} />
-                    {comments.length ?
-                        comments.map((comment, index) =>
-                            <Comment comment={comment} key={index} />
-                        )
-                        : <NoComments />
-                    }
-                </View>
-            }
+            <View style={{ marginHorizontal: 5 }}>
+                <CommentInput postID={post.id} scrolViewRef={scrolViewRef} />
+                {comments.length ?
+                    comments.map((comment, index) =>
+                        <Comment comment={comment} key={index} />
+                    )
+                    : <NoComments />
+                }
+            </View>
         </View>
     )
 }

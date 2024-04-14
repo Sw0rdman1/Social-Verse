@@ -182,7 +182,6 @@ const PostsList = ({ navigation }: any) => {
                     onPress={() => {
                       if (initialPosts[index].createdAt instanceof Date) {
                         const date = moment(initialPosts[index].createdAt).fromNow();
-                        initialPosts[index].createdAt = date;
                       }
                       navigation.navigate("Post", {
                         post: initialPosts[index],

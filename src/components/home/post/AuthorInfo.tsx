@@ -62,10 +62,12 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderBottomColor: "#ccc",
     borderBottomWidth: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.whiteBg,
     borderTopEndRadius: 40,
     borderTopStartRadius: 40,
     height: 80,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
   },
   name: {
     fontSize: 19,

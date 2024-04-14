@@ -11,11 +11,9 @@ const ICON_SIZE = 22;
 
 interface InteractionSectionProps {
     post: Post;
-    setCommentsDisplayed: (value: boolean) => void;
-    commentsDisplayed: boolean;
 }
 
-const InteractionSection: React.FC<InteractionSectionProps> = ({ post, setCommentsDisplayed, commentsDisplayed }) => {
+const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
 
     const [isLiked, setIsLiked] = useState(post.liked);
     const [isBookmarked, setIsBookmarked] = useState(post.bookmarked);
@@ -38,25 +36,7 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post, setCommen
                     <AntDesign name="hearto" size={ICON_SIZE} color={Colors.black} />
                 }
             </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => {
-                    setCommentsDisplayed(!commentsDisplayed);
-                }}
-                style={[styles.interactionContainer,
-                {
-                    height: commentsDisplayed ? 55 : 45,
-                    paddingTop: commentsDisplayed ? 0 : 10,
-                    borderBottomLeftRadius: commentsDisplayed ? 0 : 10,
-                    borderBottomRightRadius: commentsDisplayed ? 0 : 10,
-                    backgroundColor: commentsDisplayed ? Colors.grayTransparent : "whitesmoke",
-                }]}
-            >
-                {!commentsDisplayed && <Text style={styles.interactionText}>{post.numberOfComments}</Text>}
-                {commentsDisplayed ?
-                    <AntDesign name="close" size={ICON_SIZE} color={Colors.black} /> :
-                    <FontAwesome name="comments" size={ICON_SIZE} color={Colors.black} />
-                }
-            </TouchableOpacity>
+
             <TouchableOpacity
                 onPress={() => {
                     setIsBookmarked(!isBookmarked);

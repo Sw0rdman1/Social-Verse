@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Post } from '../../../models/Post';
-import moment from 'moment';
+import moment from "moment";
 import Colors from '../../../../assets/constants/Colors';
+import { faker } from "@faker-js/faker";
 
 interface PostDescriptionProps {
     post: Post;
@@ -10,6 +11,7 @@ interface PostDescriptionProps {
 
 const PostDescription: React.FC<PostDescriptionProps> = ({ post }) => {
 
+    const dateFormatted = new Date(post.createdAt);
 
     return (
         <View style={styles.container}>
@@ -17,7 +19,7 @@ const PostDescription: React.FC<PostDescriptionProps> = ({ post }) => {
                 {post.caption}
             </Text>
             <Text style={styles.date}>
-                - {String(post.createdAt)}
+                - {moment(dateFormatted).fromNow()}
             </Text>
         </View>
     );
@@ -27,8 +29,7 @@ const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
         paddingHorizontal: 15,
-        gap: 10,
-        height: 130,
+        gap: 15,
     },
     text: {
         fontSize: 17,
@@ -37,8 +38,7 @@ const styles = StyleSheet.create({
     date: {
         fontSize: 14,
         fontWeight: '400',
-        color: Colors.gray,
-        marginBottom: 10,
+        color: Colors.grayDark,
     },
 });
 

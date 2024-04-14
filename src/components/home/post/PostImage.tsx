@@ -143,8 +143,6 @@ interface ScrollViewScreenProps {
   post: Post;
   goBackHandler: () => void;
   scrolViewRef: any;
-  openUserProfilHandler: (author: User) => void;
-  enableNavigation?: boolean;
 }
 
 const PostImage: React.FC<ScrollViewScreenProps> = ({
@@ -152,8 +150,6 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
   post,
   goBackHandler,
   scrolViewRef,
-  openUserProfilHandler,
-  enableNavigation
 }) => {
   const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
 
@@ -170,18 +166,13 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
         post={post}
         goBackHandler={goBackHandler}
       />
-      <Animated.View entering={FadeInDown.delay(600).duration(500)}>
-        <AuthorInfo
-          author={post.author}
-          openUserProfilHandler={openUserProfilHandler}
-          enableNavigation={enableNavigation}
-        />
-      </Animated.View>
       <ScrollView
         ref={scrolViewRef}
         bounces={false}
         style={{
           backgroundColor: Colors.whiteBg,
+          borderTopLeftRadius: BORDER_RADIUS,
+          borderTopRightRadius: BORDER_RADIUS,
           paddingTop: 0,
         }}
         scrollEventThrottle={5}
@@ -199,7 +190,7 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
         >
           <RNAnimated.View
             style={{
-              height: animatedPaddingTop,
+              height: animatedPaddingTop
             }}
           />
           {children}
