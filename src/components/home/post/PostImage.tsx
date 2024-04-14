@@ -19,7 +19,7 @@ import { User } from "../../../models/User";
 
 const { height } = Dimensions.get("window");
 
-const Header_Max_Height = height - 230;
+const Header_Max_Height = height - 170;
 const Header_Min_Height = 220;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 const BORDER_RADIUS = 40;
@@ -122,7 +122,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
         />
 
 
-        {/* <RNAnimated.View
+        <RNAnimated.View
           style={{
             opacity: animatedOpacity,
             position: "absolute",
@@ -132,7 +132,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
           <Animated.View entering={FadeInDown.delay(700).duration(500)}>
             <Swipe />
           </Animated.View>
-        </RNAnimated.View> */}
+        </RNAnimated.View>
       </View>
     </RNAnimated.View>
   );
@@ -175,7 +175,7 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
           borderTopRightRadius: BORDER_RADIUS,
           paddingTop: 0,
         }}
-        scrollEventThrottle={5}
+        scrollEventThrottle={1}
         showsVerticalScrollIndicator={false}
         onScroll={RNAnimated.event(
           [{ nativeEvent: { contentOffset: { y: scrollOffsetY } } }],
