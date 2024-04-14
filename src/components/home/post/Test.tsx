@@ -73,10 +73,7 @@ export default function TestPostList({ navigation }: any) {
                                     borderRadius: 16,
                                 }}
                                 onPress={() => {
-                                    if (initialPosts[index].createdAt instanceof Date) {
-                                        const date = moment(item.createdAt).fromNow();
-                                        initialPosts[index].createdAt = date;
-                                    }
+
                                     navigation.navigate("Post", {
                                         post: initialPosts[index],
                                         previousPage: "Home",
