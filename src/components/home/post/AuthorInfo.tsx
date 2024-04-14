@@ -60,11 +60,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     gap: 10,
     backgroundColor: Colors.whiteBg,
-    borderTopEndRadius: 40,
     borderTopStartRadius: 40,
     height: 80,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
   },
   name: {
     fontSize: 19,

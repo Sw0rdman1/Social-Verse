@@ -29,14 +29,15 @@ const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
         paddingHorizontal: 15,
-        gap: 15,
+        gap: 20,
+        marginBottom: 10,
     },
     text: {
-        fontSize: 17,
+        fontSize: 19,
         fontWeight: '500',
     },
     date: {
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: '400',
         color: Colors.grayDark,
     },

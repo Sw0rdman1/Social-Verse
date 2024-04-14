@@ -19,7 +19,7 @@ import { User } from "../../../models/User";
 
 const { height } = Dimensions.get("window");
 
-const Header_Max_Height = height - 170;
+const Header_Max_Height = height - 180;
 const Header_Min_Height = 220;
 const Scroll_Distance = Header_Max_Height - Header_Min_Height;
 const BORDER_RADIUS = 40;
@@ -172,7 +172,6 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
         style={{
           backgroundColor: Colors.whiteBg,
           borderTopLeftRadius: BORDER_RADIUS,
-          borderTopRightRadius: BORDER_RADIUS,
           paddingTop: 0,
         }}
         scrollEventThrottle={1}
@@ -226,6 +225,5 @@ const styles = StyleSheet.create({
   },
   borderRadius: {
     borderTopLeftRadius: BORDER_RADIUS,
-    borderTopRightRadius: BORDER_RADIUS,
   },
 });
