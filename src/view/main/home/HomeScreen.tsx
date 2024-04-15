@@ -2,8 +2,8 @@ import { StyleSheet, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Colors from "../../../../assets/constants/Colors";
 import { StackNavigationProp } from "@react-navigation/stack";
-import TestPostList from "../../../components/home/post/Test";
 import HomeHeader from "../../../components/home/HomeHeader";
+import PostFeed from "../../../components/home/post/PostFeed";
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<any, any>;
@@ -12,7 +12,6 @@ interface HomeScreenProps {
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
-
   return (
     <Animated.View style={{ flex: 1, backgroundColor: Colors.whiteBg, paddingBottom: 100 }} sharedTransitionTag="container">
       <HomeHeader />
@@ -20,7 +19,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         style={styles.formContainer}
         entering={FadeIn.delay(300).duration(500)}
       >
-        <TestPostList navigation={navigation} />
+        <PostFeed navigation={navigation} />
       </Animated.View>
     </Animated.View>
   );

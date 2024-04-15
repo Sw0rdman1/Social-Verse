@@ -3,32 +3,28 @@ import {
     Animated as RNAnimated,
     Dimensions,
     Image,
-    FlatList,
     Text,
     View,
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 import { useAppContext } from '../../../context/AppContext';
 import Colors from '../../../../assets/constants/Colors';
 import Animated from 'react-native-reanimated';
-import moment from 'moment';
+import { sortByCreatedAt } from '../../../utils/time';
 
 const { width } = Dimensions.get('screen');
 const ITEM_WIDTH = width * 0.87;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.45;
 
 
-export default function TestPostList({ navigation }: any) {
+export default function PostFeed({ navigation }: any) {
     const scrollX = React.useRef(new RNAnimated.Value(0)).current;
     const { initialPosts } = useAppContext();
 
-
-
     return (
         <RNAnimated.FlatList
-            data={initialPosts}
+            data={sortByCreatedAt(initialPosts)}
             keyExtractor={(item) => item.id.toString()}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -51,18 +47,7 @@ export default function TestPostList({ navigation }: any) {
 
                 return (
                     <View style={{ width, justifyContent: "center", alignItems: "center" }}>
-                        <View style={{
-                            borderRadius: 18,
-                            shadowColor: Colors.black,
-                            shadowOpacity: 0.2,
-                            shadowRadius: 20,
-                            shadowOffset: {
-                                width: 0,
-                                height: 0,
-                            },
-                            padding: 2,
-                            backgroundColor: Colors.white,
-                        }}>
+                        <View style={styles.mainContainer}>
                             <TouchableOpacity
                                 activeOpacity={0.95}
                                 style={{
@@ -140,10 +125,7 @@ export default function TestPostList({ navigation }: any) {
                                 </View>
 
                             </View>
-
                         </View>
-
-
                     </View>
                 )
             }}
@@ -158,4 +140,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    mainContainer: {
+        borderRadius: 18,
+        shadowColor: Colors.black,
+        shadowOpacity: 0.2,
+        shadowRadius: 20,
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        padding: 2,
+        backgroundColor: Colors.white,
+    }
 });
