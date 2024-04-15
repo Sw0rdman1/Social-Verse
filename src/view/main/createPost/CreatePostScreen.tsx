@@ -56,7 +56,7 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
                             </TouchableOpacity>
                             <Text style={styles.title}>Create New Post</Text>
                         </View>
-                        <MyImagePicker image={image} setImage={setImage} />
+                        <MyImagePicker image={image} setImage={setImage} setImageUrl={setImageUrl} />
                         <CaptionInput caption={caption} setCaption={setCaption} />
                         <CategorySelect />
                         <CreatePostButtons
