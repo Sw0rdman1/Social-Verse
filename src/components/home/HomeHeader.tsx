@@ -25,7 +25,7 @@ const HomeHeader = () => {
                 entering={
                     FadeIn.delay(300).duration(500)
                 }
-                source={{ uri: currentUser?.profilePicture }}
+                source={{ uri: currentUser.profilePicture }}
                 style={styles.avatar}
             />
         </LinearGradient>

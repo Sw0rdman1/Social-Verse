@@ -25,7 +25,6 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
     const { api, currentUser } = useAppContext();
 
     const handleLike = async () => {
-        if (!currentUser) return;
 
         if (isLiked) {
             await api.likes.unlikePost(post.id, currentUser.id);
@@ -38,7 +37,6 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
     }
 
     const handleBookmark = async () => {
-        if (!currentUser) return;
 
         if (isBookmarked) {
             await api.bookmarks.unbookmarkPost(post.id, currentUser.id);
@@ -54,7 +52,6 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
 
 
     async function fetchData() {
-        if (!currentUser) return;
 
         const numberOfLikes = await api.likes.getLikesForPost(post.id);
         setNumberOfLikes(numberOfLikes);

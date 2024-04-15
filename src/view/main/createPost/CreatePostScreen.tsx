@@ -23,6 +23,7 @@ interface CreatePostScreenProps {
 const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
     const { top } = useSafeAreaInsets()
     const [image, setImage] = useState<ImagePickerAsset | null>(null)
+    const [imageUrl, setImageUrl] = useState<string>("")
     const [caption, setCaption] = useState("")
 
     const { api, currentUser } = useAppContext()
@@ -35,7 +36,7 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
     const clickPostHandler = async () => {
         if (!image || !caption || !currentUser) return
 
-        await api.posts.createPost(caption, image, [1], currentUser.id)
+        await api.posts.createPost(caption, imageUrl, currentUser.id)
         setImage(null)
         setCaption("")
         navigation.goBack()

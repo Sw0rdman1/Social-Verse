@@ -8,7 +8,7 @@ import { Post } from '../models/Post';
 
 interface AppContextProps {
     api: GlobalController;
-    currentUser: User | null;
+    currentUser: User;
     initialPosts: Post[];
     loading: boolean;
 }
@@ -21,7 +21,7 @@ interface AppProviderProps {
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const api = GlobalController.getInstance();
-    const [currentUser, setCurrentUser] = useState<User | null>(null);
+    const [currentUser, setCurrentUser] = useState<User>({} as User);
     const [initialPosts, setInitialPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const { user, initialized } = useAuth();
@@ -41,7 +41,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
             }
             const currentUser = await api.users.getCurrentUserInformations(user.id);
             setCurrentUser(currentUser);
-            const posts = await api.posts.getPosts(user.id);
+            const posts = await api.posts.getPosts();
             setInitialPosts(posts);
             setLoading(false);
         };

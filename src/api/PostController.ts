@@ -18,7 +18,7 @@ export class PostController {
         this.global = global;
     }
 
-    public async getPosts(userID: number, page = 1, pageSize = 10): Promise<Post[]> {
+    public async getPosts(page = 1, pageSize = 10): Promise<Post[]> {
         try {
             let { data, error } = await this.supabase
                 .from('posts')
@@ -72,30 +72,15 @@ export class PostController {
     }
 
     // Create a new post
-    public async createPost(caption: string, image: ImagePickerAsset, categories: number[], authorID: number): Promise<void> {
+    public async createPost(caption: string, imageURL: string, authorID: number): Promise<void> {
         try {
-
-            const base64 = await FileSystem.readAsStringAsync(image.uri, { encoding: 'base64' });
-            const filePath = `${authorID}/${new Date().getTime()}.${image.type === 'image' ? 'png' : 'mp4'}`;
-            const contentType = image.type === 'image' ? 'image/png' : 'video/mp4';
-
-            const { data: uploadedImage } = await this.supabase.storage
-                .from('posts')
-                .upload(filePath, decode(base64), { contentType });
-
-
-            const { data: imageURL } = await this.supabase
-                .storage
-                .from('posts')
-                .createSignedUrl(uploadedImage?.path as string, EXPIRES_IN);
-
 
             let { data, error } = await this.supabase
                 .from('posts')
                 .insert({
                     created_at: new Date(),
                     caption: caption,
-                    imageUrl: imageURL?.signedUrl,
+                    imageUrl: imageURL,
                     author: authorID,
                 });
 

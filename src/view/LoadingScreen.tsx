@@ -16,7 +16,7 @@ const LoadingScreen = ({ navigation }: any) => {
   useEffect(() => {
     if (loading) return;
 
-    if (!currentUser) {
+    if (currentUser.displayName === "") {
       setFontSize(60);
       navigation.navigate("Welcome");
     } else {

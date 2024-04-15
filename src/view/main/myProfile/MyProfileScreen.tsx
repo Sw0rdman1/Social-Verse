@@ -11,14 +11,12 @@ const { height } = Dimensions.get('window')
 
 const MyProfileScreen = () => {
     const { api, currentUser } = useAppContext()
-    if (!currentUser) return null
 
     const [user, setUser] = useState<User>(currentUser)
 
 
     useEffect(() => {
         async function fetchUser() {
-            if (!currentUser) return
 
             const user = await api.users.getProfileInformations(currentUser)
             setUser(user)

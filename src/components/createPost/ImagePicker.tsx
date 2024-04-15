@@ -3,6 +3,7 @@ import { Image, View, Platform, Button, StyleSheet, TouchableOpacity, Text } fro
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from '../../../assets/constants/Colors';
+import { useAppContext } from '../../context/AppContext';
 
 interface ImagePickerProps {
     image: ImagePicker.ImagePickerAsset | null;
@@ -11,8 +12,9 @@ interface ImagePickerProps {
 
 const ImagePickerGallery: React.FC<ImagePickerProps> = ({ image, setImage }) => {
 
+    const { api, currentUser } = useAppContext();
+
     const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             aspect: [4, 3],
@@ -20,6 +22,7 @@ const ImagePickerGallery: React.FC<ImagePickerProps> = ({ image, setImage }) => 
         });
 
         if (!result.canceled) {
+            api.images.uploadImage(result.assets[0], currentUser.id, "posts");
             setImage(result.assets[0]);
         }
     };
