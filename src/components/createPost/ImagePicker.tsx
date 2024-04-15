@@ -5,8 +5,8 @@ import * as ImagePicker from 'expo-image-picker';
 import Colors from '../../../assets/constants/Colors';
 
 interface ImagePickerProps {
-    image: string;
-    setImage: (image: string) => void;
+    image: ImagePicker.ImagePickerAsset | null;
+    setImage: (image: ImagePicker.ImagePickerAsset) => void;
 }
 
 const ImagePickerGallery: React.FC<ImagePickerProps> = ({ image, setImage }) => {
@@ -20,14 +20,14 @@ const ImagePickerGallery: React.FC<ImagePickerProps> = ({ image, setImage }) => 
         });
 
         if (!result.canceled) {
-            setImage(result.assets[0].uri);
+            setImage(result.assets[0]);
         }
     };
 
     return (
         <TouchableOpacity style={styles.button} onPress={pickImage}>
             {image ?
-                <Image source={{ uri: image }} style={styles.image} />
+                <Image source={{ uri: image.uri }} style={styles.image} />
                 : <View style={styles.noPhotoContainer}>
                     <Ionicons name="md-images" size={32} color={Colors.whiteBg} />
                     <Text style={styles.buttonText}>Gallery</Text>

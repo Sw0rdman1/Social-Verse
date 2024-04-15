@@ -2,6 +2,11 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { Post } from "../models/Post";
 import GlobalController from "./GlobalController";
 import { snakeToCamel } from "../utils/caseConverter";
+import { ImagePickerAsset } from "expo-image-picker";
+import * as FileSystem from 'expo-file-system';
+import { decode } from 'base64-arraybuffer';
+
+const EXPIRES_IN = 365 * 24 * 60 * 60;
 
 export class PostController {
 
@@ -67,20 +72,38 @@ export class PostController {
     }
 
     // Create a new post
-    public async createPost(caption: string, image: string, categories: number[], authorID: string): Promise<void> {
+    public async createPost(caption: string, image: ImagePickerAsset, categories: number[], authorID: number): Promise<void> {
         try {
+
+            const base64 = await FileSystem.readAsStringAsync(image.uri, { encoding: 'base64' });
+            const filePath = `${authorID}/${new Date().getTime()}.${image.type === 'image' ? 'png' : 'mp4'}`;
+            const contentType = image.type === 'image' ? 'image/png' : 'video/mp4';
+
+            const { data: uploadedImage } = await this.supabase.storage
+                .from('posts')
+                .upload(filePath, decode(base64), { contentType });
+
+
+            const { data: imageURL } = await this.supabase
+                .storage
+                .from('posts')
+                .createSignedUrl(uploadedImage?.path as string, EXPIRES_IN);
+
+
             let { data, error } = await this.supabase
                 .from('posts')
                 .insert({
+                    created_at: new Date(),
                     caption: caption,
-                    image: image,
-                    categories: categories,
-                    author_id: authorID,
+                    imageUrl: imageURL?.signedUrl,
+                    author: authorID,
                 });
+
 
             if (error) {
                 throw error;
             }
+
 
             console.log('Post created:', data);
 

@@ -11,6 +11,7 @@ import CaptionInput from '../../../components/createPost/CaptionInput'
 import CategorySelect from '../../../components/createPost/CategorySelect'
 import { useAppContext } from '../../../context/AppContext'
 import { Ionicons } from '@expo/vector-icons'
+import { ImagePickerAsset } from 'expo-image-picker'
 
 
 interface CreatePostScreenProps {
@@ -21,23 +22,21 @@ interface CreatePostScreenProps {
 
 const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
     const { top } = useSafeAreaInsets()
-    const [image, setImage] = useState("")
+    const [image, setImage] = useState<ImagePickerAsset | null>(null)
     const [caption, setCaption] = useState("")
 
-    const { api } = useAppContext()
+    const { api, currentUser } = useAppContext()
 
 
     const goBackHandler = () => {
-        setImage("")
+        setImage(null)
         navigation.goBack()
     }
-    const clickPostHandler = () => {
-        if (!image || !caption) return
+    const clickPostHandler = async () => {
+        if (!image || !caption || !currentUser) return
 
-        console.log("image", image);
-
-        // api.posts.createPost(caption, image, [1], "2")
-        setImage("")
+        await api.posts.createPost(caption, image, [1], currentUser.id)
+        setImage(null)
         setCaption("")
         navigation.goBack()
     }
@@ -48,7 +47,7 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
         <GradientBackground inverted centerItems>
             <View style={styles.container}>
                 <BlurView intensity={100} tint="dark" style={styles.blurContainer}>
-                    {image && <Image source={{ uri: image }} style={styles.image} />}
+                    {image && <Image source={{ uri: image.uri }} style={styles.image} />}
                     <View style={styles.formContainer}>
                         <View style={[styles.titleContainer, { marginTop: top + 10 }]}>
                             <TouchableOpacity style={styles.backButton} onPress={goBackHandler}>
