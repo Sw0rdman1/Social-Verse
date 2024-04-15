@@ -4,50 +4,40 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 
 interface CreatePostButtonsProps {
     clickPostHandler: () => void;
-    clickCancelHandler: () => void;
+    disableButton?: boolean;
 }
 
-const CreatePostButtons: React.FC<CreatePostButtonsProps> = ({ clickPostHandler, clickCancelHandler }) => {
+const CreatePostButtons: React.FC<CreatePostButtonsProps> = ({ clickPostHandler, disableButton }) => {
     return (
-        <View style={styles.buttonsContainer}>
-
-            <Animated.View
-                entering={FadeInDown.delay(200).duration(500)}
-                style={styles.button}
-
-            >
-                <TouchableOpacity style={styles.postButton} onPress={clickPostHandler}>
-                    <Text style={[{ color: Colors.black }, styles.buttonText]}>Post</Text>
-                </TouchableOpacity>
-
-            </Animated.View>
-            <Animated.View
-                entering={FadeInDown.delay(200).duration(500)}
-                style={styles.button}
-
-            >
-                <TouchableOpacity style={styles.cancelButton} onPress={clickCancelHandler}>
-                    <Text style={[{ color: Colors.black }, styles.cancelButtonText]}>Cancel</Text>
-                </TouchableOpacity>
-            </Animated.View>
-        </View>
+        <Animated.View
+            entering={FadeInDown.delay(200).duration(500)}
+            style={styles.button}
+        >
+            <TouchableOpacity disabled={disableButton} style={disableButton ? styles.postButtonDisabled : styles.postButton} onPress={clickPostHandler}>
+                <Text style={[{ color: disableButton ? Colors.whiteBg : Colors.black }, styles.buttonText]}>Post</Text>
+            </TouchableOpacity>
+        </Animated.View>
     )
 }
 
 export default CreatePostButtons
 
 const styles = StyleSheet.create({
-    buttonsContainer: {
+    button: {
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 15,
         width: "95%",
-    },
-    button: {
-        width: "100%",
+        marginTop: 10
     },
     postButton: {
         backgroundColor: Colors.whiteBg,
+        padding: 10,
+        borderRadius: 10,
+        alignItems: 'center',
+        width: "100%"
+    },
+    postButtonDisabled: {
+        backgroundColor: Colors.grayTransparentLess,
         padding: 10,
         borderRadius: 10,
         alignItems: 'center',

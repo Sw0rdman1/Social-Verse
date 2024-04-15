@@ -56,17 +56,18 @@ export default CategorySelect
 
 const styles = StyleSheet.create({
     container: {
-        width: "95%",
+        width: "100%",
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'left',
+        marginTop: 10,
     },
     titleText: {
         color: Colors.whiteBg,
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: '700',
         marginBottom: 15,
-        width: "95%"
+        width: "92.5%"
     },
 
     option: {
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     },
     category: {
         padding: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 15,
         borderWidth: 1,
         borderRadius: 25,
         marginRight: 10,
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     categoryText: {
         color: Colors.whiteBg,
         fontWeight: '600',
-        fontSize: 16,
+        fontSize: 15,
     },
 
     selectedCategory: {

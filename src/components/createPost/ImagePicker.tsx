@@ -36,30 +36,6 @@ const ImagePickerGallery: React.FC<ImagePickerProps> = ({ image, setImage }) => 
     );
 }
 
-const ImagePickerCamera: React.FC<ImagePickerProps> = ({ image, setImage }) => {
-
-    const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchCameraAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            aspect: [4, 3],
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
-        }
-    };
-
-    return (
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <TouchableOpacity style={styles.button} onPress={pickImage}>
-                <Ionicons name="md-camera" size={24} color={Colors.whiteBg} />
-                <Text style={styles.buttonText}>Camera</Text>
-            </TouchableOpacity>
-        </View>
-    );
-}
 
 const MyImagePicker = ({ image, setImage }: ImagePickerProps) => {
     return (

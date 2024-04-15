@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import MyImagePicker from '../../../components/createPost/ImagePicker'
 import Colors from '../../../../assets/constants/Colors'
 import { useState } from 'react'
@@ -7,10 +7,11 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { BlurView } from 'expo-blur'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import CreatePostButtons from '../../../components/createPost/CreatePostButtons'
-import { useBottomTab } from '../../../context/BottomBarContext'
 import CaptionInput from '../../../components/createPost/CaptionInput'
-import EnableComments from '../../../components/createPost/EnableComments'
 import CategorySelect from '../../../components/createPost/CategorySelect'
+import { useAppContext } from '../../../context/AppContext'
+import { Ionicons } from '@expo/vector-icons'
+
 
 interface CreatePostScreenProps {
     navigation: StackNavigationProp<any, any>;
@@ -22,20 +23,26 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
     const { top } = useSafeAreaInsets()
     const [image, setImage] = useState("")
     const [caption, setCaption] = useState("")
-    const [enableComments, setEnableComments] = useState(false)
 
-    const { setBottomTabVisible } = useBottomTab()
+    const { api } = useAppContext()
 
-    const clickCancelHandler = () => {
+
+    const goBackHandler = () => {
         setImage("")
-        setBottomTabVisible(true)
+        navigation.goBack()
+    }
+    const clickPostHandler = () => {
+        if (!image || !caption) return
+
+        console.log("image", image);
+
+        // api.posts.createPost(caption, image, [1], "2")
+        setImage("")
+        setCaption("")
         navigation.goBack()
     }
 
-    const clickPostHandler = () => {
-        // setImage("")
-        // navigation.goBack()
-    }
+    const disableButton = !image || !caption
 
     return (
         <GradientBackground inverted centerItems>
@@ -43,14 +50,18 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
                 <BlurView intensity={100} tint="dark" style={styles.blurContainer}>
                     {image && <Image source={{ uri: image }} style={styles.image} />}
                     <View style={styles.formContainer}>
-                        <Text style={[styles.title, { marginTop: top + 10 }]}>Create New Post</Text>
+                        <View style={[styles.titleContainer, { marginTop: top + 10 }]}>
+                            <TouchableOpacity style={styles.backButton} onPress={goBackHandler}>
+                                <Ionicons name="arrow-back" size={30} color={Colors.whiteBg} />
+                            </TouchableOpacity>
+                            <Text style={styles.title}>Create New Post</Text>
+                        </View>
                         <MyImagePicker image={image} setImage={setImage} />
                         <CaptionInput caption={caption} setCaption={setCaption} />
                         <CategorySelect />
-                        <EnableComments enableComments={enableComments} setEnableComments={setEnableComments} />
                         <CreatePostButtons
+                            disableButton={disableButton}
                             clickPostHandler={clickPostHandler}
-                            clickCancelHandler={clickCancelHandler}
                         />
                     </View>
                 </BlurView>
@@ -77,8 +88,8 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 20,
-        paddingHorizontal: 20,
+        gap: 25,
+        paddingHorizontal: 10,
     },
     image: {
         width: "100%",
@@ -88,12 +99,21 @@ const styles = StyleSheet.create({
         left: 0,
         zIndex: -1
     },
+    titleContainer: {
+        width: "100%",
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         color: Colors.whiteBg,
         textTransform: 'uppercase'
     },
+    backButton: {
+        position: 'absolute',
+        left: 10,
+    }
 
 
 })

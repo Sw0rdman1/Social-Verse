@@ -67,7 +67,26 @@ export class PostController {
     }
 
     // Create a new post
-    public async createPost(): Promise<void> {
+    public async createPost(caption: string, image: string, categories: number[], authorID: string): Promise<void> {
+        try {
+            let { data, error } = await this.supabase
+                .from('posts')
+                .insert({
+                    caption: caption,
+                    image: image,
+                    categories: categories,
+                    author_id: authorID,
+                });
+
+            if (error) {
+                throw error;
+            }
+
+            console.log('Post created:', data);
+
+        } catch (error) {
+            console.error('Error creating post:', (error as Error).message);
+        }
 
 
     }
