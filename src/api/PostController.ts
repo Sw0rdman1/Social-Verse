@@ -18,25 +18,37 @@ export class PostController {
         this.global = global;
     }
 
-    public async getPosts(page = 1, pageSize = 10): Promise<Post[]> {
+    public async getPosts(page = 1, pageSize = 3): Promise<{ data: Post[], total: number }> {
         try {
-            let { data, error } = await this.supabase
+            let { data: posts, error } = await this.supabase
                 .from('posts')
                 .select('*, author:users(*)')
-                .range((page - 1) * pageSize, page * pageSize - 1);
+                .range((page - 1) * pageSize, page * pageSize - 1)
+                .order('created_at', { ascending: false });
 
+
+            const { count } = await this.supabase
+                .from('posts')
+                .select('*', { count: 'exact' });
 
             if (error) {
-                console.log('Error fetching posts:', error.message);
+                console.log('Error fetching posts count:', error.message);
                 throw error;
             }
 
-            let posts = snakeToCamel(data);
 
-            return posts;
+            if (!count) {
+                throw new Error('Error fetching posts count');
+            }
+
+            return {
+                data: snakeToCamel(posts),
+                total: count
+            }
+
         } catch (error) {
             console.error('Error fetching posts:', (error as Error).message);
-            return [];
+            return { data: [], total: 0 };
         }
     }
 

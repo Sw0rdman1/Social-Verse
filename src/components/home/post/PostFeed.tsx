@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
     Animated as RNAnimated,
     Dimensions,
-    Image,
     Text,
     View,
     StyleSheet,
@@ -12,6 +11,7 @@ import { useAppContext } from '../../../context/AppContext';
 import Colors from '../../../../assets/constants/Colors';
 import Animated from 'react-native-reanimated';
 import { sortByCreatedAt } from '../../../utils/time';
+import { Image } from 'expo-image';
 
 const { width } = Dimensions.get('screen');
 const ITEM_WIDTH = width * 0.87;
@@ -20,11 +20,30 @@ const ITEM_HEIGHT = ITEM_WIDTH * 1.45;
 
 export default function PostFeed({ navigation }: any) {
     const scrollX = React.useRef(new RNAnimated.Value(0)).current;
-    const { initialPosts } = useAppContext();
+    const { initialPosts, api } = useAppContext();
+    const [posts, setPosts] = React.useState(initialPosts);
+    const totalPosts = initialPosts.total;
+
+    console.log(totalPosts, posts.data.length);
+
+
+    const handleEndReached = async () => {
+        if (totalPosts === posts.data.length) return;
+
+        const currentPage = Math.ceil(posts.data.length / 3);
+        const newPosts = await api.posts.getPosts(currentPage + 1);
+
+        setPosts({
+            data: [...posts.data, ...newPosts.data],
+            total: newPosts.total,
+        });
+    }
 
     return (
         <RNAnimated.FlatList
-            data={sortByCreatedAt(initialPosts)}
+            onEndReached={handleEndReached}
+            onEndReachedThreshold={0.5}
+            data={posts.data}
             keyExtractor={(item) => item.id.toString()}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -45,6 +64,7 @@ export default function PostFeed({ navigation }: any) {
                     outputRange: [-width * 0.7, 0, width * 0.7],
                 });
 
+
                 return (
                     <View style={{ width, justifyContent: "center", alignItems: "center" }}>
                         <View style={styles.mainContainer}>
@@ -60,7 +80,7 @@ export default function PostFeed({ navigation }: any) {
                                 onPress={() => {
 
                                     navigation.navigate("Post", {
-                                        post: initialPosts[index],
+                                        post: initialPosts.data[index],
                                         previousPage: "Home",
                                     });
 

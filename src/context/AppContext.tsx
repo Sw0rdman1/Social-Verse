@@ -5,11 +5,17 @@ import { useAuth } from '../hooks/useAuth';
 import { Post } from '../models/Post';
 
 
+interface PostResponse {
+    data: Post[];
+    total: number;
+
+}
+
 
 interface AppContextProps {
     api: GlobalController;
     currentUser: User;
-    initialPosts: Post[];
+    initialPosts: PostResponse;
     loading: boolean
     refreshPosts: () => Promise<void>;
 }
@@ -23,7 +29,7 @@ interface AppProviderProps {
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const api = GlobalController.getInstance();
     const [currentUser, setCurrentUser] = useState<User>({} as User);
-    const [initialPosts, setInitialPosts] = useState<Post[]>([]);
+    const [initialPosts, setInitialPosts] = useState<PostResponse>({} as PostResponse);
     const [loading, setLoading] = useState<boolean>(true);
     const { user, initialized } = useAuth();
 
