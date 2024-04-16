@@ -10,7 +10,8 @@ interface AppContextProps {
     api: GlobalController;
     currentUser: User;
     initialPosts: Post[];
-    loading: boolean;
+    loading: boolean
+    refreshPosts: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -51,8 +52,13 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
     }, [user, initialized]);
 
+    const refreshPosts = async () => {
+        const posts = await api.posts.getPosts();
+        setInitialPosts(posts);
+    };
+
     return (
-        <AppContext.Provider value={{ api, currentUser, initialPosts, loading }}>
+        <AppContext.Provider value={{ api, currentUser, initialPosts, loading, refreshPosts }}>
             {children}
         </AppContext.Provider>
     );

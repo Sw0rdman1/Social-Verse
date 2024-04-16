@@ -26,7 +26,7 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
     const [imageUrl, setImageUrl] = useState<string>("")
     const [caption, setCaption] = useState("")
 
-    const { api, currentUser } = useAppContext()
+    const { api, currentUser, refreshPosts } = useAppContext()
 
 
     const goBackHandler = () => {
@@ -37,6 +37,8 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
         if (!image || !caption || !currentUser) return
 
         await api.posts.createPost(caption, imageUrl, currentUser.id)
+
+        await refreshPosts()
         setImage(null)
         setCaption("")
         navigation.goBack()
