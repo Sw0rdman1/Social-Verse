@@ -26,24 +26,19 @@ export default Comment
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         width: "100%",
-        paddingVertical: 10,
-        paddingHorizontal: 10,
         flexDirection: "row",
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.whiteBg,
-        gap: 5,
+        gap: 10,
+        padding: 10,
     },
     avatar: {
         alignItems: "center",
-        marginTop: 10,
+        paddingTop: 5,
     },
     textContainer: {
         flex: 1,
-        marginLeft: 5,
         gap: 5,
-        backgroundColor: Colors.whiteBg,
+        backgroundColor: Colors.whiteSmoke,
         padding: 10,
         paddingHorizontal: 15,
         borderRadius: 20,

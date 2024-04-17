@@ -43,11 +43,15 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
         <View style={styles.mainContainer}>
             <View style={{ marginHorizontal: 5 }}>
                 <CommentInput postID={post.id} scrolViewRef={scrolViewRef} refreshData={fetchComments} />
+
                 {comments.length ?
-                    comments.map((comment, index) =>
-                        <Comment comment={comment} key={index} />
-                    )
-                    : <NoComments />
+                    <View style={styles.commentsContainer}>
+                        {comments.map((comment, index) =>
+                            <Comment comment={comment} key={index} />
+                        )}
+                    </View>
+                    :
+                    <NoComments />
                 }
             </View>
         </View>
@@ -63,6 +67,19 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginHorizontal: 5,
     },
+    commentsContainer: {
+        flex: 1,
+        minHeight: 270,
+        backgroundColor: Colors.whiteBg,
+        borderRadius: 20,
+        marginHorizontal: 5,
+        marginTop: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 10,
+
+    },
+
     noCommentContainer: {
         alignItems: 'center',
         justifyContent: 'center',
