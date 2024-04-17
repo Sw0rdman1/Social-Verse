@@ -23,7 +23,7 @@ const lightTheme: ThemeColors = {
 };
 
 const darkTheme: ThemeColors = {
-    backgroundColor: '#000000',
+    backgroundColor: '#252525',
     textColor: '#FFFFFF',
     gray: '#999DA0',
     primaryColor: '#2ec4b6',

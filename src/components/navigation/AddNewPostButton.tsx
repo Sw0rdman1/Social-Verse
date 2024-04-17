@@ -3,9 +3,11 @@ import React from 'react'
 import Colors from '../../../assets/constants/Colors'
 import { Entypo } from '@expo/vector-icons';
 import { useBottomTab } from '../../context/BottomBarContext';
+import { useTheme } from '../../context/ThemeContext';
 
 const AddNewPostButton = ({ navigation }: any) => {
     const { isBottomTabVisible } = useBottomTab();
+    const { theme } = useTheme();
 
     if (!isBottomTabVisible) {
         return null;
@@ -14,10 +16,10 @@ const AddNewPostButton = ({ navigation }: any) => {
     return (
 
         <TouchableOpacity
-            style={styles.addPostStyle}
+            style={[styles.addPostStyle, { backgroundColor: theme.primaryColor, shadowColor: theme.primaryColor }]}
             onPress={() => navigation.navigate("CreatePostScreen")}
         >
-            <Entypo name="plus" size={32} color={Colors.white} />
+            <Entypo name="plus" size={32} color={theme.backgroundColor} />
         </TouchableOpacity>
     )
 }
@@ -31,12 +33,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 60,
-        backgroundColor: Colors.gradient2,
         position: "absolute",
         bottom: 40,
         right: 25,
         zIndex: 100,
-        shadowColor: Colors.gradient2,
         shadowOffset: { width: 2, height: 3 },
         shadowOpacity: 0.65,
         shadowRadius: 3,

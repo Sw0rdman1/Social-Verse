@@ -4,19 +4,21 @@ import Colors from '../../../assets/constants/Colors'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAppContext } from '../../context/AppContext'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useTheme } from '../../context/ThemeContext'
 
 const HomeHeader = () => {
     const { top } = useSafeAreaInsets()
     const { currentUser } = useAppContext()
-
+    const { theme } = useTheme()
 
     return (
         <LinearGradient
-            colors={[Colors.gradient2, Colors.gradient2TransparentLess, Colors.whiteBg]}
+            colors={[theme.primaryColor, theme.primaryColorVariants.highOpacity, theme.backgroundColor]}
             style={[styles.titleContainer, { paddingTop: top + 25 }]}
         >
             <Animated.Text
-                style={styles.title}
+                style=
+                {[styles.title, { shadowColor: theme.textColor }]}
                 sharedTransitionTag="home-screen-title"
             >
                 SocialVerse
@@ -26,7 +28,7 @@ const HomeHeader = () => {
                     FadeIn.delay(300).duration(500)
                 }
                 source={{ uri: currentUser.profilePicture }}
-                style={styles.avatar}
+                style={[styles.avatar, { borderColor: theme.backgroundColor }]}
             />
         </LinearGradient>
     )
@@ -51,7 +53,6 @@ const styles = StyleSheet.create({
         color: Colors.whiteBg,
         fontWeight: "700",
         fontSize: 42,
-        shadowColor: Colors.black,
         shadowOpacity: 0.4,
         shadowRadius: 20,
         shadowOffset: {
@@ -66,7 +67,6 @@ const styles = StyleSheet.create({
         height: 45,
         borderRadius: 50,
         borderWidth: 1,
-        borderColor: Colors.whiteBg,
     },
 
 
