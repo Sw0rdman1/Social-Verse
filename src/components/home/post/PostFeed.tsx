@@ -24,9 +24,6 @@ export default function PostFeed({ navigation }: any) {
     const [posts, setPosts] = React.useState(initialPosts);
     const totalPosts = initialPosts.total;
 
-    console.log(totalPosts, posts.data.length);
-
-
     const handleEndReached = async () => {
         if (totalPosts === posts.data.length) return;
 

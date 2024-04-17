@@ -62,8 +62,7 @@ export class CommentController {
                 throw error;
             }
 
-
-            console.log('Post created:', data);
+            console.log('Comment created:', data);
 
         } catch (error) {
             console.error('Error creating post:', (error as Error).message);

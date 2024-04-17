@@ -36,8 +36,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log('AppProvider', user, initialized);
-
             if (!initialized) {
                 return;
             }

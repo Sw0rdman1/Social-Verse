@@ -38,8 +38,6 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
 
     const fetchComments = async () => {
         const comments = await api.comments.getCommentsForPost(post.id);
-        console.log('Comments:', comments);
-
         setComments(comments);
     }
 

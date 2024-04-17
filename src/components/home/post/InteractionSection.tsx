@@ -56,8 +56,6 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
         const numberOfLikes = await api.likes.getLikesForPost(post.id);
         setNumberOfLikes(numberOfLikes);
 
-        console.log(numberOfLikes);
-
         const numberOfBookmarks = await api.bookmarks.getBookmarksForPost(post.id);
         setNumberOfBookmarks(numberOfBookmarks);
 
