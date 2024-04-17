@@ -1,24 +1,22 @@
 import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { User, getCurrentUser } from '../../../models/User'
 import { useEffect, useState } from 'react'
-import Colors from '../../../../assets/constants/Colors'
 import UserInformation from '../../../components/myProfile/UserInformation'
 import ProfileActions from '../../../components/myProfile/ProfileActions'
 import FollowerSection from '../../../components/myProfile/FollowerSection'
 import { useAppContext } from '../../../context/AppContext'
+import { useTheme } from '../../../context/ThemeContext'
 
 const { height } = Dimensions.get('window')
 
 const MyProfileScreen = () => {
     const { api, currentUser } = useAppContext()
-
     const [user, setUser] = useState<User>(currentUser)
-
+    const { theme } = useTheme()
 
     useEffect(() => {
         async function fetchUser() {
-
-            const user = await api.users.getProfileInformations(currentUser)
+            // const user = await api.users.getProfileInformations(currentUser)
             setUser(user)
         }
 
@@ -27,7 +25,9 @@ const MyProfileScreen = () => {
 
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {
+            backgroundColor: theme.backgroundColor
+        }]}>
             <Image
                 source={{ uri: user.profilePicture }}
                 style={{
@@ -39,10 +39,17 @@ const MyProfileScreen = () => {
                     zIndex: 1,
                 }}
             />
-            <View style={styles.topContainer}>
+            <View style={[styles.topContainer, {
+                backgroundColor: theme.primaryColorVariants.mediumOpacity,
+            }]}>
             </View>
-            <View style={styles.middleContainer} />
-            <View style={styles.bottomContainer}>
+            <View style={[styles.middleContainer, {
+                backgroundColor: theme.backgroundColor,
+
+            }]} />
+            <View style={[styles.bottomContainer, {
+                backgroundColor: theme.backgroundColor,
+            }]}>
                 <UserInformation user={user} />
                 <FollowerSection user={user} />
                 <ProfileActions />
@@ -59,14 +66,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: Colors.whiteSmoke,
     },
     topContainer: {
         height: height / 2,
         position: 'absolute',
         top: 0,
         width: '100%',
-        backgroundColor: Colors.gradient2,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -76,7 +81,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: height / 3,
         width: '100%',
-        backgroundColor: Colors.gradient2,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -86,7 +90,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        backgroundColor: Colors.whiteSmoke,
         display: 'flex',
         borderTopLeftRadius: 50,
         zIndex: 2,

@@ -22,15 +22,16 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const [theme, setTheme] = useState<ThemeColors>(lightTheme);
     const [primaryColor, setPrimaryColorState] = useState<string>(lightTheme.primaryColor);
+    const [colorScheme, setColorScheme] = React.useState(
+        Appearance.getColorScheme(),
+    );
 
     useEffect(() => {
-        // Load theme and primary color preference from AsyncStorage
         const loadPreferences = async () => {
-            const colorScheme = Appearance.getColorScheme();
 
             const storedTheme = await AsyncStorage.getItem('themePreference');
             if (storedTheme) {
-                setTheme(storedTheme !== 'light' ? lightTheme : darkTheme);
+                setTheme(storedTheme === 'light' ? lightTheme : darkTheme);
             } else {
                 setTheme(colorScheme !== 'light' ? lightTheme : darkTheme);
             }
@@ -41,7 +42,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
                 setPrimaryColorState(storedColor);
             }
         };
-
+        Appearance.addChangeListener(({ colorScheme }) => setColorScheme(colorScheme));
         loadPreferences();
     }, []);
 

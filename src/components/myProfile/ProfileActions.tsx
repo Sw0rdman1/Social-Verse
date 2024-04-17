@@ -2,23 +2,26 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import Colors from '../../../assets/constants/Colors';
 import { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useTheme } from '../../context/ThemeContext';
 
 const ProfileActions: React.FC = () => {
     const [newNotification, setNewNotification] = useState(2)
+    const { theme } = useTheme();
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {
+            backgroundColor: theme.backgroundColorPrimary,
+        }]}>
             <View style={styles.rowContainer}>
-                <Option color={Colors.grayDark} icon="newspaper-variant-multiple" text="My Feed" />
-                <Option color={Colors.grayDark} icon="edit" text="Edit Profile" />
-                <Option color={Colors.gray} newNotification={newNotification} icon="notifications" text="Notifications" />
+                <Option color={theme.gray} icon="newspaper-variant-multiple" text="My Feed" />
+                <Option color={theme.gray} icon="edit" text="Edit Profile" />
+                <Option color={theme.gray} newNotification={newNotification} icon="notifications" text="Notifications" />
             </View>
             <View style={styles.rowContainer}>
-                <Option color={Colors.grayDark} icon="setting" text="Settings" />
-                <Option color={Colors.gray} icon="privacy" text="Privacy policy" />
-                <Option color={Colors.redLighter} icon="logout" text="Log out" />
+                <Option color={theme.gray} icon="setting" text="Settings" />
+                <Option color={theme.gray} icon="privacy" text="Privacy policy" />
+                <Option color={theme.red.classic} icon="logout" text="Log out" />
             </View>
 
         </View>
@@ -29,10 +32,11 @@ const ProfileActions: React.FC = () => {
 const ICON_SIZE = 28;
 
 const Option: React.FC<{ newNotification?: number, color: string; icon: 'privacy' | 'edit' | 'notifications' | 'setting' | 'logout' | 'newspaper-variant-multiple'; text: string }> = ({ color, icon, text, newNotification }) => {
+    const { theme } = useTheme();
 
     const returnIcon = () => {
         if (!icon) return null;
-        if (icon === 'notifications' && newNotification && newNotification > 0) color = Colors.gradient2;
+        if (icon === 'notifications' && newNotification && newNotification > 0) color = theme.primaryColor;
 
         switch (icon) {
             case 'privacy':
@@ -67,10 +71,12 @@ const Option: React.FC<{ newNotification?: number, color: string; icon: 'privacy
 
     if (icon === 'notifications') return (
         <TouchableOpacity style={[styles.option, {
-            borderColor: Colors.grayTransparentMore,
+            borderColor: theme.gray,
         }]}>
             {returnIcon()}
-            <Text style={styles.text}>{text}</Text>
+            <Text style={[styles.text, {
+                color: theme.gray,
+            }]}>{text}</Text>
             {newNotification && newNotification > 0 &&
                 <View style={{
                     position: 'absolute',
@@ -82,19 +88,21 @@ const Option: React.FC<{ newNotification?: number, color: string; icon: 'privacy
                     justifyContent: 'center',
                     alignItems: 'center',
                     borderRadius: 20,
-                    backgroundColor: Colors.gradient2TransparentLess,
+                    backgroundColor: theme.primaryColorVariants.highOpacity,
                 }} >
-                    <Text style={{ fontSize: 11, fontWeight: "600", color: Colors.whiteBg }}>{newNotification}</Text>
+                    <Text style={{ fontSize: 11, fontWeight: "600", color: theme.backgroundColor }}>{newNotification}</Text>
                 </View>}
         </TouchableOpacity>
     );
 
     return (
         <TouchableOpacity style={[styles.option, {
-            borderColor: Colors.grayTransparentMore,
+            borderColor: theme.gray,
         }]}>
             {returnIcon()}
-            <Text style={styles.text}>{text}</Text>
+            <Text style={[styles.text, {
+                color: theme.gray,
+            }]}>{text}</Text>
         </TouchableOpacity>
     );
 };
@@ -107,7 +115,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 20,
         gap: 15,
-        backgroundColor: Colors.white,
         borderRadius: 35,
     },
     rowContainer: {
@@ -127,11 +134,9 @@ const styles = StyleSheet.create({
         gap: 5,
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     },
-
     text: {
         fontSize: 12,
         fontWeight: '600',
-        color: Colors.gray
     },
 });
 
