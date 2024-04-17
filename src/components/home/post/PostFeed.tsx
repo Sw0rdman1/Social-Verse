@@ -10,12 +10,12 @@ import {
 import { useAppContext } from '../../../context/AppContext';
 import Colors from '../../../../assets/constants/Colors';
 import Animated from 'react-native-reanimated';
-import { sortByCreatedAt } from '../../../utils/time';
 import { Image } from 'expo-image';
 
 const { width } = Dimensions.get('screen');
 const ITEM_WIDTH = width * 0.87;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.45;
+const PAGE_SIZE = 3;
 
 
 export default function PostFeed({ navigation }: any) {
@@ -30,8 +30,8 @@ export default function PostFeed({ navigation }: any) {
     const handleEndReached = async () => {
         if (totalPosts === posts.data.length) return;
 
-        const currentPage = Math.ceil(posts.data.length / 3);
-        const newPosts = await api.posts.getPosts(currentPage + 1);
+        const currentPage = Math.ceil(posts.data.length / PAGE_SIZE);
+        const newPosts = await api.posts.getPosts(currentPage + 1, PAGE_SIZE);
 
         setPosts({
             data: [...posts.data, ...newPosts.data],
