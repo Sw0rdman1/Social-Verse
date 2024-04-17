@@ -28,6 +28,14 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
     const [comments, setComments] = useState<CommentEntity[]>([]);
     const { api } = useAppContext();
 
+    const returnTitle = () => {
+        if (comments.length === 1) {
+            return '1 Comment';
+        } else {
+            return `${comments.length} Comments`;
+        }
+    }
+
     const fetchComments = async () => {
         const comments = await api.comments.getCommentsForPost(post.id);
         console.log('Comments:', comments);
@@ -46,6 +54,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) =
 
                 {comments.length ?
                     <View style={styles.commentsContainer}>
+                        <Text style={styles.commentTitle}> {returnTitle()}</Text>
                         {comments.map((comment, index) =>
                             <Comment comment={comment} key={index} />
                         )}
@@ -69,22 +78,30 @@ const styles = StyleSheet.create({
     },
     commentsContainer: {
         flex: 1,
-        minHeight: 270,
+        minHeight: 250,
         backgroundColor: Colors.whiteBg,
         borderRadius: 20,
-        marginHorizontal: 5,
-        marginTop: 10,
+        marginTop: 20,
         display: 'flex',
         flexDirection: 'column',
         gap: 10,
+        borderTopWidth: 1,
+        borderTopColor: Colors.grayTransparentMore,
+    },
 
+    commentTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: Colors.grayDark,
+        marginVertical: 10,
+        marginLeft: 10,
     },
 
     noCommentContainer: {
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 10,
-        height: 270,
+        height: 250,
         gap: 5,
     },
     noCommentText: {

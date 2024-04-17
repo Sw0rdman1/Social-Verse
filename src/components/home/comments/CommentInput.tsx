@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../../../assets/constants/Colors';
 import { useAppContext } from '../../../context/AppContext';
+import { Image } from 'expo-image';
+import Avatar from '../../ui/Avatar';
 
 
 const { height } = Dimensions.get("window");
@@ -41,6 +43,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ postID, scrolViewRef, refre
     return (
 
         <View style={styles.container}>
+            <Avatar size={40} user={currentUser} />
             <TextInput
                 style={styles.input}
                 placeholder="Write a comment..."
@@ -66,18 +69,22 @@ export default CommentInput
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 10,
-        marginTop: 10,
-
+        alignItems: 'center',
+        gap: 10,
+        padding: 5,
+        marginTop: 20,
+    },
+    avatar: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
     },
     input: {
         backgroundColor: Colors.whiteSmoke,
-        padding: 18,
+        padding: 14,
         borderRadius: 15,
         flex: 1,
-        marginRight: 5,
         fontSize: 18,
     },
     buttonContainer: {
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 54,
-        width: 54,
+        height: 44,
+        width: 44,
     }
 })
