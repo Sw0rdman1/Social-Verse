@@ -1,6 +1,7 @@
 interface ThemeColors {
     backgroundColor: string;
     textColor: string;
+    gray: string;
     primaryColor: string;
     primaryColorVariants: {
         lowOpacity: string;
@@ -12,22 +13,24 @@ interface ThemeColors {
 const lightTheme: ThemeColors = {
     backgroundColor: '#FFFFFF',
     textColor: '#000000',
-    primaryColor: '#007AFF',
+    gray: '#999DA0',
+    primaryColor: '#2ec4b6',
     primaryColorVariants: {
-        lowOpacity: 'rgba(0, 122, 255, 0.2)',
-        mediumOpacity: 'rgba(0, 122, 255, 0.5)',
-        highOpacity: 'rgba(0, 122, 255, 0.8)',
+        lowOpacity: 'rgba(46,196,182, 0.2)',
+        mediumOpacity: 'rgba(46,196,182, 0.5)',
+        highOpacity: 'rgba(46,196,182, 0.8)',
     },
 };
 
 const darkTheme: ThemeColors = {
     backgroundColor: '#000000',
     textColor: '#FFFFFF',
-    primaryColor: '#FF9500',
+    gray: '#999DA0',
+    primaryColor: '#2ec4b6',
     primaryColorVariants: {
-        lowOpacity: 'rgba(255, 149, 0, 0.2)',
-        mediumOpacity: 'rgba(255, 149, 0, 0.5)',
-        highOpacity: 'rgba(255, 149, 0, 0.8)',
+        lowOpacity: 'rgba(46,196,182, 0.2)',
+        mediumOpacity: 'rgba(46,196,182, 0.5)',
+        highOpacity: 'rgba(46,196,182, 0.8)',
     },
 };
 
