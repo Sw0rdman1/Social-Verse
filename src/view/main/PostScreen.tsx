@@ -1,6 +1,5 @@
 import { StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
-import Colors from "../../../assets/constants/Colors";
 import PostImage from "../../components/home/post/PostImage";
 import InteractionSection from "../../components/home/post/InteractionSection";
 import PostDescription from "../../components/home/post/PostDescription";
@@ -8,7 +7,6 @@ import CommentSection from "../../components/home/comments/CommentSection";
 import { useEffect, useRef, useState } from "react";
 import { useBottomTab } from "../../context/BottomBarContext";
 import { User } from "../../models/User";
-import AuthorInfo from "../../components/home/post/AuthorInfo";
 
 const PostScreen = ({ route, navigation }: any) => {
   const { post, previousPage } = route.params;
@@ -66,7 +64,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 100,
-    backgroundColor: Colors.grayTransparent,
   },
   infoContainer: {
     flex: 1,

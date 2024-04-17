@@ -9,13 +9,13 @@ import {
   Image,
 } from "react-native";
 import { Post } from "../../../models/Post";
-import Colors from "../../../../assets/constants/Colors";
 import { useEffect, useRef, useState } from "react";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
 import AuthorInfo from "./AuthorInfo";
 import BackButton from "../../ui/BackButton";
 import { User } from "../../../models/User";
+import { useTheme } from "../../../context/ThemeContext";
 
 const { height } = Dimensions.get("window");
 
@@ -57,7 +57,7 @@ const Swipe = () => {
       ]}
     >
       <Ionicons name="ios-chevron-up" size={24} color="white" />
-      <Text style={styles.text}>Swipe for more info</Text>
+      <Text style={[styles.text, { color: "#fff" }]}>Swipe for more info</Text>
     </RNAnimated.View>
   );
 };
@@ -152,6 +152,7 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
   scrolViewRef,
 }) => {
   const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
+  const { theme } = useTheme();
 
   const animatedPaddingTop = scrollOffsetY.interpolate({
     inputRange: [0, Scroll_Distance],
@@ -175,7 +176,7 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
         ref={scrolViewRef}
         bounces={false}
         style={{
-          backgroundColor: Colors.whiteSmoke,
+          backgroundColor: theme.backgroundColor,
           paddingTop: 0,
         }}
         scrollEventThrottle={1}
@@ -226,7 +227,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: "bold",
-    color: Colors.white,
   },
   borderRadius: {
     borderTopLeftRadius: BORDER_RADIUS,
