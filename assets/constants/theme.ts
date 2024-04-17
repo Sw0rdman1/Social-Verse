@@ -1,5 +1,6 @@
 interface ThemeColors {
     backgroundColor: string;
+    backgroundColorPrimary: string;
     textColor: string;
     gray: string;
     primaryColor: string;
@@ -11,7 +12,8 @@ interface ThemeColors {
 }
 
 const lightTheme: ThemeColors = {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f2f2f2',
+    backgroundColorPrimary: '#FFFFFF',
     textColor: '#000000',
     gray: '#999DA0',
     primaryColor: '#2ec4b6',
@@ -24,6 +26,7 @@ const lightTheme: ThemeColors = {
 
 const darkTheme: ThemeColors = {
     backgroundColor: '#252525',
+    backgroundColorPrimary: '#1A1A1A',
     textColor: '#FFFFFF',
     gray: '#999DA0',
     primaryColor: '#2ec4b6',

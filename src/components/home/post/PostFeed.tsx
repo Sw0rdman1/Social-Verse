@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
     Animated as RNAnimated,
     Dimensions,
@@ -8,10 +7,10 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import { useAppContext } from '../../../context/AppContext';
-import Colors from '../../../../assets/constants/Colors';
 import Animated from 'react-native-reanimated';
 import { Image } from 'expo-image';
 import { useTheme } from '../../../context/ThemeContext';
+import { useRef, useState } from 'react';
 
 const { width } = Dimensions.get('screen');
 const ITEM_WIDTH = width * 0.87;
@@ -21,11 +20,10 @@ const PAGE_SIZE = 3;
 
 export default function PostFeed({ navigation }: any) {
     const { initialPosts, api } = useAppContext();
-    const [posts, setPosts] = React.useState(initialPosts);
-
+    const [posts, setPosts] = useState(initialPosts);
     const { theme } = useTheme();
 
-    const scrollX = React.useRef(new RNAnimated.Value(0)).current;
+    const scrollX = useRef(new RNAnimated.Value(0)).current;
 
     const handleEndReached = async () => {
         if (initialPosts.total === posts.data.length) return;
@@ -67,7 +65,10 @@ export default function PostFeed({ navigation }: any) {
 
                 return (
                     <View style={{ width, justifyContent: "center", alignItems: "center" }}>
-                        <View style={styles.mainContainer}>
+                        <View style={[styles.mainContainer, {
+                            backgroundColor: theme.backgroundColor,
+                            shadowColor: theme.textColor,
+                        }]}>
                             <TouchableOpacity
                                 activeOpacity={0.95}
                                 style={{
@@ -135,13 +136,13 @@ export default function PostFeed({ navigation }: any) {
                                         height: 60,
                                         borderRadius: 60,
                                         borderWidth: 6,
-                                        borderColor: Colors.white,
+                                        borderColor: theme.backgroundColor,
                                         marginRight: 5,
                                     }}
                                 />
                                 <View style={{ gap: 2 }}>
-                                    <Text style={{ fontSize: 18, fontWeight: '600', color: Colors.black }}>{item.author.displayName}</Text>
-                                    <Text style={{ fontSize: 14, fontWeight: '600', color: Colors.gray }}> - "{item.caption}"</Text>
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: theme.textColor }}>{item.author.displayName}</Text>
+                                    <Text style={{ fontSize: 14, fontWeight: '600', color: theme.gray }}> - "{item.caption}"</Text>
                                 </View>
 
                             </View>
@@ -162,7 +163,6 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         borderRadius: 18,
-        shadowColor: Colors.black,
         shadowOpacity: 0.2,
         shadowRadius: 20,
         shadowOffset: {
@@ -170,6 +170,5 @@ const styles = StyleSheet.create({
             height: 0,
         },
         padding: 2,
-        backgroundColor: Colors.white,
     }
 });

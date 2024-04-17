@@ -29,10 +29,11 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
                 tabBarStyle:
                     isBottomTabVisible ? {
                         width: "70%",
-                        backgroundColor: theme.backgroundColor,
+                        backgroundColor: theme.backgroundColorPrimary,
                         height: 65,
                         paddingBottom: 0,
                         marginHorizontal: 15,
+                        borderTopColor: "transparent",
                         borderRadius: 35,
                         shadowColor: theme.textColor,
                         shadowOffset: { width: 0, height: 2 },
