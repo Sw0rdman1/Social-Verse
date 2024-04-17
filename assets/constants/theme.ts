@@ -3,6 +3,10 @@ interface ThemeColors {
     backgroundColorPrimary: string;
     textColor: string;
     gray: string;
+    red: {
+        classic: string;
+        transparent: string;
+    };
     primaryColor: string;
     primaryColorVariants: {
         lowOpacity: string;
@@ -16,6 +20,10 @@ const lightTheme: ThemeColors = {
     backgroundColorPrimary: '#FFFFFF',
     textColor: '#000000',
     gray: '#999DA0',
+    red: {
+        classic: '#ff0000',
+        transparent: 'rgba(255, 0, 0, 0.15)',
+    },
     primaryColor: '#2ec4b6',
     primaryColorVariants: {
         lowOpacity: 'rgba(46,196,182, 0.2)',
@@ -29,6 +37,10 @@ const darkTheme: ThemeColors = {
     backgroundColorPrimary: '#1A1A1A',
     textColor: '#FFFFFF',
     gray: '#999DA0',
+    red: {
+        classic: '#ff0000',
+        transparent: 'rgba(255, 0, 0, 0.35)',
+    },
     primaryColor: '#2ec4b6',
     primaryColorVariants: {
         lowOpacity: 'rgba(46,196,182, 0.2)',

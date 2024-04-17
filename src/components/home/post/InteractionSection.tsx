@@ -2,9 +2,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import Colors from '../../../../assets/constants/Colors';
 import { Post } from '../../../models/Post';
 import { useAppContext } from '../../../context/AppContext';
+import { useTheme } from '../../../context/ThemeContext';
 
 
 const ICON_SIZE = 22;
@@ -15,13 +15,13 @@ interface InteractionSectionProps {
 }
 
 const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
-
     const [isLiked, setIsLiked] = useState(false);
     const [numberOfLikes, setNumberOfLikes] = useState(0);
 
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [numberOfBookmarks, setNumberOfBookmarks] = useState(0);
 
+    const { theme } = useTheme();
     const { api, currentUser } = useAppContext();
 
     const handleLike = async () => {
@@ -77,13 +77,17 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
                 onPress={handleLike}
                 style={[styles.interactionContainer,
                 {
-                    backgroundColor: isLiked ? Colors.likeColorTransparent : "whitesmoke",
+                    shadowColor: theme.textColor,
+                    shadowOpacity: 0.5,
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowRadius: 10,
+                    backgroundColor: isLiked ? theme.red.transparent : theme.backgroundColorPrimary,
                 }]}
             >
-                <Text style={styles.interactionText}>{numberOfLikes}</Text>
+                <Text style={[styles.interactionText, { color: theme.textColor }]}>{numberOfLikes}</Text>
                 {isLiked ?
-                    <AntDesign name="heart" size={ICON_SIZE} color={Colors.likeColor} /> :
-                    <AntDesign name="hearto" size={ICON_SIZE} color={Colors.black} />
+                    <AntDesign name="heart" size={ICON_SIZE} color={theme.red.classic} /> :
+                    <AntDesign name="hearto" size={ICON_SIZE} color={theme.textColor} />
                 }
             </TouchableOpacity>
 
@@ -91,14 +95,18 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
                 onPress={handleBookmark}
                 style={[styles.interactionContainer,
                 {
-                    backgroundColor: isBookmarked ? Colors.gradient2Transparent : "whitesmoke",
+                    shadowColor: theme.textColor,
+                    shadowOpacity: 0.5,
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowRadius: 10,
+                    backgroundColor: isBookmarked ? theme.primaryColorVariants.mediumOpacity : theme.backgroundColorPrimary,
                 }]}
             >
-                <Text style={styles.interactionText}>{numberOfBookmarks}</Text>
+                <Text style={[styles.interactionText, { color: theme.textColor }]}>{numberOfBookmarks}</Text>
 
                 {isBookmarked ?
-                    <FontAwesome name="bookmark" size={ICON_SIZE} color={Colors.gradient2} /> :
-                    <FontAwesome name="bookmark-o" size={ICON_SIZE} color={Colors.black} />
+                    <FontAwesome name="bookmark" size={ICON_SIZE} color={theme.primaryColor} /> :
+                    <FontAwesome name="bookmark-o" size={ICON_SIZE} color={theme.textColor} />
                 }
             </TouchableOpacity>
         </View >
@@ -112,7 +120,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         gap: 5,
-        borderColor: Colors.whiteBg,
         paddingHorizontal: 10,
         height: 60,
         marginTop: 10,
