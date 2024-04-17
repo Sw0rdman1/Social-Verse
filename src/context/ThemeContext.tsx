@@ -57,7 +57,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         await AsyncStorage.setItem('primaryColorPreference', color);
         setTheme({
             ...theme,
-            primaryColor: color,
+            primaryColor: `rgb(${color})`,
             primaryColorVariants: {
                 lowOpacity: `rgba(${color}, 0.2)`, // Low opacity variant
                 mediumOpacity: `rgba(${color}, 0.5)`, // Medium opacity variant

@@ -66,7 +66,7 @@ export default function PostFeed({ navigation }: any) {
                 return (
                     <View style={{ width, justifyContent: "center", alignItems: "center" }}>
                         <View style={[styles.mainContainer, {
-                            backgroundColor: theme.backgroundColor,
+                            backgroundColor: theme.backgroundColorPrimary,
                             shadowColor: theme.textColor,
                         }]}>
                             <TouchableOpacity
@@ -118,7 +118,7 @@ export default function PostFeed({ navigation }: any) {
                                     display: 'flex',
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    backgroundColor: theme.backgroundColor,
+                                    backgroundColor: theme.backgroundColorPrimary,
                                     shadowColor: theme.textColor,
                                     shadowOpacity: 0.2,
                                     shadowRadius: 20,

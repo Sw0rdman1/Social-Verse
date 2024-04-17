@@ -4,6 +4,7 @@ import RootNavigation from "./src/navigation";
 import { AppProvider } from "./src/context/AppContext";
 import { BottomTabProvider } from "./src/context/BottomBarContext";
 import { ThemeProvider } from "./src/context/ThemeContext";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <AuthProvider>
         <AppProvider>
           <BottomTabProvider>
+            <StatusBar style="auto" />
             <RootNavigation />
           </BottomTabProvider>
         </AppProvider >

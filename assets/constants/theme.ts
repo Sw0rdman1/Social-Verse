@@ -1,3 +1,26 @@
+const primaryColors = [
+    {
+        hex: '#2ec4b6',
+        rgb: '46, 196, 182',
+    },
+    {
+        hex: '#ff9f1c',
+        rgb: '255, 159, 28',
+    },
+    {
+        hex: '#48dbfb',
+        rgb: '72, 219, 251',
+    },
+    {
+        hex: '#f368e0',
+        rgb: '243, 104, 22)',
+    },
+    {
+        hex: '#ff7f50',
+        rgb: '255, 127, 80',
+    },
+];
+
 interface ThemeColors {
     backgroundColor: string;
     backgroundColorPrimary: string;
@@ -16,15 +39,15 @@ interface ThemeColors {
 }
 
 const lightTheme: ThemeColors = {
-    backgroundColor: '#f2f2f2',
-    backgroundColorPrimary: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    backgroundColorPrimary: '#f2f2f2',
     textColor: '#000000',
     gray: '#999DA0',
     red: {
         classic: '#ff0000',
         transparent: 'rgba(255, 0, 0, 0.15)',
     },
-    primaryColor: '#2ec4b6',
+    primaryColor: `rgb(${primaryColors[0].rgb})`,
     primaryColorVariants: {
         lowOpacity: 'rgba(46,196,182, 0.2)',
         mediumOpacity: 'rgba(46,196,182, 0.5)',
@@ -41,7 +64,7 @@ const darkTheme: ThemeColors = {
         classic: '#ff0000',
         transparent: 'rgba(255, 0, 0, 0.35)',
     },
-    primaryColor: '#2ec4b6',
+    primaryColor: `rgb(${primaryColors[0].rgb})`,
     primaryColorVariants: {
         lowOpacity: 'rgba(46,196,182, 0.2)',
         mediumOpacity: 'rgba(46,196,182, 0.5)',
@@ -49,4 +72,6 @@ const darkTheme: ThemeColors = {
     },
 };
 
-export { lightTheme, darkTheme, ThemeColors };
+
+
+export { primaryColors, lightTheme, darkTheme, ThemeColors };
