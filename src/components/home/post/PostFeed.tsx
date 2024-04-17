@@ -11,6 +11,7 @@ import { useAppContext } from '../../../context/AppContext';
 import Colors from '../../../../assets/constants/Colors';
 import Animated from 'react-native-reanimated';
 import { Image } from 'expo-image';
+import { useTheme } from '../../../context/ThemeContext';
 
 const { width } = Dimensions.get('screen');
 const ITEM_WIDTH = width * 0.87;
@@ -19,13 +20,15 @@ const PAGE_SIZE = 3;
 
 
 export default function PostFeed({ navigation }: any) {
-    const scrollX = React.useRef(new RNAnimated.Value(0)).current;
     const { initialPosts, api } = useAppContext();
     const [posts, setPosts] = React.useState(initialPosts);
-    const totalPosts = initialPosts.total;
+
+    const { theme } = useTheme();
+
+    const scrollX = React.useRef(new RNAnimated.Value(0)).current;
 
     const handleEndReached = async () => {
-        if (totalPosts === posts.data.length) return;
+        if (initialPosts.total === posts.data.length) return;
 
         const currentPage = Math.ceil(posts.data.length / PAGE_SIZE);
         const newPosts = await api.posts.getPosts(currentPage + 1, PAGE_SIZE);
@@ -114,8 +117,8 @@ export default function PostFeed({ navigation }: any) {
                                     display: 'flex',
                                     flexDirection: 'row',
                                     alignItems: 'center',
-                                    backgroundColor: Colors.white,
-                                    shadowColor: Colors.black,
+                                    backgroundColor: theme.backgroundColor,
+                                    shadowColor: theme.textColor,
                                     shadowOpacity: 0.2,
                                     shadowRadius: 20,
                                     shadowOffset: {

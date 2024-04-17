@@ -4,6 +4,7 @@ import Colors from "../../../../assets/constants/Colors";
 import { StackNavigationProp } from "@react-navigation/stack";
 import HomeHeader from "../../../components/home/HomeHeader";
 import PostFeed from "../../../components/home/post/PostFeed";
+import { useTheme } from "../../../context/ThemeContext";
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<any, any>;
@@ -11,9 +12,10 @@ interface HomeScreenProps {
 
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+  const { theme } = useTheme();
 
   return (
-    <Animated.View style={{ flex: 1, backgroundColor: Colors.whiteBg, paddingBottom: 100 }} sharedTransitionTag="container">
+    <Animated.View style={{ flex: 1, backgroundColor: theme.backgroundColor, paddingBottom: 100 }} sharedTransitionTag="container">
       <HomeHeader />
       <Animated.View
         style={styles.formContainer}
