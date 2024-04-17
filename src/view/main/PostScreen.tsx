@@ -44,11 +44,6 @@ const PostScreen = ({ route, navigation }: any) => {
         scrolViewRef={scrolViewRef}
       >
         <View style={styles.infoContainer}>
-          <AuthorInfo
-            author={post.author}
-            openUserProfilHandler={openUserProfilHandler}
-            enableNavigation={enableNavigation}
-          />
           <PostDescription post={post} />
           <InteractionSection
             post={post}
@@ -71,7 +66,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 100,
-    backgroundColor: Colors.whiteBg,
+    backgroundColor: Colors.grayTransparent,
   },
   infoContainer: {
     flex: 1,

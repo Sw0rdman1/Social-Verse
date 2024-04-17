@@ -166,12 +166,16 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
         post={post}
         goBackHandler={goBackHandler}
       />
+      <AuthorInfo
+        author={post.author}
+        openUserProfilHandler={() => { }}
+        enableNavigation={false}
+      />
       <ScrollView
         ref={scrolViewRef}
         bounces={false}
         style={{
-          backgroundColor: Colors.whiteBg,
-          borderTopLeftRadius: BORDER_RADIUS,
+          backgroundColor: Colors.whiteSmoke,
           paddingTop: 0,
         }}
         scrollEventThrottle={1}
@@ -192,6 +196,7 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
               height: animatedPaddingTop
             }}
           />
+
           {children}
         </Animated.View>
       </ScrollView>
