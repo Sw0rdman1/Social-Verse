@@ -78,9 +78,9 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
                 style={[styles.interactionContainer,
                 {
                     shadowColor: theme.textColor,
-                    shadowOpacity: 0.5,
+                    shadowOpacity: 0.3,
                     shadowOffset: { width: 0, height: 4 },
-                    shadowRadius: 10,
+                    shadowRadius: 3,
                     backgroundColor: isLiked ? theme.red.transparent : theme.backgroundColorPrimary,
                 }]}
             >
@@ -96,9 +96,9 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
                 style={[styles.interactionContainer,
                 {
                     shadowColor: theme.textColor,
-                    shadowOpacity: 0.5,
+                    shadowOpacity: 0.3,
                     shadowOffset: { width: 0, height: 4 },
-                    shadowRadius: 10,
+                    shadowRadius: 3,
                     backgroundColor: isBookmarked ? theme.primaryColorVariants.mediumOpacity : theme.backgroundColorPrimary,
                 }]}
             >
@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         width: '100%',
-        gap: 5,
-        paddingHorizontal: 10,
+        gap: 15,
+        paddingHorizontal: 20,
         height: 60,
         marginTop: 10,
         paddingTop: 5,

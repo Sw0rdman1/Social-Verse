@@ -1,19 +1,22 @@
 import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
-import Colors from '../../../../assets/constants/Colors';
 import { useAppContext } from '../../../context/AppContext';
-import { Image } from 'expo-image';
 import Avatar from '../../ui/Avatar';
+import { useTheme } from '../../../context/ThemeContext';
 
 
 const { height } = Dimensions.get("window");
 
 
 const Button = ({ onPress }: any) => {
+    const { theme } = useTheme();
+
     return (
-        <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
-            <Ionicons name="send" size={24} color={Colors.gradient2} />
+        <TouchableOpacity onPress={onPress} style={[styles.buttonContainer, {
+            backgroundColor: theme.primaryColorVariants.mediumOpacity,
+        }]}>
+            <Ionicons name="send" size={24} color={theme.primaryColor} />
         </TouchableOpacity>
     )
 }
@@ -21,12 +24,13 @@ const Button = ({ onPress }: any) => {
 interface CommentInputProps {
     postID: number;
     scrolViewRef: any;
-    refreshData: () => void;
+    refreshData: () => Promise<void>
 }
 
 const CommentInput: React.FC<CommentInputProps> = ({ postID, scrolViewRef, refreshData }) => {
     const [comment, setComment] = useState('')
     const { api, currentUser } = useAppContext();
+    const { theme } = useTheme();
 
     const handleCommentChange = (text: string) => {
         setComment(text)
@@ -45,8 +49,12 @@ const CommentInput: React.FC<CommentInputProps> = ({ postID, scrolViewRef, refre
         <View style={styles.container}>
             <Avatar size={40} user={currentUser} />
             <TextInput
-                style={styles.input}
+                style={[styles.input, {
+                    backgroundColor: theme.backgroundColorPrimary,
+                    color: theme.textColor
+                }]}
                 placeholder="Write a comment..."
+                placeholderTextColor={theme.gray}
                 value={comment}
                 onChangeText={handleCommentChange}
                 onFocus={() => {
@@ -70,26 +78,21 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
         gap: 10,
         padding: 5,
         marginTop: 20,
     },
-    avatar: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-    },
+
     input: {
-        backgroundColor: Colors.whiteSmoke,
         padding: 14,
         borderRadius: 15,
         flex: 1,
         fontSize: 18,
+        paddingBottom: 40,
     },
     buttonContainer: {
-        backgroundColor: Colors.gradient2Transparent,
         padding: 10,
+        marginTop: 15,
         borderRadius: 15,
         alignItems: 'center',
         justifyContent: 'center',

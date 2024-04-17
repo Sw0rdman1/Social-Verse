@@ -33,8 +33,8 @@ const lightTheme: ThemeColors = {
 };
 
 const darkTheme: ThemeColors = {
-    backgroundColor: '#252525',
-    backgroundColorPrimary: '#1A1A1A',
+    backgroundColor: '#1A1A1A',
+    backgroundColorPrimary: '#252525',
     textColor: '#FFFFFF',
     gray: '#999DA0',
     red: {
