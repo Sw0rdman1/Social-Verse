@@ -5,10 +5,10 @@ import { snakeToCamel } from "../utils/caseConverter";
 import { ImagePickerAsset } from "expo-image-picker";
 import * as FileSystem from 'expo-file-system';
 import { decode } from 'base64-arraybuffer';
+import Comment from "../models/Comment";
 
-const EXPIRES_IN = 365 * 24 * 60 * 60;
 
-export class PostController {
+export class CommentController {
 
     private supabase: SupabaseClient;
 
@@ -16,51 +16,44 @@ export class PostController {
         this.supabase = supabase;
     }
 
-    public async getPosts(page = 1, pageSize = 3): Promise<{ data: Post[], total: number }> {
+    public async getCommentsForPost(postID: number): Promise<Comment[]> {
         try {
-            let { data: posts, error } = await this.supabase
-                .from('posts')
+            let { data: comments, error } = await this.supabase
+                .from('comments')
                 .select('*, author:users(*)')
-                .range((page - 1) * pageSize, page * pageSize - 1)
+                .eq('post', postID)
                 .order('created_at', { ascending: false });
 
 
-            const { count } = await this.supabase
-                .from('posts')
-                .select('*', { count: 'exact' });
 
             if (error) {
-                console.log('Error fetching posts count:', error.message);
+                console.log('Error fetching comments count:', error.message);
                 throw error;
             }
 
-
-            if (!count) {
-                throw new Error('Error fetching posts count');
+            if (!comments) {
+                throw new Error('Error fetching comments');
             }
 
-            return {
-                data: snakeToCamel(posts),
-                total: count
-            }
+
+            return snakeToCamel(comments) as Comment[];
 
         } catch (error) {
             console.error('Error fetching posts:', (error as Error).message);
-            return { data: [], total: 0 };
+            return [];
         }
     }
 
-
     // Create a new post
-    public async createPost(caption: string, imageURL: string, authorID: number): Promise<void> {
+    public async createComment(postID: number, text: string, authorID: number): Promise<void> {
         try {
 
             let { data, error } = await this.supabase
                 .from('posts')
                 .insert({
                     created_at: new Date(),
-                    caption: caption,
-                    imageUrl: imageURL,
+                    text: text,
+                    post: postID,
                     author: authorID,
                 });
 
