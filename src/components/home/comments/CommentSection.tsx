@@ -3,14 +3,12 @@ import { Post } from '../../../models/Post';
 import { useEffect, useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import Colors from '../../../../assets/constants/Colors';
-import CommentEntity, { getFakeComments } from '../../../models/Comment';
+import CommentEntity from '../../../models/Comment';
 import Comment from './Comment';
 import { MaterialIcons } from '@expo/vector-icons';
 import CommentInput from './CommentInput';
 import { AntDesign } from '@expo/vector-icons';
-
-const ICON_SIZE = 28;
-const { height } = Dimensions.get("window");
+import { useAppContext } from '../../../context/AppContext';
 
 const NoComments: React.FC = () => {
     return (
@@ -28,15 +26,23 @@ interface CommentSectionProps {
 
 const CommentSection: React.FC<CommentSectionProps> = ({ post, scrolViewRef }) => {
     const [comments, setComments] = useState<CommentEntity[]>([]);
+    const { api } = useAppContext();
+
+    const fetchComments = async () => {
+        const comments = await api.comments.getCommentsForPost(post.id);
+        console.log('Comments:', comments);
+
+        setComments(comments);
+    }
 
     useEffect(() => {
-        // setComments(getFakeComments(post.id));
+        fetchComments();
     }, [])
 
     return (
         <View style={styles.mainContainer}>
             <View style={{ marginHorizontal: 5 }}>
-                <CommentInput postID={post.id} scrolViewRef={scrolViewRef} />
+                <CommentInput postID={post.id} scrolViewRef={scrolViewRef} refreshData={fetchComments} />
                 {comments.length ?
                     comments.map((comment, index) =>
                         <Comment comment={comment} key={index} />

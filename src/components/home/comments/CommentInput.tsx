@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 
 import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../../../assets/constants/Colors';
+import { useAppContext } from '../../../context/AppContext';
 
 
 const { height } = Dimensions.get("window");
@@ -18,19 +19,21 @@ const Button = ({ onPress }: any) => {
 interface CommentInputProps {
     postID: number;
     scrolViewRef: any;
+    refreshData: () => void;
 }
 
-const CommentInput: React.FC<CommentInputProps> = ({ postID, scrolViewRef }) => {
+const CommentInput: React.FC<CommentInputProps> = ({ postID, scrolViewRef, refreshData }) => {
     const [comment, setComment] = useState('')
+    const { api, currentUser } = useAppContext();
 
     const handleCommentChange = (text: string) => {
         setComment(text)
     }
 
-    const handleCommentSubmit = () => {
-        // Handle comment submission logic here
-        console.log('New comment:', comment)
+    const handleCommentSubmit = async () => {
+        await api.comments.createComment(postID, comment, currentUser.id);
         setComment('')
+        await refreshData();
     }
 
 

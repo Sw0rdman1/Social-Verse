@@ -49,7 +49,7 @@ export class CommentController {
         try {
 
             let { data, error } = await this.supabase
-                .from('posts')
+                .from('comments')
                 .insert({
                     created_at: new Date(),
                     text: text,
