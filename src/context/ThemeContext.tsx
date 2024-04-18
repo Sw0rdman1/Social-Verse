@@ -3,6 +3,31 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { lightTheme, darkTheme, ThemeColors } from '../../assets/constants/theme';
 import { Appearance } from 'react-native';
 
+const setThemeHandler = (value: string, primaryColor: string): ThemeColors => {
+    if (value === 'light') {
+        return {
+            ...lightTheme,
+            primaryColor: `rgb(${primaryColor})`,
+            primaryColorVariants: {
+                lowOpacity: `rgba(${primaryColor}, 0.2)`, // Low opacity variant
+                mediumOpacity: `rgba(${primaryColor}, 0.5)`, // Medium opacity variant
+                highOpacity: `rgba(${primaryColor}, 0.8)`, // High opacity variant
+            },
+        };
+    } else {
+        return {
+            ...darkTheme,
+            primaryColor: `rgb(${primaryColor})`,
+            primaryColorVariants: {
+                lowOpacity: `rgba(${primaryColor}, 0.2)`, // Low opacity variant
+                mediumOpacity: `rgba(${primaryColor}, 0.5)`, // Medium opacity variant
+                highOpacity: `rgba(${primaryColor}, 0.8)`, // High opacity variant
+            },
+        };
+    }
+
+}
+
 interface ThemeContextProps {
     theme: ThemeColors;
     toggleTheme: () => void;
@@ -30,12 +55,14 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         const loadPreferences = async () => {
 
             const storedTheme = await AsyncStorage.getItem('themePreference');
-            if (storedTheme) {
-                setTheme(storedTheme === 'light' ? lightTheme : darkTheme);
-            } else {
-                setTheme(colorScheme !== 'light' ? lightTheme : darkTheme);
-            }
 
+            if (storedTheme) {
+                setTheme(setThemeHandler(storedTheme, primaryColor));
+            } else if (colorScheme) {
+                setTheme(setThemeHandler(colorScheme, primaryColor));
+            } else {
+                setTheme(setThemeHandler('light', primaryColor));
+            }
 
             const storedColor = await AsyncStorage.getItem('primaryColorPreference');
             if (storedColor) {
@@ -47,9 +74,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }, []);
 
     const toggleTheme = async () => {
-        const newTheme = theme === lightTheme ? darkTheme : lightTheme;
+        const newTheme = setThemeHandler(theme.backgroundColor === "#FFFFFF" ? 'dark' : 'light', primaryColor);
         setTheme(newTheme);
-        await AsyncStorage.setItem('themePreference', newTheme === lightTheme ? 'light' : 'dark');
+        await AsyncStorage.setItem('themePreference', newTheme.backgroundColor === "#FFFFFF" ? 'light' : 'dark');
     };
 
     const setPrimaryColor = async (color: string) => {
