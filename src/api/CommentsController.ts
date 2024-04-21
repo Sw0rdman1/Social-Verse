@@ -47,6 +47,9 @@ export class CommentController {
     // Create a new post
     public async createComment(postID: number, text: string, authorID: number): Promise<void> {
         try {
+            if (!text) {
+                throw new Error('Text is required');
+            }
 
             let { data, error } = await this.supabase
                 .from('comments')

@@ -77,11 +77,8 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
                 onPress={handleLike}
                 style={[styles.interactionContainer,
                 {
-                    shadowColor: theme.textColor,
-                    shadowOpacity: 0.3,
-                    shadowOffset: { width: 0, height: 4 },
-                    shadowRadius: 3,
                     backgroundColor: isLiked ? theme.red.transparent : theme.backgroundColorPrimary,
+
                 }]}
             >
                 <Text style={[styles.interactionText, { color: theme.textColor }]}>{numberOfLikes}</Text>
@@ -95,11 +92,8 @@ const InteractionSection: React.FC<InteractionSectionProps> = ({ post }) => {
                 onPress={handleBookmark}
                 style={[styles.interactionContainer,
                 {
-                    shadowColor: theme.textColor,
-                    shadowOpacity: 0.3,
-                    shadowOffset: { width: 0, height: 4 },
-                    shadowRadius: 3,
                     backgroundColor: isBookmarked ? theme.primaryColorVariants.mediumOpacity : theme.backgroundColorPrimary,
+
                 }]}
             >
                 <Text style={[styles.interactionText, { color: theme.textColor }]}>{numberOfBookmarks}</Text>

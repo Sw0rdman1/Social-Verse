@@ -37,6 +37,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ postID, scrolViewRef, refre
     }
 
     const handleCommentSubmit = async () => {
+        if (!comment) return;
         await api.comments.createComment(postID, comment, currentUser.id);
         setComment('')
         await refreshData();
