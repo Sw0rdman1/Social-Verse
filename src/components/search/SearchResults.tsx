@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import {
     View,
-    Text,
     Image,
     StyleSheet,
     ScrollView,
     TouchableOpacity,
 } from "react-native";
 import { User } from "../../models/User";
-import Colors from "../../../assets/constants/Colors";
 import { StackNavigationProp } from "@react-navigation/stack";
 import Animated, { FadeIn, FadeOut, Layout } from "react-native-reanimated";
+import { useTheme } from "../../context/ThemeContext";
+import Text from "../ui/Text";
 
 interface SearchResultsProps {
     users: User[];
@@ -18,6 +18,7 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
+    const { theme } = useTheme();
 
     const openUserProfilePage = (user: User) => {
         navigation.navigate("UserProfile", {
@@ -27,7 +28,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView style={[styles.container, {}]}>
             {users.map((user, index) => (
                 <TouchableOpacity
                     onPress={() => openUserProfilePage(user)}
@@ -59,13 +60,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        backgroundColor: Colors.white,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         display: "flex",
         flex: 1,
         paddingTop: 10,
         paddingHorizontal: 10,
+        marginTop: 150,
     },
     userContainer: {
         flexDirection: "row",
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 10,
         borderBottomWidth: 1,
-        borderBottomColor: Colors.grayTransparentLess,
     },
     avatar: {
         borderRadius: 200,

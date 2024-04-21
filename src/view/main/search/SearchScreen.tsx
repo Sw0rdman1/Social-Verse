@@ -9,6 +9,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchResults from '../../../components/search/SearchResults';
 import { User, getFakeUsers } from '../../../models/User';
 import { StackNavigationProp } from '@react-navigation/stack';
+import SearchTitle from '../../../components/search/SearchTitle';
+import { useTheme } from '../../../context/ThemeContext';
 
 interface SearchScreenProps {
     navigation: StackNavigationProp<any, any>
@@ -22,8 +24,8 @@ interface SearchCritera {
 }
 
 const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
-    const insets = useSafeAreaInsets();
     const [initialUsers, setInitialUsers] = useState<User[]>([])
+    const { theme } = useTheme();
     const [users, setUsers] = useState<User[]>([])
     const [searchCriteria, setSearchCriteria] = useState<SearchCritera>({
         filtersDisplayed: false,
@@ -35,8 +37,6 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
     const displayFilters = () => {
         setSearchCriteria({ ...searchCriteria, filtersDisplayed: !searchCriteria.filtersDisplayed })
     }
-
-
 
     useEffect(() => {
         const fetchedUsers = getFakeUsers()
@@ -54,17 +54,10 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
 
 
     return (
-        <GradientBackground inverted centerItems>
-            <View
-                style={[styles.container, {
-                    paddingTop: insets.top + 10,
-                }]}
-            >
-                <SearchInput setSearchCriteria={setSearchCriteria} searchUsers={searchUsers} searchCriteria={searchCriteria} displayFilters={displayFilters} />
-
-                <SearchResults users={users} navigation={navigation} />
-            </View>
-        </GradientBackground>
+        <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
+            <SearchTitle />
+            <SearchResults users={users} navigation={navigation} />
+        </View>
     )
 }
 
