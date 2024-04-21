@@ -52,8 +52,18 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     );
 
     useEffect(() => {
-        const loadPreferences = async () => {
+        const loadPrimaryColor = async () => {
+            const storedColor = await AsyncStorage.getItem('primaryColorPreference');
+            if (storedColor) {
+                setPrimaryColorState(storedColor);
+            }
 
+        };
+        loadPrimaryColor();
+    }, []);
+
+    useEffect(() => {
+        const loadPreferredTheme = async () => {
             const storedTheme = await AsyncStorage.getItem('themePreference');
 
             if (storedTheme) {
@@ -63,15 +73,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             } else {
                 setTheme(setThemeHandler('light', primaryColor));
             }
+        }
 
-            const storedColor = await AsyncStorage.getItem('primaryColorPreference');
-            if (storedColor) {
-                setPrimaryColorState(storedColor);
-            }
-        };
-        Appearance.addChangeListener(({ colorScheme }) => setColorScheme(colorScheme));
-        loadPreferences();
-    }, []);
+        loadPreferredTheme();
+    }, [colorScheme, primaryColor]);
 
     const toggleTheme = async () => {
         const newTheme = setThemeHandler(theme.backgroundColor === "#FFFFFF" ? 'dark' : 'light', primaryColor);
