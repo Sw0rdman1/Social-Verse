@@ -25,7 +25,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     theme.backgroundColor,
   ]
 
-  const gradientContainerHeight = theme.backgroundColor === "#FFFFFF" ? height * 0.7 : height * 0.45
+  const gradientContainerHeight = theme.backgroundColor === "#FFFFFF" ? height * 0.7 : height * 0.5
 
   return (
     <Animated.View style={{ flex: 1, backgroundColor: theme.backgroundColor }} sharedTransitionTag="container">
@@ -38,6 +38,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         entering={FadeIn.delay(300).duration(500)}
       >
         <FeedTest navigation={navigation} />
+
       </Animated.View>
     </Animated.View>
   );

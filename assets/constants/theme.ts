@@ -45,7 +45,7 @@ const lightTheme: ThemeColors = {
     },
     primaryColor: `rgb(${primaryColors[0].rgb})`,
     primaryColorVariants: {
-        lowOpacity: 'rgba(46,196,182, 0.2)',
+        lowOpacity: 'rgba(46,196,182, 0.1)',
         mediumOpacity: 'rgba(46,196,182, 0.5)',
         highOpacity: 'rgba(46,196,182, 0.8)',
     },
@@ -62,7 +62,7 @@ const darkTheme: ThemeColors = {
     },
     primaryColor: `rgb(${primaryColors[0].rgb})`,
     primaryColorVariants: {
-        lowOpacity: 'rgba(46,196,182, 0.2)',
+        lowOpacity: 'rgba(46,196,182, 0.1)',
         mediumOpacity: 'rgba(46,196,182, 0.5)',
         highOpacity: 'rgba(46,196,182, 0.8)',
     },

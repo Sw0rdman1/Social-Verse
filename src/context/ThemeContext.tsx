@@ -9,7 +9,7 @@ const setThemeHandler = (value: string, primaryColor: string): ThemeColors => {
             ...lightTheme,
             primaryColor: `rgb(${primaryColor})`,
             primaryColorVariants: {
-                lowOpacity: `rgba(${primaryColor}, 0.2)`, // Low opacity variant
+                lowOpacity: `rgba(${primaryColor}, 0.1)`, // Low opacity variant
                 mediumOpacity: `rgba(${primaryColor}, 0.5)`, // Medium opacity variant
                 highOpacity: `rgba(${primaryColor}, 0.8)`, // High opacity variant
             },
@@ -19,7 +19,7 @@ const setThemeHandler = (value: string, primaryColor: string): ThemeColors => {
             ...darkTheme,
             primaryColor: `rgb(${primaryColor})`,
             primaryColorVariants: {
-                lowOpacity: `rgba(${primaryColor}, 0.2)`, // Low opacity variant
+                lowOpacity: `rgba(${primaryColor}, 0.1)`, // Low opacity variant
                 mediumOpacity: `rgba(${primaryColor}, 0.5)`, // Medium opacity variant
                 highOpacity: `rgba(${primaryColor}, 0.8)`, // High opacity variant
             },
@@ -96,7 +96,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             ...theme,
             primaryColor: `rgb(${color})`,
             primaryColorVariants: {
-                lowOpacity: `rgba(${color}, 0.2)`, // Low opacity variant
+                lowOpacity: `rgba(${color}, 0.1)`, // Low opacity variant
                 mediumOpacity: `rgba(${color}, 0.5)`, // Medium opacity variant
                 highOpacity: `rgba(${color}, 0.8)`, // High opacity variant
             },

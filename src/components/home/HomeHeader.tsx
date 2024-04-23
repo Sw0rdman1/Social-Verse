@@ -16,16 +16,20 @@ const HomeHeader = () => {
         theme.backgroundColor :
         theme.primaryColor
 
+    const textShadowColor = theme.backgroundColor === "#FFFFFF" ?
+        theme.primaryColor :
+        theme.backgroundColor
+
 
     return (
         <BlurView
-            intensity={15}
+            intensity={20}
             tint={theme.backgroundColor === "#FFFFFF" ? "light" : "dark"}
-            style={[styles.titleContainer, { paddingTop: top + 25 }]}>
+            style={[styles.titleContainer, { paddingTop: top + 25, backgroundColor: theme.primaryColorVariants.lowOpacity }]}>
 
             <Animated.Text
                 style=
-                {[styles.title, { color: logoColor, textShadowColor: theme.primaryColor }]}
+                {[styles.title, { color: logoColor, textShadowColor }]}
                 sharedTransitionTag="home-screen-title"
             >
                 SocialVerse
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         fontSize: 44,
         textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 1
+        textShadowRadius: 2
     },
 
     avatar: {
