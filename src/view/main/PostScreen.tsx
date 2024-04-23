@@ -7,11 +7,13 @@ import CommentSection from "../../components/home/comments/CommentSection";
 import { useEffect, useRef, useState } from "react";
 import { useBottomTab } from "../../context/BottomBarContext";
 import { User } from "../../models/User";
+import { useTheme } from "../../context/ThemeContext";
 
 const PostScreen = ({ route, navigation }: any) => {
   const { post, previousPage } = route.params;
   const scrolViewRef = useRef(null);
   const [enableNavigation, setEnableNavigation] = useState(false);
+  const { theme } = useTheme();
 
   const { setBottomTabVisible } = useBottomTab();
 
@@ -35,7 +37,12 @@ const PostScreen = ({ route, navigation }: any) => {
   }, []);
 
   return (
-    <Animated.View style={styles.container}>
+    <Animated.View
+      sharedTransitionTag="container"
+      style={[styles.container, {
+        backgroundColor: theme.backgroundColorPrimary,
+      }]}
+    >
       <PostImage
         post={post}
         goBackHandler={goBackHandler}
@@ -63,7 +70,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
-    zIndex: 100,
   },
   infoContainer: {
     flex: 1,

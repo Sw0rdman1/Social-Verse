@@ -167,11 +167,15 @@ const PostImage: React.FC<ScrollViewScreenProps> = ({
         post={post}
         goBackHandler={goBackHandler}
       />
-      <AuthorInfo
-        author={post.author}
-        openUserProfilHandler={() => { }}
-        enableNavigation={false}
-      />
+      <Animated.View
+        entering={FadeInDown.delay(500).duration(500)}
+      >
+        <AuthorInfo
+          author={post.author}
+          openUserProfilHandler={() => { }}
+          enableNavigation={false}
+        />
+      </Animated.View>
       <ScrollView
         ref={scrolViewRef}
         bounces={false}

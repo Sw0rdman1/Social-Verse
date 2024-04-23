@@ -12,29 +12,23 @@ const HomeHeader = () => {
     const { currentUser } = useAppContext()
     const { theme } = useTheme()
 
+    const logoColor = theme.backgroundColor === "#FFFFFF" ?
+        theme.backgroundColor :
+        theme.primaryColor
+
     return (
-        <LinearGradient
-            colors={[theme.backgroundColor, theme.backgroundColor]}
-            style={[styles.titleContainer, { paddingTop: top + 25 }]}
-        >
+        <View style={[styles.titleContainer, { paddingTop: top + 25 }]}>
 
             <Animated.Text
                 style=
-                {[styles.title, { color: theme.primaryColor }]}
+                {[styles.title, { color: logoColor, textShadowColor: theme.primaryColor }]}
                 sharedTransitionTag="home-screen-title"
             >
                 SocialVerse
             </Animated.Text>
             <ThemeSwitch />
 
-            {/* <Animated.Image
-                entering={
-                    FadeIn.delay(300).duration(500)
-                }
-                source={{ uri: currentUser.profilePicture }}
-                style={[styles.avatar, { borderColor: theme.backgroundColor }]}
-            /> */}
-        </LinearGradient>
+        </View>
     )
 }
 
@@ -53,6 +47,8 @@ const styles = StyleSheet.create({
     title: {
         fontWeight: "700",
         fontSize: 44,
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 1
     },
 
     avatar: {

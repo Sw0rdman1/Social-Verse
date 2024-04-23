@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import Colors from "../../../../assets/constants/Colors";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -6,6 +6,10 @@ import HomeHeader from "../../../components/home/HomeHeader";
 import PostFeed from "../../../components/home/post/PostFeed";
 import { useTheme } from "../../../context/ThemeContext";
 import PrimaryColorSwitch from "../../../components/theme/PrimaryColorSwitch";
+import FeedTest from "../../../components/home/post/FeedTest";
+import { LinearGradient } from "expo-linear-gradient";
+
+const { height, width } = Dimensions.get('window');
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<any, any>;
@@ -15,15 +19,25 @@ interface HomeScreenProps {
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const { theme } = useTheme();
 
+  const gradientPatern = [
+    theme.primaryColor,
+    theme.backgroundColor,
+    theme.backgroundColor,
+  ]
+
+  const gradientContainerHeight = theme.backgroundColor === "#FFFFFF" ? height * 0.7 : height * 0.45
+
   return (
-    <Animated.View style={{ flex: 1, backgroundColor: theme.backgroundColor, paddingBottom: 100 }} sharedTransitionTag="container">
+    <Animated.View style={{ flex: 1, backgroundColor: theme.backgroundColor }} sharedTransitionTag="container">
+      <LinearGradient colors={gradientPatern} style={[styles.gradientContainer, {
+        height: gradientContainerHeight,
+      }]} />
       <HomeHeader />
-      <PrimaryColorSwitch />
       <Animated.View
         style={styles.formContainer}
         entering={FadeIn.delay(300).duration(500)}
       >
-        <PostFeed navigation={navigation} />
+        <FeedTest navigation={navigation} />
       </Animated.View>
     </Animated.View>
   );
@@ -39,7 +53,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  gradientContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
 
-
+  },
 });
 
