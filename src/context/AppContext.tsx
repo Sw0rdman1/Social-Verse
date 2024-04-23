@@ -44,11 +44,14 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
                 setLoading(false);
                 return;
             }
+
             const currentUser = await api.users.getCurrentUserInformations(user.id);
             setCurrentUser(currentUser);
             const posts = await api.posts.getPosts();
             setInitialPosts(posts);
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
         };
 
         fetchData();

@@ -32,12 +32,14 @@ interface ThemeContextProps {
     theme: ThemeColors;
     toggleTheme: () => void;
     setPrimaryColor: (color: string) => void;
+    loadingTheme: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextProps>({
     theme: lightTheme,
     toggleTheme: () => { },
     setPrimaryColor: () => { },
+    loadingTheme: true,
 });
 
 interface ThemeProviderProps {
@@ -47,6 +49,7 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const [theme, setTheme] = useState<ThemeColors>(lightTheme);
     const [primaryColor, setPrimaryColorState] = useState<string>(lightTheme.primaryColor);
+    const [loadingTheme, setLoadingTheme] = useState<boolean>(true);
     const [colorScheme, setColorScheme] = React.useState(
         Appearance.getColorScheme(),
     );
@@ -73,6 +76,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             } else {
                 setTheme(setThemeHandler('light', primaryColor));
             }
+
+            if (loadingTheme) setLoadingTheme(false);
         }
 
         loadPreferredTheme();
@@ -99,7 +104,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     };
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme, setPrimaryColor }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme, setPrimaryColor, loadingTheme }}>
             {children}
         </ThemeContext.Provider>
     );

@@ -1,16 +1,16 @@
 import { StyleSheet, View } from "react-native";
 import Animated, { FadeInUp, FadeInDown } from "react-native-reanimated";
-import GradientBackground from "../components/ui/GradientBackground";
-import Colors from "../../assets/constants/Colors";
 import { useEffect, useState } from "react";
 import FormsTemplate from "../components/auth/welcome/FormsTemplate";
-import { useAuth } from "../hooks/useAuth";
 import HomeScreenTemplate from "../components/HomeScreenTemplate";
 import { useAppContext } from "../context/AppContext";
+import { useTheme } from "../context/ThemeContext";
+import { LinearGradient } from "expo-linear-gradient";
 
 const LoadingScreen = ({ navigation }: any) => {
   const { currentUser, loading } = useAppContext();
   const [fontSize, setFontSize] = useState(60);
+  const { loadingTheme, theme } = useTheme();
 
 
   useEffect(() => {
@@ -25,21 +25,25 @@ const LoadingScreen = ({ navigation }: any) => {
     }
   }, [currentUser, loading]);
 
+  if (loadingTheme) {
+    return <View />;
+  }
+
   return (
     <Animated.View style={styles.fullContainer} sharedTransitionTag="container">
-      <GradientBackground centerItems inverted>
+      <LinearGradient colors={[theme.primaryColor, theme.backgroundColor, theme.backgroundColor, theme.backgroundColor, theme.backgroundColor, theme.primaryColor,]} style={styles.fullContainer}>
         {loading && currentUser && (
           <View style={styles.container}>
             <Animated.Text
               entering={FadeInDown.delay(500).duration(500)}
-              style={[styles.title, { fontSize }]}
+              style={[styles.title, { fontSize, color: theme.primaryColor }]}
               sharedTransitionTag="home-screen-title"
             >
               SocialVerse
             </Animated.Text>
             <Animated.Text
               entering={FadeInUp.delay(700).duration(500)}
-              style={styles.subtitle}
+              style={[styles.subtitle, { color: theme.textColor }]}
             >
               New era of social networking
             </Animated.Text>
@@ -47,7 +51,7 @@ const LoadingScreen = ({ navigation }: any) => {
         )}
         <FormsTemplate />
         <HomeScreenTemplate />
-      </GradientBackground>
+      </LinearGradient>
     </Animated.View>
   );
 };
@@ -67,12 +71,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "700",
-    color: Colors.white,
   },
   subtitle: {
     textAlign: "center",
     fontSize: 24,
     fontWeight: "600",
-    color: Colors.titleColor,
   },
 });
