@@ -12,6 +12,8 @@ import CategorySelect from '../../../components/createPost/CategorySelect'
 import { useAppContext } from '../../../context/AppContext'
 import { Ionicons } from '@expo/vector-icons'
 import { ImagePickerAsset } from 'expo-image-picker'
+import { LinearGradient } from 'expo-linear-gradient'
+import { useTheme } from '../../../context/ThemeContext'
 
 
 interface CreatePostScreenProps {
@@ -25,6 +27,7 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
     const [image, setImage] = useState<ImagePickerAsset | null>(null)
     const [imageUrl, setImageUrl] = useState<string>("")
     const [caption, setCaption] = useState("")
+    const { theme } = useTheme()
 
     const { api, currentUser, refreshPosts } = useAppContext()
 
@@ -47,7 +50,10 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
     const disableButton = !image || !caption
 
     return (
-        <GradientBackground inverted centerItems>
+        <LinearGradient colors={[
+            theme.primaryColor,
+            theme.primaryColorVariants.mediumOpacity,
+        ]} style={{ flex: 1 }}>
             <View style={styles.container}>
                 <BlurView intensity={100} tint="dark" style={styles.blurContainer}>
                     {image && <Image source={{ uri: image.uri }} style={styles.image} />}
@@ -69,7 +75,7 @@ const CreatePostScreen: React.FC<CreatePostScreenProps> = ({ navigation }) => {
                 </BlurView>
 
             </View>
-        </GradientBackground >
+        </LinearGradient >
     )
 }
 
