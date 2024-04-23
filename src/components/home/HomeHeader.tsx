@@ -7,6 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { useTheme } from '../../context/ThemeContext'
 import ThemeSwitch from '../theme/ThemeSwitch'
 import { BlurView } from 'expo-blur'
+import PrimaryColorSwitch from '../theme/PrimaryColorSwitch'
 
 const HomeHeader = () => {
     const { top } = useSafeAreaInsets()
@@ -35,6 +36,7 @@ const HomeHeader = () => {
                 SocialVerse
             </Animated.Text>
             <ThemeSwitch />
+            <PrimaryColorSwitch />
 
         </BlurView>
     )
