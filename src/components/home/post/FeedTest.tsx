@@ -68,12 +68,12 @@ export default FeedTest
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 10,
     },
     itemContainer: {
-        height: height - 180,
-        margin: 15,
+        height: height,
         alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 15,
     },
     postContainer: {
         borderRadius: 15,

@@ -6,18 +6,22 @@ import { useAppContext } from '../../context/AppContext'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useTheme } from '../../context/ThemeContext'
 import ThemeSwitch from '../theme/ThemeSwitch'
+import { BlurView } from 'expo-blur'
 
 const HomeHeader = () => {
     const { top } = useSafeAreaInsets()
-    const { currentUser } = useAppContext()
     const { theme } = useTheme()
 
     const logoColor = theme.backgroundColor === "#FFFFFF" ?
         theme.backgroundColor :
         theme.primaryColor
 
+
     return (
-        <View style={[styles.titleContainer, { paddingTop: top + 25 }]}>
+        <BlurView
+            intensity={15}
+            tint={theme.backgroundColor === "#FFFFFF" ? "light" : "dark"}
+            style={[styles.titleContainer, { paddingTop: top + 25 }]}>
 
             <Animated.Text
                 style=
@@ -28,7 +32,7 @@ const HomeHeader = () => {
             </Animated.Text>
             <ThemeSwitch />
 
-        </View>
+        </BlurView>
     )
 }
 
@@ -41,7 +45,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 25,
-        marginBottom: 20,
+        paddingBottom: 25,
+        position: "absolute",
+        zIndex: 100,
+        top: 0,
+        left: 0,
     },
 
     title: {
