@@ -6,6 +6,7 @@ import { useTheme } from '../../context/ThemeContext';
 const ThemeSwitch: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
     const [isLightTheme, setIsLightTheme] = useState(theme.backgroundColor === "#FFFFFF");
+    const iconColor = isLightTheme ? theme.backgroundColor : theme.primaryColor;
 
     const switchTheme = () => {
         setIsLightTheme(!isLightTheme)
@@ -19,7 +20,7 @@ const ThemeSwitch: React.FC = () => {
                     <FontAwesome
                         name="sun-o" // Sun icon from FontAwesome
                         size={24}
-                        color={theme.primaryColor}
+                        color={iconColor}
                     />
                 </TouchableOpacity>
                 :
@@ -27,7 +28,7 @@ const ThemeSwitch: React.FC = () => {
                     <MaterialIcons
                         name="nights-stay" // Moon icon from MaterialIcons
                         size={24}
-                        color={theme.primaryColor}
+                        color={iconColor}
                     />
                 </TouchableOpacity>}
         </View>
