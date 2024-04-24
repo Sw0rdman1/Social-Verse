@@ -22,6 +22,10 @@ interface ThemeColors {
     backgroundColorPrimary: string;
     textColor: string;
     gray: string;
+    grayVariant: {
+        light: string;
+        dark: string;
+    }
     red: {
         classic: string;
         transparent: string;
@@ -39,6 +43,10 @@ const lightTheme: ThemeColors = {
     backgroundColorPrimary: '#FFFFFF',
     textColor: '#000000',
     gray: '#999DA0',
+    grayVariant: {
+        light: 'rgba(153, 157, 160, 0.15)',
+        dark: 'rgba(153, 157, 160, 0.45)'
+    },
     red: {
         classic: '#ff0000',
         transparent: 'rgba(255, 0, 0, 0.15)',
@@ -56,6 +64,10 @@ const darkTheme: ThemeColors = {
     backgroundColorPrimary: '#252525',
     textColor: '#FFFFFF',
     gray: '#999DA0',
+    grayVariant: {
+        light: 'rgba(153, 157, 160, 0.15)',
+        dark: 'rgba(153, 157, 160, 0.45)'
+    },
     red: {
         classic: '#ff0000',
         transparent: 'rgba(255, 0, 0, 0.35)',

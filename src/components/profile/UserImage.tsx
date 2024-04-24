@@ -8,9 +8,9 @@ import {
 import { useRef } from "react";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { User } from "../../models/User";
-import Colors from "../../../assets/constants/Colors";
 import BackButton from "../ui/BackButton";
 import UserInfo from "./UserInfo";
+import { useTheme } from "../../context/ThemeContext";
 
 const { height } = Dimensions.get("window");
 
@@ -32,6 +32,8 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
   goBackHandler,
   isFollowing
 }) => {
+
+  const { theme } = useTheme();
 
   const animatedHeaderHeight = value.interpolate({
     inputRange: [0, Scroll_Distance],
@@ -65,7 +67,9 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
         },
       ]}
     >
-      <View style={styles.headerContainer}>
+      <View style={[styles.headerContainer, {
+        backgroundColor: theme.backgroundColorPrimary,
+      }]}>
         <RNAnimated.View
           style={[
             styles.backButon,
@@ -81,11 +85,11 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
           style={[styles.image, styles.borderRadius]}
         >
           <RNAnimated.View
-            style={[styles.image, styles.borderRadius, { opacity: animatedImageOpacity, backgroundColor: Colors.blackTransparent }]}
+            style={[styles.image, styles.borderRadius, { opacity: animatedImageOpacity, backgroundColor: theme.textColor }]}
           />
         </Animated.View>
         <Animated.Image
-          sharedTransitionTag={user.id + ".image"}
+          sharedTransitionTag={user.id + ".user.image"}
           source={{
             uri: user.profilePicture as string,
           }}
@@ -111,6 +115,7 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
   goBackHandler,
   isFollowing
 }) => {
+  const { theme } = useTheme();
   const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
 
   const animatedPaddingTop = scrollOffsetY.interpolate({
@@ -120,7 +125,9 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
   });
 
   return (
-    <View style={styles.homeContainer}>
+    <View style={[styles.homeContainer, {
+      backgroundColor: theme.backgroundColorPrimary,
+    }]}>
       <DynamicHeader
         value={scrollOffsetY}
         user={user}
@@ -132,7 +139,7 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
       <ScrollView
         bounces={false}
         style={{
-          backgroundColor: Colors.whiteBg,
+          backgroundColor: theme.backgroundColorPrimary,
           paddingTop: 0,
         }}
         scrollEventThrottle={5}
@@ -165,11 +172,9 @@ export default UserImage;
 const styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
-    backgroundColor: Colors.whiteBg,
 
   },
   headerContainer: {
-    backgroundColor: Colors.whiteBg,
     flexDirection: "row",
     display: "flex",
     justifyContent: "center",
@@ -183,11 +188,7 @@ const styles = StyleSheet.create({
     zIndex: 20,
   },
 
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: Colors.white,
-  },
+
   borderRadius: {
     borderBottomLeftRadius: BORDER_RADIUS,
     borderBottomRightRadius: BORDER_RADIUS,

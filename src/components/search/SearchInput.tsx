@@ -26,9 +26,9 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchUsers, searchTerm, setS
 
     return (
         <BlurView
-            intensity={30}
+            intensity={25}
             tint={theme.backgroundColor === "#FFFFFF" ? "light" : "dark"}
-            style={[styles.container, { paddingTop: top + 15, backgroundColor: theme.primaryColorVariants.highOpacity }]}>
+            style={[styles.container, { paddingTop: top + 15, backgroundColor: theme.primaryColorVariants.mediumOpacity }]}>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={[styles.input, {

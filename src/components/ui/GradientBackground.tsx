@@ -13,7 +13,7 @@ const GradientBackground = () => {
     theme.backgroundColorPrimary,
   ]
 
-  const gradientContainerHeight = theme.backgroundColor === "#FFFFFF" ? height * 0.8 : height * 0.7
+  const gradientContainerHeight = theme.backgroundColor === "#FFFFFF" ? height * 0.8 : height * 0.8
 
   return (
     <LinearGradient

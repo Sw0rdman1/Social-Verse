@@ -1,19 +1,18 @@
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Animated, { FadeInDown } from "react-native-reanimated";
+import { StyleSheet, View } from "react-native";
 import { useBottomTab } from "../../context/BottomBarContext";
 import { useEffect, useState } from "react";
 import UserImage from "../../components/profile/UserImage";
-import Colors from "../../../assets/constants/Colors";
-import UserInfo from "../../components/profile/UserInfo";
 import FollowerSection from "../../components/profile/FollowerSection";
 import UserButtons from "../../components/profile/UserButtons";
 import UserFeed from "../../components/profile/UserFeed";
 import { Post } from "../../models/Post";
+import { useTheme } from "../../context/ThemeContext";
 
 
 const UserProfileScreen = ({ route, navigation }: any) => {
   const { user, previousPage } = route.params;
   const { setBottomTabVisible } = useBottomTab();
+  const { theme } = useTheme();
 
   const [isFollowing, setIsFollowing] = useState(user.isFollowing)
 
@@ -34,13 +33,15 @@ const UserProfileScreen = ({ route, navigation }: any) => {
 
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {
+      backgroundColor: theme.backgroundColorPrimary,
+    }]}>
       <UserImage
         user={user}
         goBackHandler={goBackHandler}
         isFollowing={isFollowing}
       >
-        <View style={[styles.infoContainer, { height: isFollowing ? "auto" : 300, backgroundColor: isFollowing ? Colors.whiteBg : Colors.grayTransparentLess }]}>
+        <View style={[styles.infoContainer, { height: isFollowing ? "auto" : 300, backgroundColor: isFollowing ? theme.backgroundColor : theme.grayVariant.light }]}>
           <FollowerSection user={user} isFollowing={isFollowing} />
           <UserButtons user={user} isFollowing={isFollowing} setIsFollowing={setIsFollowing} />
           <UserFeed user={user} isFollowing={isFollowing} openPost={openPostHandler} />
@@ -58,7 +59,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 100,
-    backgroundColor: Colors.white,
   },
   infoContainer: {
     width: "100%",
