@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
-import Colors from '../../../assets/constants/Colors'
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../context/ThemeContext';
 import { BlurView } from 'expo-blur';
@@ -29,17 +28,21 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchUsers, searchTerm, setS
         <BlurView
             intensity={30}
             tint={theme.backgroundColor === "#FFFFFF" ? "light" : "dark"}
-            style={[styles.container, { paddingTop: top + 25, backgroundColor: theme.primaryColorVariants.lowOpacity }]}>
+            style={[styles.container, { paddingTop: top + 15, backgroundColor: theme.primaryColorVariants.highOpacity }]}>
             <View style={styles.inputContainer}>
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input, {
+                        backgroundColor: theme.backgroundColorPrimary,
+                        color: theme.textColor,
+                        borderColor: theme.backgroundColorPrimary
+                    }]}
                     placeholder="Search..."
                     value={searchTerm}
                     onChangeText={(text) => setSearchTerm(text)}
                     onSubmitEditing={handleSearch}
-                    placeholderTextColor={Colors.gray}
+                    placeholderTextColor={theme.gray}
                 />
-                <Ionicons name="search" size={22} color={Colors.black} style={styles.searchIcon} />
+                <Ionicons name="search" size={22} color={theme.textColor} style={styles.searchIcon} />
             </View>
         </BlurView>
 
@@ -53,8 +56,8 @@ export default SearchInput
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        paddingBottom: 25,
         paddingHorizontal: 20,
+        paddingBottom: 25,
         position: "absolute",
         zIndex: 100,
         top: 0,
@@ -62,25 +65,20 @@ const styles = StyleSheet.create({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: 15,
     },
     inputContainer: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        height: 50,
     },
     input: {
         width: "100%",
         height: "100%",
-        borderColor: Colors.grayTransparent,
-        backgroundColor: Colors.whiteBg,
         borderRadius: 20,
         borderWidth: 1,
         paddingHorizontal: 16,
         paddingVertical: 14,
-        color: Colors.black,
         fontSize: 16,
         fontWeight: "500",
         position: "relative",

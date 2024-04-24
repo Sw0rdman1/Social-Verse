@@ -10,8 +10,7 @@ const GradientBackground = () => {
 
   const gradientPatern = [
     theme.primaryColor,
-    theme.backgroundColor,
-    theme.backgroundColor,
+    theme.backgroundColorPrimary,
   ]
 
   const gradientContainerHeight = theme.backgroundColor === "#FFFFFF" ? height * 0.8 : height * 0.7

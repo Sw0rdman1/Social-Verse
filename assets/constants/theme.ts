@@ -36,7 +36,7 @@ interface ThemeColors {
 
 const lightTheme: ThemeColors = {
     backgroundColor: '#FFFFFF',
-    backgroundColorPrimary: '#f2f2f2',
+    backgroundColorPrimary: '#FFFFFF',
     textColor: '#000000',
     gray: '#999DA0',
     red: {

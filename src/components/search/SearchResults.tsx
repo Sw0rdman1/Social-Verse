@@ -28,9 +28,14 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
     };
 
     return (
-        <ScrollView style={[styles.container, {}]}>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={[styles.container, {
+            }]}
+        >
             {users.map((user, index) => (
                 <TouchableOpacity
+                    activeOpacity={0.8}
                     onPress={() => openUserProfilePage(user)}
                     key={user.id}
                 >
@@ -38,7 +43,9 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
                         entering={FadeIn.delay(100 * index)}
                         exiting={FadeOut}
                         layout={Layout.delay(100)}
-                        style={styles.userContainer}
+                        style={[styles.userContainer, {
+                            backgroundColor: theme.backgroundColorPrimary,
+                        }]}
                     >
                         <Animated.Image
                             sharedTransitionTag={user.id + "-search.image"}
@@ -52,7 +59,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
                     </Animated.View>
                 </TouchableOpacity>
             ))}
-            <View style={{ height: 120 }} />
+            <View style={{ height: 150 }} />
         </ScrollView>
     );
 };
@@ -60,25 +67,27 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         display: "flex",
         flex: 1,
         paddingHorizontal: 10,
-        paddingTop: 150,
+        paddingTop: 40,
+        marginTop: 110,
     },
     userContainer: {
         flexDirection: "row",
         alignItems: "center",
-        paddingVertical: 12,
+        paddingVertical: 15,
         paddingHorizontal: 10,
-        borderBottomWidth: 1,
+        marginBottom: 10,
+        borderRadius: 20,
     },
     avatar: {
         borderRadius: 200,
         marginRight: 16,
-        height: 60,
-        width: 60,
+        height: 50,
+        width: 50,
     },
     userInfo: {
         flex: 1,

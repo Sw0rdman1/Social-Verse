@@ -36,7 +36,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
 
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
+        <View style={[styles.container, { backgroundColor: theme.backgroundColorPrimary }]}>
             <GradientBackground />
             <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchUsers={searchUsers} />
             <SearchResults users={users} navigation={navigation} />
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         display: "flex",
         width: "100%",
         gap: 20,
+        overflow: "hidden",
     },
 
 })
