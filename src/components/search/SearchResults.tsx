@@ -41,7 +41,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ users, navigation }) => {
                         style={styles.userContainer}
                     >
                         <Animated.Image
-                            sharedTransitionTag={user.id + ".image"}
+                            sharedTransitionTag={user.id + "-search.image"}
                             source={{ uri: user.profilePicture }}
                             style={styles.avatar}
                         />
@@ -64,9 +64,8 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 50,
         display: "flex",
         flex: 1,
-        paddingTop: 10,
         paddingHorizontal: 10,
-        marginTop: 150,
+        paddingTop: 150,
     },
     userContainer: {
         flexDirection: "row",

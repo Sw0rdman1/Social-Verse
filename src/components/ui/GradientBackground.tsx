@@ -1,31 +1,37 @@
 import { LinearGradient } from "expo-linear-gradient";
+import { useTheme } from "../../context/ThemeContext";
+import { Dimensions, StyleSheet } from "react-native";
 
-import Colors from "../../../assets/constants/Colors";
-const { gradient1, gradient2 } = Colors;
 
-interface GradientBackgroundProps {
-  children: React.ReactNode;
-  centerItems?: boolean;
-  inverted?: boolean;
-}
+const { height } = Dimensions.get("window");
 
-const GradientBackground = ({
-  children,
-  centerItems,
-  inverted,
-}: GradientBackgroundProps) => {
+const GradientBackground = () => {
+  const { theme } = useTheme();
+
+  const gradientPatern = [
+    theme.primaryColor,
+    theme.backgroundColor,
+    theme.backgroundColor,
+  ]
+
+  const gradientContainerHeight = theme.backgroundColor === "#FFFFFF" ? height * 0.8 : height * 0.7
+
   return (
     <LinearGradient
-      style={{
-        flex: 1,
-        justifyContent: centerItems ? "center" : "flex-start",
-        alignItems: centerItems ? "center" : "flex-start",
-      }}
-      colors={inverted ? [gradient2, gradient1] : [gradient1, gradient2]}
-    >
-      {children}
-    </LinearGradient>
+      colors={gradientPatern}
+      style={[styles.gradientContainer, { height: gradientContainerHeight }]}
+    />
   );
 };
 
 export default GradientBackground;
+
+const styles = StyleSheet.create({
+  gradientContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+
+  },
+});

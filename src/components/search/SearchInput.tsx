@@ -2,56 +2,46 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
 import Colors from '../../../assets/constants/Colors'
 import { Ionicons } from '@expo/vector-icons';
-import SearchFilters from './SearchFIlters';
+import { useTheme } from '../../context/ThemeContext';
+import { BlurView } from 'expo-blur';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface SearchInputProps {
     searchUsers: (searchTerm: string) => void;
-    searchCriteria: {
-        filtersDisplayed: boolean
-        searchTerm: string
-        isFollowing: boolean
-        includeEmail: boolean
-    }
-    displayFilters: () => void
-    setSearchCriteria: (searchCriteria: any) => void
+    setSearchTerm: (searchTerm: string) => void;
+    searchTerm: string
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ searchUsers, searchCriteria, displayFilters, setSearchCriteria }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ searchUsers, searchTerm, setSearchTerm }) => {
+    const { theme } = useTheme()
+    const { top } = useSafeAreaInsets()
 
     useEffect(() => {
-        searchUsers(searchCriteria.searchTerm)
-    }, [searchCriteria])
+        searchUsers(searchTerm)
+    }, [searchTerm])
 
     const handleSearch = () => {
-        searchUsers(searchCriteria.searchTerm)
+        searchUsers(searchTerm)
     }
 
-    const isIconColored = searchCriteria.filtersDisplayed || searchCriteria.includeEmail || searchCriteria.isFollowing
 
     return (
-        <View style={styles.mainContainer}>
-            <View style={styles.container}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Search..."
-                        value={searchCriteria.searchTerm}
-                        onChangeText={(text) => setSearchCriteria({ ...searchCriteria, searchTerm: text })}
-                        onSubmitEditing={handleSearch}
-                        placeholderTextColor={Colors.gray}
-                    />
-                    <Ionicons name="search" size={22} color={Colors.black} style={styles.searchIcon} />
-                </View>
-                <TouchableOpacity
-                    style={isIconColored ? styles.selectedFilterContainer : styles.filterContainer}
-                    onPress={displayFilters}
-                >
-                    <Ionicons name="filter" size={24} color={isIconColored ? Colors.gradient2 : Colors.whiteBg} />
-                </TouchableOpacity>
+        <BlurView
+            intensity={30}
+            tint={theme.backgroundColor === "#FFFFFF" ? "light" : "dark"}
+            style={[styles.container, { paddingTop: top + 25, backgroundColor: theme.primaryColorVariants.lowOpacity }]}>
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChangeText={(text) => setSearchTerm(text)}
+                    onSubmitEditing={handleSearch}
+                    placeholderTextColor={Colors.gray}
+                />
+                <Ionicons name="search" size={22} color={Colors.black} style={styles.searchIcon} />
             </View>
-            {searchCriteria.filtersDisplayed && <SearchFilters searchCriteria={searchCriteria} setSearchCriteria={setSearchCriteria} />}
-        </View>
-
+        </BlurView>
 
     )
 }
@@ -61,22 +51,18 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchUsers, searchCriteria, 
 export default SearchInput
 
 const styles = StyleSheet.create({
-    mainContainer: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-    },
     container: {
+        width: "100%",
+        paddingBottom: 25,
+        paddingHorizontal: 20,
+        position: "absolute",
+        zIndex: 100,
+        top: 0,
+        left: 0,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        flexDirection: "row",
-        paddingVertical: 10,
         gap: 15,
-        width: "100%",
-        paddingHorizontal: 20,
     },
     inputContainer: {
         display: "flex",
@@ -84,7 +70,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         height: 50,
-        width: "85%",
     },
     input: {
         width: "100%",
@@ -105,25 +90,4 @@ const styles = StyleSheet.create({
         right: 0,
         marginRight: 15,
     },
-    filterContainer: {
-        backgroundColor: "transparent",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: 45,
-        aspectRatio: 1,
-        borderRadius: 30,
-
-    },
-    selectedFilterContainer: {
-        borderRadius: 30,
-        backgroundColor: Colors.whiteBg,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: 45,
-        aspectRatio: 1,
-
-    },
-
 })
