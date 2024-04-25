@@ -41,7 +41,7 @@ const UserProfileScreen = ({ route, navigation }: any) => {
         goBackHandler={goBackHandler}
         isFollowing={isFollowing}
       >
-        <View style={[styles.infoContainer, { height: isFollowing ? "auto" : 320, backgroundColor: isFollowing ? theme.backgroundColor : theme.grayVariant.light }]}>
+        <View style={[styles.infoContainer, { height: isFollowing ? "auto" : 320, backgroundColor: isFollowing ? theme.backgroundColorPrimary : theme.grayVariant.light }]}>
           <FollowerSection user={user} isFollowing={isFollowing} />
           <UserButtons user={user} isFollowing={isFollowing} setIsFollowing={setIsFollowing} />
           <UserFeed user={user} isFollowing={isFollowing} openPost={openPostHandler} />

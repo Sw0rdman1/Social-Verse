@@ -61,7 +61,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value, user, goBackHandle
           flexDirection: "row",
           alignItems: "flex-end",
           height: "100%",
-          backgroundColor: theme.grayVariant.light
+          backgroundColor: isFollowing ? theme.backgroundColorPrimary : theme.grayVariant.light
         }}
       >
         <RNAnimated.View

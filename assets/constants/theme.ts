@@ -70,7 +70,7 @@ const darkTheme: ThemeColors = {
     gray: '#999DA0',
     grayVariant: {
         light: 'rgba(153, 157, 160, 0.05)',
-        dark: 'rgba(153, 157, 160, 0.45)'
+        dark: 'rgba(153, 157, 160, 0.15)'
     },
     red: {
         classic: '#ff0000',

@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { User } from '../../models/User';
-import Colors from '../../../assets/constants/Colors';
 import Text from '../ui/Text';
+import { useTheme } from '../../context/ThemeContext';
 
 interface FollowerSectionProps {
     user: User;
@@ -10,17 +10,19 @@ interface FollowerSectionProps {
 }
 
 const FollowerSection: React.FC<FollowerSectionProps> = ({ user, isFollowing }) => {
+    const { theme } = useTheme();
+
     return (
         <View style={styles.container}>
-            <View style={[styles.item, { backgroundColor: isFollowing ? Colors.gradient2Transparent : Colors.grayTransparentLess }]}>
+            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.grayVariant.dark }]}>
                 <Text style={styles.label}>Posts</Text>
                 <Text style={styles.count}>{user.numberOfPosts}</Text>
             </View>
-            <View style={[styles.item, { backgroundColor: isFollowing ? Colors.gradient2Transparent : Colors.grayTransparentLess }]}>
+            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.grayVariant.dark }]}>
                 <Text style={styles.label}>Followers</Text>
                 <Text style={styles.count}>{user.numberOfFollowers}</Text>
             </View>
-            <View style={[styles.item, { backgroundColor: isFollowing ? Colors.gradient2Transparent : Colors.grayTransparentLess }]}>
+            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.grayVariant.dark }]}>
                 <Text style={styles.label}>Following</Text>
                 <Text style={styles.count}>{user.numberOfFollowing}</Text>
             </View>
