@@ -44,7 +44,7 @@ const lightTheme: ThemeColors = {
     textColor: '#000000',
     gray: '#999DA0',
     grayVariant: {
-        light: 'rgba(153, 157, 160, 0.15)',
+        light: 'rgba(153, 157, 160, 0.85)',
         dark: 'rgba(153, 157, 160, 0.45)'
     },
     red: {

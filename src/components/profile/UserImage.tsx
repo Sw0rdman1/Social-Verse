@@ -26,12 +26,7 @@ interface DynamicHeaderProps {
   isFollowing: boolean;
 }
 
-const DynamicHeader: React.FC<DynamicHeaderProps> = ({
-  value,
-  user,
-  goBackHandler,
-  isFollowing
-}) => {
+const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value, user, goBackHandler, isFollowing }) => {
 
   const { theme } = useTheme();
 
@@ -60,21 +55,17 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({
   });
 
   return (
-    <RNAnimated.View
-      style={[
-        {
-          height: animatedHeaderHeight,
-        },
-      ]}
-    >
-      <View style={[styles.headerContainer, {
-        backgroundColor: theme.backgroundColorPrimary,
-      }]}>
+    <RNAnimated.View style={{ height: animatedHeaderHeight }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "flex-end",
+          height: "100%",
+          backgroundColor: theme.grayVariant.light
+        }}
+      >
         <RNAnimated.View
-          style={[
-            styles.backButon,
-            { top: animatedBackButtonTop, opacity: animatedArrowOpacity },
-          ]}
+          style={[styles.backButon, { top: animatedBackButtonTop, opacity: animatedArrowOpacity }]}
         >
           <BackButton inverted size={26} handleBackButton={goBackHandler} />
         </RNAnimated.View>
@@ -109,12 +100,7 @@ interface ScrollViewScreenProps {
   isFollowing: boolean;
 }
 
-const UserImage: React.FC<ScrollViewScreenProps> = ({
-  children,
-  user,
-  goBackHandler,
-  isFollowing
-}) => {
+const UserImage: React.FC<ScrollViewScreenProps> = ({ children, user, goBackHandler, isFollowing }) => {
   const { theme } = useTheme();
   const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
 
@@ -125,23 +111,17 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
   });
 
   return (
-    <View style={[styles.homeContainer, {
-      backgroundColor: theme.backgroundColorPrimary,
-    }]}>
+    <View style={styles.homeContainer}>
       <DynamicHeader
         value={scrollOffsetY}
         user={user}
         goBackHandler={goBackHandler}
         isFollowing={isFollowing}
       />
-      <View style={{ height: 5 }} />
 
       <ScrollView
         bounces={false}
-        style={{
-          backgroundColor: theme.backgroundColorPrimary,
-          paddingTop: 0,
-        }}
+        style={{ backgroundColor: theme.backgroundColorPrimary }}
         scrollEventThrottle={5}
         showsVerticalScrollIndicator={false}
         onScroll={RNAnimated.event(
@@ -152,14 +132,9 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({
         )}
       >
         <Animated.View
-          style={[styles.borderRadius, { flex: 1 }]}
           entering={FadeInDown.delay(600).duration(500)}
         >
-          <RNAnimated.View
-            style={{
-              height: animatedPaddingTop,
-            }}
-          />
+          <RNAnimated.View style={{ height: animatedPaddingTop }} />
           {children}
         </Animated.View>
       </ScrollView>
@@ -172,23 +147,12 @@ export default UserImage;
 const styles = StyleSheet.create({
   homeContainer: {
     flex: 1,
-
   },
-  headerContainer: {
-    flexDirection: "row",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    height: "100%",
-  },
-
   backButon: {
     position: "absolute",
     left: 5,
     zIndex: 20,
   },
-
-
   borderRadius: {
     borderBottomLeftRadius: BORDER_RADIUS,
     borderBottomRightRadius: BORDER_RADIUS,
