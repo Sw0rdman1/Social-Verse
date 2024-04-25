@@ -1,26 +1,29 @@
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { User } from '../../models/User';
-import Colors from '../../../assets/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import usePosts from '../../hooks/usePosts';
 import { Post } from '../../models/Post';
 import moment from 'moment';
 import UserFeedPost from './UserFeedPost';
+import { useTheme } from '../../context/ThemeContext';
+import Text from '../ui/Text';
 
 
 
 const NotFollowingFeed = ({ displayName }: { displayName: string }) => {
+    const { theme } = useTheme();
+
     return (
         <Animated.View
             entering={FadeInDown.delay(500).duration(500)}
             style={styles.notFollowingContainer}>
             <View style={styles.notFollowingContainer}>
-                <Ionicons name="lock-closed" size={28} color={Colors.gray} />
-                <View>
-                    <Text style={styles.NotFollowingText}>This user is private. Follow to see {displayName} posts </Text>
-                </View>
+                <Ionicons name="lock-closed" size={28} color={theme.gray} />
+                <Text style={[styles.NotFollowingText, { color: theme.gray }]}>
+                    This user is private. Follow to see {displayName} posts
+                </Text>
             </View>
         </Animated.View>
     )
@@ -34,6 +37,7 @@ interface UserFeedProps {
 
 const UserFeed: React.FC<UserFeedProps> = ({ user, isFollowing, openPost }) => {
     const posts = usePosts(user);
+    const { theme } = useTheme();
     const [isGrid, setIsGrid] = useState(true);
 
     const openPostHandler = (post: Post) => {
@@ -52,7 +56,7 @@ const UserFeed: React.FC<UserFeedProps> = ({ user, isFollowing, openPost }) => {
     return (
         <Animated.View
             entering={FadeInDown.delay(500).duration(500)}
-            style={styles.container}
+            style={[styles.container, { backgroundColor: theme.backgroundColor }]}
         >
             <View style={styles.postsContainer}>
                 <View style={styles.titleContainer}>
@@ -64,14 +68,14 @@ const UserFeed: React.FC<UserFeedProps> = ({ user, isFollowing, openPost }) => {
                             <Ionicons
                                 name={isGrid ? 'grid' : 'grid-outline'}
                                 size={24}
-                                color={isGrid ? Colors.primary : Colors.gray}
+                                color={isGrid ? theme.primaryColor : theme.gray}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => setIsGrid(false)}>
                             <Ionicons
                                 name={isGrid ? 'list-outline' : 'list'}
                                 size={28}
-                                color={isGrid ? Colors.gray : Colors.primary}
+                                color={isGrid ? theme.gray : theme.primaryColor}
                             />
                         </TouchableOpacity>
                     </View>
@@ -99,11 +103,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         fontWeight: 'bold',
-        color: Colors.gray
     },
     container: {
         flex: 1,
-        backgroundColor: Colors.whiteBg,
         paddingBottom: 50,
     },
     titleContainer: {
@@ -118,7 +120,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: Colors.black,
     },
     postsContainer: {
         flexDirection: 'row',

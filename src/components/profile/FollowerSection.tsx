@@ -12,19 +12,22 @@ interface FollowerSectionProps {
 const FollowerSection: React.FC<FollowerSectionProps> = ({ user, isFollowing }) => {
     const { theme } = useTheme();
 
+    const textColor = isFollowing ? theme.primaryColor : theme.gray;
+
+
     return (
         <View style={styles.container}>
-            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.grayVariant.dark }]}>
-                <Text style={styles.label}>Posts</Text>
-                <Text style={styles.count}>{user.numberOfPosts}</Text>
+            <View style={[styles.item, { backgroundColor: isFollowing ? theme.backgroundColorPrimary : theme.gray }]}>
+                <Text style={[styles.label, { color: textColor }]}>Posts</Text>
+                <Text style={[styles.count, { color: textColor }]}>{user.numberOfPosts}</Text>
             </View>
-            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.grayVariant.dark }]}>
-                <Text style={styles.label}>Followers</Text>
-                <Text style={styles.count}>{user.numberOfFollowers}</Text>
+            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.gray }]}>
+                <Text style={[styles.label, { color: textColor }]}>Followers</Text>
+                <Text style={[styles.count, { color: textColor }]}>{user.numberOfFollowers}</Text>
             </View>
-            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.grayVariant.dark }]}>
-                <Text style={styles.label}>Following</Text>
-                <Text style={styles.count}>{user.numberOfFollowing}</Text>
+            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.gray }]}>
+                <Text style={[styles.label, { color: textColor }]}>Following</Text>
+                <Text style={[styles.count, { color: textColor }]}>{user.numberOfFollowing}</Text>
             </View>
         </View>
     )

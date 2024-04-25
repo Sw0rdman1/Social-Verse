@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
-import Colors from '../../../assets/constants/Colors'
 import { User } from '../../models/User'
 import Animated, { FadeInDown, FadeInRight, FadeInUp, FadeOutRight } from 'react-native-reanimated'
+import { useTheme } from '../../context/ThemeContext';
 
 interface FollowButtonProps {
     isFollowing: boolean;
@@ -12,6 +11,7 @@ interface FollowButtonProps {
 }
 
 const FollowButton: React.FC<FollowButtonProps> = ({ isFollowing, setIsFollowing, user }) => {
+    const { theme } = useTheme();
 
     const handleFollow = () => {
         setIsFollowing(!isFollowing)
@@ -20,12 +20,15 @@ const FollowButton: React.FC<FollowButtonProps> = ({ isFollowing, setIsFollowing
     return (
         <View style={{ flex: 1 }}>
             <TouchableOpacity
-                style={[styles.button, !isFollowing ? styles.followingButton : styles.notFollowingButton]}
+                style={[styles.button, {
+                    backgroundColor: isFollowing ? theme.gray : theme.backgroundColorPrimary,
+                    borderColor: isFollowing ? theme.gray : theme.primaryColor
+                }]}
                 onPress={handleFollow}
             >
-                <Ionicons name={isFollowing ? 'checkmark' : 'add'} size={26} color={!isFollowing ? Colors.whiteBg : Colors.gradient2} />
+                <Ionicons name={isFollowing ? 'checkmark' : 'add'} size={26} color={!isFollowing ? theme.backgroundColorPrimary : theme.primaryColor} />
                 <Text
-                    style={[styles.buttonText, { color: !isFollowing ? Colors.white : Colors.gradient2 }]}
+                    style={[styles.buttonText, { color: !isFollowing ? theme.backgroundColorPrimary : theme.primaryColor }]}
                 >
                     {isFollowing ? 'Following' : 'Follow'}
                 </Text>
@@ -35,17 +38,18 @@ const FollowButton: React.FC<FollowButtonProps> = ({ isFollowing, setIsFollowing
 }
 
 const WriteMessageButton = () => {
+    const { theme } = useTheme();
     return (
         <Animated.View
             entering={FadeInRight.duration(300)}
             exiting={FadeOutRight.duration(300)}
             style={{ flex: 1 }}>
             <TouchableOpacity
-                style={[styles.button, { backgroundColor: Colors.gradient2, borderColor: Colors.gradient2 }]}
+                style={[styles.button, { backgroundColor: theme.primaryColor, borderColor: theme.primaryColor }]}
             >
-                <Ionicons name='chatbubble-ellipses' size={24} color={Colors.white} />
+                <Ionicons name='chatbubble-ellipses' size={24} color={theme.backgroundColorPrimary} />
                 <Text
-                    style={[styles.buttonText, { color: Colors.white }]}
+                    style={[styles.buttonText, { color: theme.backgroundColorPrimary }]}
                 >
                     Message
                 </Text>
@@ -61,7 +65,6 @@ interface UserButtonsProps {
 }
 
 const UserButtons: React.FC<UserButtonsProps> = ({ user, isFollowing, setIsFollowing }) => {
-
 
     return (
         <Animated.View
@@ -94,18 +97,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderWidth: 1,
     },
-    followingButton: {
-        backgroundColor: Colors.gray,
-        borderColor: Colors.gray,
-    },
-    notFollowingButton: {
-        backgroundColor: Colors.whiteBg,
-        borderColor: Colors.gradient2,
 
-    },
     buttonText: {
         marginLeft: 5,
-        color: Colors.gradient2,
         fontSize: 18,
         fontWeight: 'bold',
     },
