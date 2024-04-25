@@ -39,7 +39,6 @@ const UserFeed: React.FC<UserFeedProps> = ({ user, isFollowing, openPost }) => {
     const openPostHandler = (post: Post) => {
         if (post.createdAt instanceof Date) {
             const date = moment(post.createdAt).fromNow();
-            post.createdAt = date;
         }
         openPost(post);
     }

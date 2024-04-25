@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { User } from '../../models/User';
 import Colors from '../../../assets/constants/Colors';
+import Text from '../ui/Text';
 
 interface FollowerSectionProps {
     user: User;

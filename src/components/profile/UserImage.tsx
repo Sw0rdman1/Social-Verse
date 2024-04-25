@@ -76,7 +76,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value, user, goBackHandle
           style={[styles.image, styles.borderRadius]}
         >
           <RNAnimated.View
-            style={[styles.image, styles.borderRadius, { opacity: animatedImageOpacity, backgroundColor: theme.textColor }]}
+            style={[styles.image, styles.borderRadius, { opacity: animatedImageOpacity, backgroundColor: theme.blackTransparent }]}
           />
         </Animated.View>
         <Animated.Image
@@ -84,7 +84,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value, user, goBackHandle
           source={{
             uri: user.profilePicture as string,
           }}
-          blurRadius={isFollowing ? 1 : 10}
+          blurRadius={isFollowing ? 1 : 5}
           style={[styles.image, styles.borderRadius, { zIndex: 0 }]}
         />
         <UserInfo user={user} />
