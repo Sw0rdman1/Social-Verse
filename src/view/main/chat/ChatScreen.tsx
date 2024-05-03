@@ -1,4 +1,4 @@
-import { Image, Keyboard, KeyboardAvoidingView, KeyboardEvent, LayoutAnimation, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, Keyboard, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import Chat from "../../../models/Chat";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Animated from "react-native-reanimated";
@@ -18,7 +18,6 @@ interface ChatScreenProps {
 
 const ChatScreen: React.FC<ChatScreenProps> = ({ route, navigation }) => {
   const { chat } = route.params as { chat: Chat };
-
   const { top } = useSafeAreaInsets();
 
   const { setBottomTabVisible } = useBottomTab();
@@ -31,7 +30,7 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ route, navigation }) => {
 
   useEffect(() => {
     setBottomTabVisible(false);
-    ;
+
     return () => {
       setBottomTabVisible(true);
     };
@@ -40,31 +39,34 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ route, navigation }) => {
 
 
   return (
-    <KeyboardAvoidingView
-      behavior="padding"
-      style={styles.container}
-    >
-      <GradientBackground inverted>
-        <View style={[styles.headerContainer, { paddingTop: top }]}>
-          <TouchableOpacity onPress={goBackHandler}>
-            <MaterialCommunityIcons
-              name="arrow-left"
-              size={24}
-              color={Colors.whiteBg}
-            />
-          </TouchableOpacity>
-          <Image
-            source={{ uri: chat.user.profilePicture }}
-            style={styles.avatar}
+    <View style={styles.container}>
+      <View style={[styles.headerContainer, { paddingTop: top }]}>
+        <TouchableOpacity onPress={goBackHandler}>
+          <MaterialCommunityIcons
+            name="arrow-left"
+            size={24}
+            color={Colors.whiteBg}
           />
-          <Text style={styles.username}>{chat.user.displayName}</Text>
-        </View>
-        <View style={{ flex: 1, backgroundColor: Colors.white, width: "100%" }}>
-          <ChatMessages />
-          <MessageInput />
-        </View>
-      </GradientBackground>
-    </KeyboardAvoidingView>
+        </TouchableOpacity>
+        <Image
+          source={{ uri: chat.user.profilePicture }}
+          style={styles.avatar}
+        />
+        <Text style={styles.username}>{chat.user.displayName}</Text>
+      </View>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={{ flex: 1, backgroundColor: Colors.white, width: "100%" }} keyboardVerticalOffset={20}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <>
+            <ChatMessages />
+            <MessageInput />
+          </>
+        </TouchableWithoutFeedback>
+
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 
@@ -75,6 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     flexDirection: "column",
+    justifyContent: "flex-start",
   },
   headerContainer: {
     display: "flex",
