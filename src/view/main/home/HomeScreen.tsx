@@ -32,7 +32,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       <LinearGradient colors={gradientPatern} style={[styles.gradientContainer, {
         height: gradientContainerHeight,
       }]} />
-      <HomeHeader />
+      <HomeHeader navigation={navigation} />
       <Animated.View
         style={styles.formContainer}
         entering={FadeIn.delay(300).duration(500)}

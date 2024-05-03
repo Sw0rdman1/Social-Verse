@@ -1,15 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Animated, { FadeIn } from 'react-native-reanimated'
 import Colors from '../../../assets/constants/Colors'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAppContext } from '../../context/AppContext'
-import { LinearGradient } from 'expo-linear-gradient'
+import { Entypo } from '@expo/vector-icons';
 import { useTheme } from '../../context/ThemeContext'
 import ThemeSwitch from '../theme/ThemeSwitch'
 import { BlurView } from 'expo-blur'
 import PrimaryColorSwitch from '../theme/PrimaryColorSwitch'
 
-const HomeHeader = () => {
+const HomeHeader = ({ navigation }: any) => {
     const { top } = useSafeAreaInsets()
     const { theme } = useTheme()
 
@@ -36,8 +36,9 @@ const HomeHeader = () => {
                 SocialVerse
             </Animated.Text>
             <ThemeSwitch />
-            <PrimaryColorSwitch />
-
+            <TouchableOpacity onPress={() => { navigation.navigate("Inbox") }}>
+                <Entypo name="chat" size={24} color={theme.backgroundColor} />
+            </TouchableOpacity>
         </BlurView>
     )
 }
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: "center",
         paddingHorizontal: 25,
         paddingBottom: 25,
         position: "absolute",

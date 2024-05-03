@@ -87,25 +87,6 @@ const BottomTabNavigation: React.FC<BottomNavigationProps> = ({ navigation }) =>
             />
 
             <Tab.Screen
-                name="ChatTab"
-                children={() => (
-                    <ChatNavigation />
-                )}
-                options={{
-                    tabBarIcon: ({ focused }) => {
-                        return (
-                            <TabContainer focused={focused}>
-                                <Entypo
-                                    name="chat"
-                                    size={24}
-                                    color={focused ? theme.primaryColor : theme.gray}
-                                />
-                            </TabContainer>
-                        );
-                    },
-                }}
-            />
-            <Tab.Screen
                 name="MyProfileTab"
                 children={() => (
                     <MyProfileNavigation />

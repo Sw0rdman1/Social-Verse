@@ -8,6 +8,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import MainScreen from "../view/main/MainScreen";
 import { useAppContext } from "../context/AppContext";
 import CreatePostScreen from "../view/main/createPost/CreatePostScreen";
+import InboxScreen from "../view/main/chat/InboxScreen";
+import ChatScreen from "../view/main/chat/ChatScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +31,18 @@ export default function RootNavigation() {
             component={MainScreen}
             options={{ headerShown: false, gestureEnabled: false }}
           />
+          <Stack.Group >
+            <Stack.Screen
+              name="Inbox"
+              component={InboxScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Chat"
+              component={ChatScreen}
+              options={{ headerShown: false }}
+            />
+          </Stack.Group>
           <Stack.Screen
             name="CreatePostScreen"
             component={CreatePostScreen}
