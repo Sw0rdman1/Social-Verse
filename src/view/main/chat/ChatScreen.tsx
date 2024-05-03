@@ -1,13 +1,15 @@
-import { Image, Keyboard, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import Chat from "../../../models/Chat";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Animated from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Colors from "../../../../assets/constants/Colors";
-import GradientBackground from "../../../components/ui/GradientBackground";
-import ChatMessages from "../../../components/chat/ChatMessages";
 import { useBottomTab } from "../../../context/BottomBarContext";
 import { useEffect } from "react";
+import View from "../../../components/ui/View";
+import Text from "../../../components/ui/Text";
+import { useTheme } from "../../../context/ThemeContext";
+import ChatMessages from "../../../components/chat/ChatMessages";
+import { BlurView } from "expo-blur";
 import MessageInput from "../../../components/chat/MessageInput";
 interface ChatScreenProps {
   route: any;
@@ -19,6 +21,7 @@ interface ChatScreenProps {
 const ChatScreen: React.FC<ChatScreenProps> = ({ route, navigation }) => {
   const { chat } = route.params as { chat: Chat };
   const { top } = useSafeAreaInsets();
+  const { theme } = useTheme();
 
   const { setBottomTabVisible } = useBottomTab();
 
@@ -40,7 +43,10 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.headerContainer, { paddingTop: top }]}>
+      <BlurView
+        intensity={35}
+        tint={theme.backgroundColor === "#FFFFFF" ? "light" : "dark"}
+        style={[styles.headerContainer, { paddingTop: top, backgroundColor: theme.primaryColorVariants.highOpacity }]}>
         <TouchableOpacity onPress={goBackHandler}>
           <MaterialCommunityIcons
             name="arrow-left"
@@ -53,19 +59,10 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ route, navigation }) => {
           style={styles.avatar}
         />
         <Text style={styles.username}>{chat.user.displayName}</Text>
-      </View>
-      <KeyboardAvoidingView
-        behavior="padding"
-        style={{ flex: 1, backgroundColor: Colors.white, width: "100%" }} keyboardVerticalOffset={20}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <>
-            <ChatMessages />
-            <MessageInput />
-          </>
-        </TouchableWithoutFeedback>
+      </BlurView>
+      <ChatMessages />
+      <MessageInput />
 
-      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -80,6 +77,11 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   headerContainer: {
+    position: "absolute",
+    top: 0,
+    width: "100%",
+    height: 120,
+    zIndex: 100,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",

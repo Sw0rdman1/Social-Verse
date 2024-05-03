@@ -3,13 +3,17 @@ import React from 'react'
 import { returnRandomMessages } from '../../models/Message'
 import Message from './Message'
 import { FlatList } from 'react-native-gesture-handler'
+import { useTheme } from '../../context/ThemeContext'
 
 const ChatMessages = () => {
     const messages = returnRandomMessages("u1")
+    const { theme } = useTheme();
 
     return (
         <FlatList
-            style={styles.container}
+            style={[styles.container, {
+                backgroundColor: theme.backgroundColor,
+            }]}
             contentContainerStyle={{ paddingTop: 15 }}
             data={messages}
             keyExtractor={(item) => item.id}

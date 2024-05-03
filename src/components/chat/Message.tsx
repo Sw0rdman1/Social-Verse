@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import MessageEntity from '../../models/Message'
-import Colors from '../../../assets/constants/Colors'
 import moment from 'moment'
+import { useTheme } from '../../context/ThemeContext'
+import Text from '../ui/Text'
 
 interface MessageProps {
     message: MessageEntity
@@ -9,10 +10,11 @@ interface MessageProps {
 
 const MyMessage: React.FC<MessageProps> = ({ message }) => {
     const fromNow = moment(message.date).fromNow();
+    const { theme } = useTheme();
 
     return (
-        <View style={[styles.container, { backgroundColor: Colors.gradient2 }]}>
-            <Text style={styles.text}>{message.text}</Text>
+        <View style={[styles.container, { backgroundColor: theme.primaryColor }]}>
+            <Text>{message.text}</Text>
             <Text style={styles.time}>{fromNow}</Text>
         </View>
     )
@@ -20,9 +22,11 @@ const MyMessage: React.FC<MessageProps> = ({ message }) => {
 
 const TheirMessage: React.FC<MessageProps> = ({ message }) => {
     const fromNow = moment(message.date).fromNow();
+    const { theme } = useTheme();
+
     return (
-        <View style={[styles.container, { backgroundColor: Colors.gray }]}>
-            <Text style={styles.text}>{message.text}</Text>
+        <View style={[styles.container, { backgroundColor: theme.backgroundColorPrimary }]}>
+            <Text >{message.text}</Text>
             <Text style={styles.time}>{fromNow}</Text>
         </View>
     )
@@ -41,17 +45,14 @@ export default Message
 
 const styles = StyleSheet.create({
     container: {
+        maxWidth: "65%",
         padding: 15,
         margin: 10,
-        maxWidth: "80%",
         borderRadius: 20,
     },
-    text: {
-        color: "white",
-    },
+
     time: {
-        alignSelf: "flex-end",
+        fontSize: 12,
         color: "white",
-        opacity: 0.5,
     },
 })
