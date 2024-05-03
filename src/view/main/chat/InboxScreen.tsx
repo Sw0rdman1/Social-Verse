@@ -1,12 +1,10 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Colors from "../../../../assets/constants/Colors";
-import GradientBackground from "../../../components/ui/GradientBackground";
 import InboxHeader from "../../../components/chat/InboxHeader";
 import InboxChat from "../../../components/chat/InboxChat";
 import Chat, { useFakeChats } from "../../../models/Chat";
 import moment from "moment";
 import { sortByLastMessageDate } from "../../../utils/time";
+import { useTheme } from "../../../context/ThemeContext";
 
 interface InboxScreenProps {
   navigation: any;
@@ -14,6 +12,7 @@ interface InboxScreenProps {
 
 const InboxScreen: React.FC<InboxScreenProps> = ({ navigation }) => {
   const chats = useFakeChats();
+  const { theme } = useTheme();
 
 
   const openChatHandler = (chat: Chat) => {
@@ -26,9 +25,12 @@ const InboxScreen: React.FC<InboxScreenProps> = ({ navigation }) => {
 
   return (
     <>
-      <SafeAreaView style={{ flex: 0, backgroundColor: Colors.gradient2 }} />
+      <SafeAreaView style={{ flex: 0, backgroundColor: theme.backgroundColor }} />
       <InboxHeader>
-        <View style={styles.chatContainers}>
+        <View style={[styles.chatContainers, {
+          backgroundColor: theme.backgroundColorPrimary,
+          marginBottom: 100,
+        }]}>
           {sortByLastMessageDate(chats)
             .map((chat, index) => (
               <InboxChat
@@ -38,7 +40,6 @@ const InboxScreen: React.FC<InboxScreenProps> = ({ navigation }) => {
                 openChatHandler={openChatHandler}
               />
             ))}
-          <View style={{ height: 100 }} />
         </View>
       </InboxHeader>
     </>
@@ -63,7 +64,6 @@ const styles = StyleSheet.create({
   chatContainers: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: Colors.whiteBg,
     flex: 1,
   },
 });

@@ -1,8 +1,9 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Chat from "../../models/Chat";
 import moment from "moment";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import Colors from "../../../assets/constants/Colors";
+import Text from "../ui/Text";
+import { useTheme } from "../../context/ThemeContext";
 
 interface InboxChatProps {
   chat: Chat;
@@ -12,13 +13,17 @@ interface InboxChatProps {
 
 const InboxChat: React.FC<InboxChatProps> = ({ chat, openChatHandler, index }) => {
   const fromNow = moment(chat.lastMessageDate).fromNow();
+  const { theme } = useTheme();
+
   return (
     <TouchableOpacity
       onPress={() => openChatHandler(chat)}
     >
       <Animated.View
         entering={FadeInDown.delay(300 + 100 * index).duration(300)}
-        style={styles.container}
+        style={[styles.container, {
+          borderBottomColor: theme.grayVariant.light,
+        }]}
       >
         <Image
           source={{ uri: chat.user.profilePicture }}
@@ -26,7 +31,12 @@ const InboxChat: React.FC<InboxChatProps> = ({ chat, openChatHandler, index }) =
         />
         <View style={styles.rightContainer}>
           <View style={styles.rightTopContainer}>
-            <Text style={styles.username}>{chat.user.displayName}</Text>
+            <Text ellipsizeMode="tail" style={styles.username}>
+              {chat.user.displayName.length > 21
+                ? chat.user.displayName.slice(0, 19) + "..."
+                : chat.user.displayName
+              }
+            </Text>
             <Text style={styles.date}>{fromNow}</Text>
           </View>
           <Text numberOfLines={2} style={styles.lastMessage}>
@@ -50,7 +60,6 @@ const styles = StyleSheet.create({
     padding: 10,
     gap: 15,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.grayTransparentLess,
   },
   avatar: {
     width: 60,

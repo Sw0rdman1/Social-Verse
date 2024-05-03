@@ -41,7 +41,7 @@ interface ThemeColors {
 
 const lightTheme: ThemeColors = {
     backgroundColor: '#FFFFFF',
-    backgroundColorPrimary: '#FFFFFF',
+    backgroundColorPrimary: '#FAF9F6',
     textColor: '#000000',
     blackTransparent: "rgba(51, 51, 51, 0.6)",
     gray: '#999DA0',
