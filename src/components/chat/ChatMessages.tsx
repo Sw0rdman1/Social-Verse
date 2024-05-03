@@ -12,7 +12,7 @@ const ChatMessages = () => {
     return (
         <FlatList
             style={[styles.container, {
-                backgroundColor: theme.backgroundColor,
+                backgroundColor: theme.backgroundColorPrimary,
             }]}
             contentContainerStyle={{ paddingTop: 15 }}
             data={messages}

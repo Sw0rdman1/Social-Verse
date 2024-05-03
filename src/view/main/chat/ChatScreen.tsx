@@ -46,7 +46,9 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ route, navigation }) => {
       <BlurView
         intensity={35}
         tint={theme.backgroundColor === "#FFFFFF" ? "light" : "dark"}
-        style={[styles.headerContainer, { paddingTop: top, backgroundColor: theme.primaryColorVariants.highOpacity }]}>
+        style={[styles.headerContainer,
+        { paddingTop: top, backgroundColor: theme.primaryColorVariants.highOpacity }
+        ]}>
         <TouchableOpacity onPress={goBackHandler}>
           <MaterialCommunityIcons
             name="arrow-left"
@@ -89,8 +91,8 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   avatar: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     borderRadius: 30,
   },
   username: {

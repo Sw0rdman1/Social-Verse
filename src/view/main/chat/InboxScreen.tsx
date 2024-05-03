@@ -28,7 +28,7 @@ const InboxScreen: React.FC<InboxScreenProps> = ({ navigation }) => {
       <SafeAreaView style={{ flex: 0, backgroundColor: theme.backgroundColor }} />
       <InboxHeader>
         <View style={[styles.chatContainers, {
-          backgroundColor: theme.backgroundColorPrimary,
+          backgroundColor: theme.backgroundColor,
           marginBottom: 100,
         }]}>
           {sortByLastMessageDate(chats)
