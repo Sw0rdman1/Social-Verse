@@ -21,19 +21,19 @@ const FollowButton: React.FC<FollowButtonProps> = ({ isFollowing, setIsFollowing
         <View style={{ flex: 1 }}>
             <TouchableOpacity
                 style={[styles.button, {
-                    backgroundColor: isFollowing ? theme.gray : theme.backgroundColorPrimary,
-                    borderColor: isFollowing ? theme.gray : theme.primaryColor
+                    backgroundColor: isFollowing ? theme.backgroundColorPrimary : theme.backgroundColorPrimary,
+                    borderColor: isFollowing ? theme.primaryColorVariants.lowOpacity : theme.primaryColorVariants.mediumOpacity
                 }]}
                 onPress={handleFollow}
             >
-                <Ionicons name={isFollowing ? 'checkmark' : 'add'} size={26} color={!isFollowing ? theme.backgroundColorPrimary : theme.primaryColor} />
+                <Ionicons name={isFollowing ? 'checkmark' : 'add'} size={26} color={!isFollowing ? theme.primaryColor : theme.primaryColor} />
                 <Text
-                    style={[styles.buttonText, { color: !isFollowing ? theme.backgroundColorPrimary : theme.primaryColor }]}
+                    style={[styles.buttonText, { color: !isFollowing ? theme.textColor : theme.primaryColor }]}
                 >
                     {isFollowing ? 'Following' : 'Follow'}
                 </Text>
             </TouchableOpacity>
-        </View>
+        </View >
     )
 }
 
@@ -45,7 +45,7 @@ const WriteMessageButton = () => {
             exiting={FadeOutRight.duration(300)}
             style={{ flex: 1 }}>
             <TouchableOpacity
-                style={[styles.button, { backgroundColor: theme.primaryColor, borderColor: theme.primaryColor }]}
+                style={[styles.button, { backgroundColor: theme.primaryColor }]}
             >
                 <Ionicons name='chatbubble-ellipses' size={24} color={theme.backgroundColorPrimary} />
                 <Text

@@ -4,31 +4,39 @@ import { User } from '../../models/User';
 import Text from '../ui/Text';
 import { useTheme } from '../../context/ThemeContext';
 
-interface FollowerSectionProps {
-    user: User;
-    isFollowing?: boolean;
-}
 
-const FollowerSection: React.FC<FollowerSectionProps> = ({ user, isFollowing }) => {
+const NumberContainer: React.FC<{ number: number, label: string, isFollowing: boolean }> = ({ number, label, isFollowing }) => {
     const { theme } = useTheme();
 
-    const textColor = isFollowing ? theme.primaryColor : theme.gray;
+    const textColor = isFollowing ? theme.primaryColor : theme.textColor;
 
+    return (
+        <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColorVariants.lowOpacity : theme.backgroundColorPrimary }]}>
+            <Text style={[styles.label, { color: textColor }]}>{label}</Text>
+            <Text style={[styles.count, { color: textColor }]}>{number}</Text>
+        </View>
+    )
+}
+
+interface FollowerSectionProps {
+    user: User;
+    isFollowing: boolean;
+}
+
+
+
+
+const FollowerSection: React.FC<FollowerSectionProps> = ({ user, isFollowing }) => {
+
+    if (!user.numberOfFollowers || !user.numberOfFollowing || !user.numberOfPosts) {
+        return null;
+    }
 
     return (
         <View style={styles.container}>
-            <View style={[styles.item, { backgroundColor: isFollowing ? theme.backgroundColorPrimary : theme.gray }]}>
-                <Text style={[styles.label, { color: textColor }]}>Posts</Text>
-                <Text style={[styles.count, { color: textColor }]}>{user.numberOfPosts}</Text>
-            </View>
-            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.gray }]}>
-                <Text style={[styles.label, { color: textColor }]}>Followers</Text>
-                <Text style={[styles.count, { color: textColor }]}>{user.numberOfFollowers}</Text>
-            </View>
-            <View style={[styles.item, { backgroundColor: isFollowing ? theme.primaryColor : theme.gray }]}>
-                <Text style={[styles.label, { color: textColor }]}>Following</Text>
-                <Text style={[styles.count, { color: textColor }]}>{user.numberOfFollowing}</Text>
-            </View>
+            <NumberContainer number={user.numberOfPosts} label="Posts" isFollowing={isFollowing} />
+            <NumberContainer number={user.numberOfFollowers} label="Followers" isFollowing={isFollowing} />
+            <NumberContainer number={user.numberOfFollowing} label="Following" isFollowing={isFollowing} />
         </View>
     )
 }
