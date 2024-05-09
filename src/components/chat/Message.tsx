@@ -13,9 +13,9 @@ const MyMessage: React.FC<MessageProps> = ({ message }) => {
     const { theme } = useTheme();
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.primaryColor }]}>
+        <View style={[styles.container, { backgroundColor: theme.primaryColorVariants.mediumOpacity, alignSelf: "flex-end" }]}>
             <Text>{message.text}</Text>
-            <Text style={styles.time}>{fromNow}</Text>
+            <Text style={[styles.time, { alignSelf: "flex-end" }]}>{fromNow}</Text>
         </View>
     )
 }
@@ -25,7 +25,7 @@ const TheirMessage: React.FC<MessageProps> = ({ message }) => {
     const { theme } = useTheme();
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.backgroundColorPrimary }]}>
+        <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
             <Text >{message.text}</Text>
             <Text style={styles.time}>{fromNow}</Text>
         </View>
@@ -49,10 +49,10 @@ const styles = StyleSheet.create({
         padding: 15,
         margin: 10,
         borderRadius: 20,
+        gap: 10,
     },
 
     time: {
         fontSize: 12,
-        color: "white",
     },
 })

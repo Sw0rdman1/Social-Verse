@@ -5,6 +5,7 @@ import {
   View,
   Text,
   RefreshControl,
+  TouchableOpacity,
 } from "react-native";
 import { useRef, useState } from "react";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
@@ -44,9 +45,11 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
         <RNAnimated.Text style={[styles.title, { fontSize, color: theme.primaryColor }]}>
           Messages
         </RNAnimated.Text>
-        <View>
-          <Ionicons name="search" size={24} color={theme.primaryColor} />
-        </View>
+        <TouchableOpacity style={[styles.iconContainer, {
+          backgroundColor: theme.primaryColor,
+        }]}>
+          <Ionicons name="add" size={24} color={theme.backgroundColor} />
+        </TouchableOpacity>
       </Animated.View>
     </RNAnimated.View>
   );
@@ -139,5 +142,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
+  },
+  iconContainer: {
+    height: 36,
+    width: 36,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 28,
   },
 });

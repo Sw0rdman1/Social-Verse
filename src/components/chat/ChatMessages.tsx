@@ -14,7 +14,7 @@ const ChatMessages = () => {
             style={[styles.container, {
                 backgroundColor: theme.backgroundColorPrimary,
             }]}
-            contentContainerStyle={{ paddingTop: 15 }}
+            contentContainerStyle={{ paddingBottom: 150 }}
             data={messages}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => <Message message={item} />}

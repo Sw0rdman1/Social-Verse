@@ -23,5 +23,5 @@ export const returnRandomMessages = (userID: string): Message[] => {
             read: false,
         });
     }
-    return messages.sort((a, b) => a.date.getTime() - b.date.getTime());
+    return messages.sort((a, b) => b.date.getTime() - a.date.getTime());
 }
