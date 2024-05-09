@@ -24,8 +24,6 @@ interface FollowerSectionProps {
 }
 
 
-
-
 const FollowerSection: React.FC<FollowerSectionProps> = ({ user, isFollowing }) => {
 
     if (!user.numberOfFollowers || !user.numberOfFollowing || !user.numberOfPosts) {

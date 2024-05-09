@@ -61,7 +61,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value, user, goBackHandle
           flexDirection: "row",
           alignItems: "flex-end",
           height: "100%",
-          backgroundColor: isFollowing ? theme.backgroundColor : theme.grayVariant.light
+          backgroundColor: isFollowing ? theme.backgroundColorPrimary : theme.grayVariant.dark
         }}
       >
         <RNAnimated.View
@@ -121,7 +121,7 @@ const UserImage: React.FC<ScrollViewScreenProps> = ({ children, user, goBackHand
 
       <ScrollView
         bounces={false}
-        style={{ backgroundColor: theme.backgroundColor }}
+        style={{ backgroundColor: theme.backgroundColorPrimary }}
         scrollEventThrottle={5}
         showsVerticalScrollIndicator={false}
         onScroll={RNAnimated.event(
