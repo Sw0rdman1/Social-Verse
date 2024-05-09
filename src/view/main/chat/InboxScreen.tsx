@@ -26,7 +26,7 @@ const InboxScreen: React.FC<InboxScreenProps> = ({ navigation }) => {
   return (
     <>
       <SafeAreaView style={{ flex: 0, backgroundColor: theme.backgroundColor }} />
-      <InboxHeader>
+      <InboxHeader navigation={navigation}>
         <View style={[styles.chatContainers, {
           backgroundColor: theme.backgroundColor,
           marginBottom: 100,

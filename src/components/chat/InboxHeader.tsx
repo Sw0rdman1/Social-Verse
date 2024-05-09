@@ -19,10 +19,16 @@ const BORDER_RADIUS = 35;
 
 interface DynamicHeaderProps {
   value: RNAnimated.Value;
+  navigation: any;
 }
 
-const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
+const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value, navigation }) => {
   const { theme } = useTheme();
+
+  const goBackHandler = () => {
+    navigation.goBack();
+  }
+
   const height = value.interpolate({
     inputRange: [0, Scroll_Distance],
     outputRange: [Header_Max_Height, Header_Min_Height],
@@ -37,14 +43,19 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
 
 
   return (
-    <RNAnimated.View style={{ height, backgroundColor: theme.backgroundColor, borderBottomColor: theme.primaryColorVariants.lowOpacity, borderBottomWidth: 1 }}>
+    <RNAnimated.View style={{ height, backgroundColor: theme.backgroundColor, borderBottomColor: theme.primaryColorVariants.mediumOpacity, borderBottomWidth: 1 }}>
       <Animated.View
         entering={FadeInUp.delay(200).duration(500)}
         style={styles.headerContainer}
       >
-        <RNAnimated.Text style={[styles.title, { fontSize, color: theme.primaryColor }]}>
-          Messages
-        </RNAnimated.Text>
+        <View style={{ flexDirection: "row", gap: 3, alignItems: "center" }}>
+          <TouchableOpacity onPress={goBackHandler}>
+            <Ionicons name="chevron-back" size={32} color={theme.primaryColor} />
+          </TouchableOpacity>
+          <RNAnimated.Text style={[styles.title, { fontSize, color: theme.primaryColor }]}>
+            Messages
+          </RNAnimated.Text>
+        </View>
         <TouchableOpacity >
           <Ionicons name="add-circle-sharp" size={36} color={theme.primaryColor} />
         </TouchableOpacity>
@@ -55,9 +66,10 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
 
 interface ScrollViewScreenProps {
   children: React.ReactNode;
+  navigation: any;
 }
 
-const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
+const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children, navigation }) => {
   const scrollOffsetY = useRef(new RNAnimated.Value(0)).current;
   const [refreshing, setRefreshing] = useState(false);
   const { theme } = useTheme();
@@ -101,7 +113,7 @@ const InboxHeader: React.FC<ScrollViewScreenProps> = ({ children }) => {
             height: animatedPaddingTop,
           }}
         />
-        <DynamicHeader value={scrollOffsetY} />
+        <DynamicHeader value={scrollOffsetY} navigation={navigation} />
 
         {children}
       </ScrollView>
@@ -121,7 +133,8 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
+    paddingRight: 20,
     height: "100%",
     borderBottomRightRadius: BORDER_RADIUS,
   },
