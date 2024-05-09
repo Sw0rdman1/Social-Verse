@@ -37,7 +37,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
 
 
   return (
-    <RNAnimated.View style={{ height, backgroundColor: theme.backgroundColor, borderBottomColor: theme.primaryColorVariants.mediumOpacity, borderBottomWidth: 1 }}>
+    <RNAnimated.View style={{ height, backgroundColor: theme.backgroundColor, borderBottomColor: theme.primaryColorVariants.lowOpacity, borderBottomWidth: 1 }}>
       <Animated.View
         entering={FadeInUp.delay(200).duration(500)}
         style={styles.headerContainer}
@@ -45,10 +45,8 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({ value }) => {
         <RNAnimated.Text style={[styles.title, { fontSize, color: theme.primaryColor }]}>
           Messages
         </RNAnimated.Text>
-        <TouchableOpacity style={[styles.iconContainer, {
-          backgroundColor: theme.primaryColor,
-        }]}>
-          <Ionicons name="add" size={24} color={theme.backgroundColor} />
+        <TouchableOpacity >
+          <Ionicons name="add-circle-sharp" size={36} color={theme.primaryColor} />
         </TouchableOpacity>
       </Animated.View>
     </RNAnimated.View>

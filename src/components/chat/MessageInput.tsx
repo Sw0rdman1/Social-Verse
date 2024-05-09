@@ -35,7 +35,7 @@ const MessageInput = () => {
     return (
         <>
             <View style={[styles.container, {
-                backgroundColor: theme.backgroundColorPrimary,
+                backgroundColor: theme.backgroundColor,
             }]}>
                 <TextInput
                     style={[styles.input, {
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
         paddingTop: 12,
     },
     input: {
+        fontSize: 18,
         flex: 1,
         marginRight: 8,
         paddingVertical: 12,

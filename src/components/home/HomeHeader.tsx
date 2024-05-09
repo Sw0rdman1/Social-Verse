@@ -3,7 +3,7 @@ import Animated, { FadeIn } from 'react-native-reanimated'
 import Colors from '../../../assets/constants/Colors'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAppContext } from '../../context/AppContext'
-import { Entypo } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../context/ThemeContext'
 import ThemeSwitch from '../theme/ThemeSwitch'
 import { BlurView } from 'expo-blur'
@@ -37,7 +37,7 @@ const HomeHeader = ({ navigation }: any) => {
             </Animated.Text>
             <ThemeSwitch />
             <TouchableOpacity onPress={() => { navigation.navigate("Inbox") }}>
-                <Entypo name="chat" size={24} color={theme.backgroundColor} />
+                <Ionicons name="chatbubble-ellipses" size={28} color={logoColor} />
             </TouchableOpacity>
         </BlurView>
     )
