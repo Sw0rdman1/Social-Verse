@@ -28,7 +28,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const gradientContainerHeight = theme.backgroundColor === "#FFFFFF" ? height * 0.7 : height * 0.5
 
   return (
-    <Animated.View style={{ flex: 1, backgroundColor: theme.backgroundColor }} sharedTransitionTag="container">
+    <Animated.View style={{ flex: 1, backgroundColor: theme.backgroundColor }} sharedTransitionTag="container1">
       <LinearGradient colors={gradientPatern} style={[styles.gradientContainer, {
         height: gradientContainerHeight,
       }]} />

@@ -35,7 +35,7 @@ const MyImagePicker: React.FC<ImagePickerProps> = ({ image, setImage, setImageUr
         if (!image) {
             return (
                 <View style={styles.noPhotoContainer}>
-                    <Ionicons name="md-images" size={32} color={Colors.whiteBg} />
+                    <Ionicons name="images" size={32} color={Colors.whiteBg} />
                     <Text style={styles.buttonText}>Gallery</Text>
                 </View>
             )

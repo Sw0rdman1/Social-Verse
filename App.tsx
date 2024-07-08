@@ -1,4 +1,5 @@
 import "react-native-gesture-handler";
+import 'react-native-reanimated'
 import { AuthProvider } from "./src/context/AuthContext";
 import RootNavigation from "./src/navigation";
 import { AppProvider } from "./src/context/AppContext";

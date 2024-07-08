@@ -56,7 +56,7 @@ const Swipe = () => {
         },
       ]}
     >
-      <Ionicons name="ios-chevron-up" size={24} color="white" />
+      <Ionicons name="caret-up" size={24} color="white" />
       <Text style={[styles.text, { color: "#fff" }]}>Swipe for more info</Text>
     </RNAnimated.View>
   );
